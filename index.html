@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Her An Kur'an, Her An Mutluluk</title>
+  <meta name="description"
+    content="Her An Kur'an, Her An Mutluluk — bir ayet, bir düşünce, bir değişim. Abdulcabbar Boran ile sohbetler, canlı yayınlar ve her gün bir iz bırakan paylaşımlar.">
+  <meta property="og:title" content="Her An Kur'an, Her An Mutluluk">
+  <meta property="og:description"
+    content="Bir ayet. Bir düşünce. Bir değişim. Sohbetler, canlı yayınlar ve her gün bir iz.">
+  <meta property="og:image" content="assets/og-image.jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="tr_TR">
+  <!-- Sekme simgesi: markanın kendi logosu (assets/hak_logo.png'den üretildi) -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/icon-512.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <link rel="shortcut icon" href="favicon.ico">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Manrope:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/sections/hero.css">
+  <link rel="stylesheet" href="css/sections/manifesto.css">
+  <link rel="stylesheet" href="css/sections/instagram.css">
+  <link rel="stylesheet" href="css/sections/broadcast.css">
+  <link rel="stylesheet" href="css/sections/boran.css">
+  <link rel="stylesheet" href="css/sections/videos.css">
+  <link rel="stylesheet" href="css/sections/videolar.css">
+  <link rel="stylesheet" href="css/sections/quote.css">
+  <link rel="stylesheet" href="css/sections/footer.css">
+</head>
+
+<body>
+
+  <!-- Görsel yedeği: bir görsel yüklenemezse yerine tasarlanmış bir
+       yer tutucu paneli (başlık + sarı sıra işareti) konur. -->
+  <script>
+    window.__imgFallback = function (img) {
+      if (!img || img.dataset.phDone) return;
+      img.dataset.phDone = '1';
+      var host = img.parentElement;
+      if (!host) return;
+      var dark = !!img.closest('[data-theme="dark"], .vids, .bcast, .footer');
+      var cap = img.dataset.caption || img.alt || '';
+      var idx = img.dataset.index || '';
+      var note = img.dataset.note || 'Görsel buraya gelecek';
+      if (getComputedStyle(host).position === 'static') host.style.position = 'relative';
+      var ph = document.createElement('span');
+      ph.className = 'imgph' + (dark ? ' imgph--dark' : '');
+      ph.setAttribute('aria-hidden', 'true');
+      ph.innerHTML =
+        (idx ? '<span class="imgph__idx">' + idx + '</span>' : '') +
+        '<span class="imgph__body"><span class="imgph__cap"></span>' +
+        '<span class="imgph__rule"></span>' +
+        '<span class="imgph__note"></span></span>';
+      ph.querySelector('.imgph__cap').textContent = cap;
+      ph.querySelector('.imgph__note').textContent = note;
+      img.style.display = 'none';
+      host.appendChild(ph);
+    };
+    // Yakalama aşamasında: JS ile sonradan eklenen görseller de kapsanır.
+    document.addEventListener('error', function (e) {
+      var t = e.target;
+      // vids__thumb hariç: kendi onerror'u hqdefault -> mqdefault
+      // geçişini yapıyor, buradaki yedek onu gizleyip bozardı.
+      if (t && t.tagName === 'IMG' && !t.classList.contains('navbar__logo')
+        && !t.classList.contains('footer__logo')
+        && !t.classList.contains('vids__thumb')) window.__imgFallback(t);
+    }, true);
+  </script>
+
+  <!-- Global film grain -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Custom cursor (desktop only, JS-driven) -->
+  <div class="cursor" aria-hidden="true">
+    <span class="cursor__dot"></span>
+    <span class="cursor__label"></span>
+  </div>
+
+  <header class="navbar" id="navbar" data-nav>
+    <div class="navbar__inner">
+      <a class="navbar__brand" href="#hero" aria-label="Her An Kur'an — ana sayfa">
+        <img class="navbar__logo" src="assets/hak_logo.png" alt="Her An Kur'an, Her An Mutluluk logosu">
+      </a>
+
+      <nav class="navbar__nav" aria-label="Ana menü">
+        <ul class="navbar__list">
+          <li><a class="navbar__link" href="#hero" data-section="hero"><span class="navbar__link-roll" data-text="Ana Sayfa">Ana Sayfa</span></a></li>
+          <li><a class="navbar__link" href="#manifesto" data-section="manifesto"><span class="navbar__link-roll" data-text="Hakkımızda">Hakkımızda</span></a></li>
+          <li><a class="navbar__link" href="#yayin" data-section="yayin"><span class="navbar__link-roll" data-text="Canlı Yayın">Canlı Yayın</span></a></li>
+          <li><a class="navbar__link" href="#videolar" data-section="videolar"><span class="navbar__link-roll" data-text="Videolar">Videolar</span></a></li>
+          <li><a class="navbar__link" href="#pazar-sohbeti" data-section="pazar-sohbeti"><span class="navbar__link-roll" data-text="Pazar Sohbeti">Pazar Sohbeti</span></a></li>
+        </ul>
+      </nav>
+
+      <div class="navbar__actions">
+        <a class="navbar__icon" href="https://www.instagram.com/herankuranheranmutluluk" target="_blank" rel="noopener noreferrer"
+          aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <rect x="3" y="3" width="18" height="18" rx="5" />
+            <circle cx="12" cy="12" r="4.2" />
+            <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none" />
+          </svg>
+        </a>
+        <a class="navbar__icon" href="https://www.youtube.com/@HeranKuranHeranMutluluk" target="_blank" rel="noopener noreferrer"
+          aria-label="YouTube">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <rect x="2.5" y="5.5" width="19" height="13" rx="3.5" />
+            <path d="M10 9.3v5.4l4.8-2.7z" fill="currentColor" stroke="none" />
+          </svg>
+        </a>
+        <a class="navbar__icon" href="https://www.facebook.com/hkuranhmutluluk" target="_blank" rel="noopener noreferrer"
+          aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path
+              d="M14.5 8.5H17V5h-2.8C11.9 5 10.6 6.6 10.6 9v2H8v3.4h2.6V21h3.5v-6.6h2.7l.5-3.4h-3.2V9.2c0-.5.2-.7.4-.7z" />
+          </svg>
+        </a>
+        <a class="navbar__icon" href="https://www.tiktok.com/@herankuranheranmutluluk" target="_blank" rel="noopener noreferrer"
+          aria-label="TikTok">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M14.4 3v10.9a3.6 3.6 0 1 1-3.1-3.57" />
+            <path d="M14.4 3c.5 2.4 2 3.9 4.4 4.2" />
+          </svg>
+        </a>
+        <a class="navbar__icon navbar__icon--wa" href="https://wa.me/905434600460" target="_blank" rel="noopener noreferrer"
+          aria-label="WhatsApp ile iletişime geç">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.5 11.7a8.4 8.4 0 0 1-12.3 7.5L3.5 20.5l1.4-4.6A8.4 8.4 0 1 1 20.5 11.7z" />
+            <path d="M9.1 8.6c.3-.6.6-.6.9-.6h.6c.2 0 .5 0 .7.6l.7 1.7c.1.3 0 .5-.1.7l-.4.5c-.1.2-.2.3 0 .6a6.2 6.2 0 0 0 2.6 2.3c.3.1.4 0 .6-.1l.5-.6c.2-.2.4-.2.6-.1l1.6.8c.3.1.5.3.5.5 0 .4-.2 1.2-.6 1.5-.4.4-1 .6-1.6.6a8 8 0 0 1-6.7-6.6c0-.7.1-1.3.5-1.8z" />
+          </svg>
+        </a>
+        <a class="navbar__cta" href="https://wa.me/905434600460" target="_blank" rel="noopener noreferrer" data-cursor="YAZ ↗"
+          aria-label="WhatsApp ile iletişime geç">
+          <svg class="navbar__cta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20.5 11.7a8.4 8.4 0 0 1-12.3 7.5L3.5 20.5l1.4-4.6A8.4 8.4 0 1 1 20.5 11.7z" />
+            <path
+              d="M9.1 8.6c.3-.6.6-.6.9-.6h.6c.2 0 .5 0 .7.6l.7 1.7c.1.3 0 .5-.1.7l-.4.5c-.1.2-.2.3 0 .6a6.2 6.2 0 0 0 2.6 2.3c.3.1.4 0 .6-.1l.5-.6c.2-.2.4-.2.6-.1l1.6.8c.3.1.5.3.5.5 0 .4-.2 1.2-.6 1.5-.4.4-1 .6-1.6.6a8 8 0 0 1-6.7-6.6c0-.7.1-1.3.5-1.8z" />
+          </svg>
+          <span>WhatsApp</span></a>
+      </div>
+
+      <button class="navbar__burger" aria-label="Menüyü aç" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </div>
+    <div class="navbar__mobile" hidden>
+      <ul class="navbar__mobile-list">
+        <li><a href="#hero">Ana Sayfa</a></li>
+        <li><a href="#manifesto">Hakkımızda</a></li>
+        <li><a href="#yayin">Canlı Yayın</a></li>
+        <li><a href="#videolar">Videolar</a></li>
+        <li><a href="#pazar-sohbeti">Pazar Sohbeti</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="icerik">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero" data-theme="light" aria-label="Giriş">
+      <div class="hero__bloom hero__bloom--purple" aria-hidden="true"></div>
+      <div class="hero__bloom hero__bloom--gold" aria-hidden="true"></div>
+      <canvas class="hero__dust" aria-hidden="true"></canvas>
+
+      <div class="hero__stage">
+        <div class="hero__copy">
+          <h1 class="hero__title">
+            <span class="hero__row"><span class="hero__word" data-split>HER AN</span></span>
+            <span class="hero__row"><span class="hero__word hero__word--accent" data-split>KUR&rsquo;AN</span></span>
+          </h1>
+          <p class="hero__sub" data-split-words>HER AN MUTLULUK</p>
+        </div>
+
+        <figure class="hero__visual">
+          <img src="assets/acb.png" alt="Dr. Abdulcabbar Boran" loading="eager" decoding="async">
+        </figure>
+      </div>
+
+      <div class="hero__scrollcue" aria-hidden="true">
+        <span class="hero__scrollcue-text">Keşfetmek için kaydır</span>
+        <span class="hero__scrollcue-line"><i></i></span>
+      </div>
+    </section>
+
+    <!-- ============ MANIFESTO ============ -->
+    <section class="manifesto" id="manifesto" data-theme="light" aria-label="Manifesto">
+      <div class="manifesto__inner">
+        <p class="manifesto__eyebrow">Hakkımızda</p>
+        <h2 class="manifesto__lines" aria-label="Bir rehber. Bir müjde. Bir davet.">
+          <span class="manifesto__line"><span>Bir <em class="u-yellow">rehber.</em></span></span>
+          <span class="manifesto__line"><span>Bir <em class="u-yellow">müjde.</em></span></span>
+          <span class="manifesto__line"><span>Bir <em class="u-yellow">davet.</em></span></span>
+        </h2>
+        <div class="manifesto__body">
+          <p>
+            Allah, insanın mutlu olmasını istiyor. Bu sebeple Kur&rsquo;an bir
+            <em class="u-yellow">mutluluk rehberidir</em>, mutluluk davetiyesidir,
+            mutluluk müjdesidir ve mutluluk garantisidir.
+          </p>
+          <p>
+            O sebeple diyoruz ki: <em class="u-purple">Her An Kur&rsquo;an, Her An Mutluluk.</em>
+            Sizi Allah&rsquo;a davet ediyoruz. Sizi mutluluğa davet ediyoruz.
+          </p>
+          <p>
+            Dr. Abdulcabbar Boran, Kur&rsquo;an-ı Kerim ayetleri ve hadisler ışığında
+            sorularınızı cevaplıyor.
+          </p>
+        </div>
+
+        <p class="manifesto__meta">
+          <span class="manifesto__meta-dot" aria-hidden="true"></span>
+          Hafta içi her gün, Türkiye saati ile <strong>21.00</strong>&rsquo;de canlı yayın
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ LIVE BROADCAST ============ -->
+    <section class="bcast" id="yayin" data-theme="dark" aria-label="Canlı yayın">
+      <div class="bcast__glow" aria-hidden="true"></div>
+      <div class="bcast__head">
+        <p class="bcast__eyebrow" data-bcast-status-label>Canlı Yayın</p>
+        <h2 class="bcast__title">HER GÜN <em>BİRLİKTEYİZ</em></h2>
+      </div>
+      <figure class="bcast__stage" data-bcast-stage>
+        <div class="bcast__frame">
+          <!-- Kanalın canlı yayını. Kanal kimliği değişirse channel= parametresini güncelle. -->
+          <iframe referrerpolicy="strict-origin-when-cross-origin" class="bcast__embed"
+            src="https://www.youtube-nocookie.com/embed/live_stream?channel=UCl6TeEmv5AAY00mSjHaKWVg&amp;rel=0&amp;playsinline=1"
+            title="Her An Kur&rsquo;an, Her An Mutluluk — canlı yayın" loading="lazy" frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+          <div class="bcast__status" data-bcast-status><!-- JS: js/data/broadcasts.js --></div>
+        </div>
+        <figcaption class="bcast__caption">
+          Her gün aynı saatte; bir ayetin gölgesinde buluşuyor, birlikte düşünüyoruz.
+        </figcaption>
+      </figure>
+    </section>
+
+    <!-- ============ INSTAGRAM ============ -->
+    <section class="ig" id="instagram" data-theme="light" aria-label="Instagram paylaşımları">
+      <div class="ig__head">
+        <p class="ig__eyebrow">Instagram</p>
+        <h2 class="ig__title">HER GÜN <em>BİR İZ</em></h2>
+      </div>
+      <div class="ig__viewport">
+        <div class="ig__track" data-ig-track><!-- JS: js/data/instagram.js --></div>
+      </div>
+      <div class="ig__foot">
+        <a class="ig__cta" href="https://www.instagram.com/herankuranheranmutluluk" target="_blank" rel="noopener noreferrer"
+          data-cursor="AÇ ↗" data-magnetic>
+          Instagram&rsquo;da takip et <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============ VİDEOLAR ============ -->
+    <section class="vlist" id="videolar" data-theme="light" aria-label="Videolar">
+      <div class="vlist__head">
+        <h2 class="vlist__title">VİDEOLAR</h2>
+      </div>
+
+      <div class="vlist__deck" data-vlist-deck data-cursor="İZLE"><!-- JS: js/data/videolar.js --></div>
+
+      <div class="vlist__nav">
+        <button class="vlist__arrow" type="button" data-vlist-prev aria-label="Önceki video">←</button>
+        <span class="vlist__counter" data-vlist-counter>01 / 04</span>
+        <button class="vlist__arrow" type="button" data-vlist-next aria-label="Sonraki video">→</button>
+      </div>
+
+      <div class="vlist__foot">
+        <a class="vlist__cta" href="https://www.youtube.com/@HeranKuranHeranMutluluk" target="_blank" rel="noopener noreferrer"
+          data-cursor="AÇ ↗" data-magnetic>
+          <span data-vlist-cta-label>Kanaldaki tüm videolar</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============ VIDEOS ============ -->
+    <section class="vids" id="pazar-sohbeti" data-theme="dark" aria-label="Pazar Sohbetleri">
+      <div class="vids__head">
+        <h2 class="vids__title">HER PAZAR <em>BİR SOHBET</em></h2>
+      </div>
+
+      <div class="vids__deck" data-vids-deck data-cursor="İZLE"><!-- JS: js/data/videos.js --></div>
+
+      <div class="vids__nav">
+        <button class="vids__arrow" type="button" data-vids-prev aria-label="Önceki video">←</button>
+        <span class="vids__counter" data-vids-counter>01 / 04</span>
+        <button class="vids__arrow" type="button" data-vids-next aria-label="Sonraki video">→</button>
+      </div>
+
+      <div class="vids__more-wrap">
+        <a class="vids__more" href="https://www.youtube.com/playlist?list=PLgvVn7A_zKMlKvjwJF3p8RAJyoOZDNLQL"
+          target="_blank" rel="noopener noreferrer" data-cursor="AÇ ↗" data-magnetic>
+          <span>Daha fazla</span>
+          <span class="vids__more-icon" aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============ ABDULCABBAR BORAN ============ -->
+    <section class="boran" id="boran" data-theme="light" aria-label="Abdulcabbar Boran">
+      <div class="boran__pin">
+        <div class="boran__intro">
+          <h2 class="boran__name" aria-label="Abdulcabbar Boran">
+            <span class="boran__name-row" data-split>DR. ABDULCABBAR</span>
+            <span class="boran__name-row boran__name-row--accent" data-split>BORAN</span>
+          </h2>
+          <ul class="boran__mots">
+            <li class="boran__mot"><span class="boran__mot-year">16 DİL</span>Bir Platform</li>
+            <li class="boran__mot"><span class="boran__mot-year">MİLYONLARCA</span>Bir Buluşma</li>
+            <li class="boran__mot"><span class="boran__mot-year">DÜNYA GENELİNDE</span>Bir Davet</li>
+          </ul>
+        </div>
+
+        <figure class="boran__portrait">
+          <img src="assets/boran-portrait.jpg" alt="Dr. Abdulcabbar Boran portresi" loading="lazy" decoding="async"
+            width="1200" height="1500" data-caption="Dr. Abdulcabbar Boran" onerror="window.__imgFallback(this)">
+        </figure>
+
+        <span class="boran__deco boran__deco--a" aria-hidden="true"></span>
+      </div>
+
+      <p class="boran__lead">
+        Hayatını ve çalışmalarını toplumlar ile inançlar arasında
+        <em class="u-yellow">uyum, sevgi ve anlayışı</em> yaymaya adamış seçkin bir alim.
+      </p>
+
+      <ol class="boran__chapters">
+        <li class="boran__chapter">
+          <span class="boran__num" aria-hidden="true">01</span>
+          <div class="boran__chapter-body">
+            <h3>Bir Adanmışlık</h3>
+            <p>Hayatını ve çalışmalarını toplumlar ile inançlar arasında uyum, sevgi ve anlayışı
+              yaymaya adamış seçkin bir alim olan Dr. Boran, uluslararası birçok konferansa katılarak
+              farklı inanç toplulukları arasında barış, anlayış ve iş birliğini geliştirme konusundaki
+              derin görüşlerini paylaşmıştır. Bugüne kadar sayısız insana dokunmuş ve dünya genelinde
+              geniş kitleleri etkilemiştir.</p>
+          </div>
+        </li>
+        <li class="boran__chapter">
+          <span class="boran__num" aria-hidden="true">02</span>
+          <div class="boran__chapter-body">
+            <h3>Bir Misyon</h3>
+            <p>Dr. Abdulcabbar Boran kariyerini kutsal kitaplarda yer alan sevgi, mutluluk ve ilahi
+              hikmet mesajlarını dil, din ve kültür sınırlarını aşacak şekilde yaymaya adamıştır.
+              Onun yaşam misyonu; dinler arası diyaloğu güçlendirmek, dünya dinlerini birleştirici
+              değerleri ortaya koymak ve insanları hakikate ulaştırmaktır.</p>
+          </div>
+        </li>
+        <li class="boran__chapter">
+          <span class="boran__num" aria-hidden="true">03</span>
+          <div class="boran__chapter-body">
+            <h3>Bir Platform</h3>
+            <p>Akademik çalışmalarının yanı sıra Dr. Boran, dünya çapında tanınan
+              <strong>Kainatın Mutluluk Merkezi</strong>
+              (<a class="boran__link" href="https://ibrahimlive.com" target="_blank" rel="noopener noreferrer"
+                data-cursor="AÇ ↗">ibrahimlive.com</a>)
+              sosyal medya platformlarının kurucusudur. Bu platform, 16 dilde milyonlarca insana
+              ulaşmakta; insanlara derin ilhamlar veren manevî yorumlar sunarak sevgi ve mutluluk gibi
+              evrensel değerleri benimsemeleri için rehberlik etmektedir.
+            </p>
+          </div>
+        </li>
+        <li class="boran__chapter">
+          <span class="boran__num" aria-hidden="true">04</span>
+          <div class="boran__chapter-body">
+            <h3>Bir Katkı</h3>
+            <p>Sosyal sorumluluk projeleri kapsamında Dr. Boran; çeşitli üniversite, dernek ve
+              kurumlara gönüllü konferanslar vererek öğrencileri, akademisyenleri ve toplumu birlik,
+              beraberlik, sevgi ve mutluluğa teşvik eden öğretilerle buluşturmaktadır.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ============ QUOTE ============ -->
+    <section class="quote" id="soz" data-theme="light" aria-label="Söz">
+      <blockquote class="quote__block">
+        <p class="quote__text">
+          <span class="quote__line">&ldquo; Sizi<em class="u-yellow"> Allah’a </em>davet ediyoruz.</span>
+          <span class="quote__line">Sizi <em class="u-yellow">Mutluluğa </em>davet ediyoruz. &rdquo;</span>
+        </p>
+      </blockquote>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer" id="iletisim" data-theme="dark">
+    <div class="footer__glow" aria-hidden="true"></div>
+    <div class="footer__inner">
+
+      <div class="footer__col footer__col--brand">
+        <a class="footer__brand" href="#hero" aria-label="Başa dön">
+          <img class="footer__logo" src="assets/hak_logo.png"
+               alt="Her An Kur'an, Her An Mutluluk logosu">
+        </a>
+        <p class="footer__tagline">
+          Allah, insanın mutlu olmasını istiyor.<br>
+          Sizi <em>Kur&rsquo;an&rsquo;a</em>, sizi <em>mutluluğa</em> davet ediyoruz.
+        </p>
+        <ul class="footer__social" aria-label="Sosyal medya">
+          <li><a href="https://www.youtube.com/@HeranKuranHeranMutluluk" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <rect x="2.5" y="5.5" width="19" height="13" rx="3.5" />
+              <path d="M10 9.3v5.4l4.8-2.7z" fill="currentColor" stroke="none" />
+            </svg></a></li>
+          <li><a href="https://www.instagram.com/herankuranheranmutluluk" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <rect x="3" y="3" width="18" height="18" rx="5" />
+              <circle cx="12" cy="12" r="4.2" />
+              <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none" />
+            </svg></a></li>
+          <li><a href="https://www.tiktok.com/@herankuranheranmutluluk" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14.4 3v10.9a3.6 3.6 0 1 1-3.1-3.57" />
+              <path d="M14.4 3c.5 2.4 2 3.9 4.4 4.2" />
+            </svg></a></li>
+          <li><a href="https://www.facebook.com/hkuranhmutluluk" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <path d="M14.5 8.5H17V5h-2.8C11.9 5 10.6 6.6 10.6 9v2H8v3.4h2.6V21h3.5v-6.6h2.7l.5-3.4h-3.2V9.2c0-.5.2-.7.4-.7z" />
+            </svg></a></li>
+        </ul>
+      </div>
+
+      <nav class="footer__col" aria-label="Alt menü">
+        <h2 class="footer__col-title">Menü</h2>
+        <ul class="footer__links">
+          <li><a href="#hero">Ana Sayfa</a></li>
+          <li><a href="#manifesto">Hakkımızda</a></li>
+          <li><a href="#yayin">Canlı Yayın</a></li>
+          <li><a href="#videolar">Videolar</a></li>
+          <li><a href="#pazar-sohbeti">Pazar Sohbeti</a></li>
+        </ul>
+      </nav>
+
+      <div class="footer__col">
+        <h2 class="footer__col-title">İletişim</h2>
+        <a class="footer__wa" href="https://wa.me/905434600460" target="_blank" rel="noopener noreferrer"
+           data-cursor="YAZ ↗" data-magnetic>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20.5 11.7a8.4 8.4 0 0 1-12.3 7.5L3.5 20.5l1.4-4.6A8.4 8.4 0 1 1 20.5 11.7z" />
+            <path d="M9.1 8.6c.3-.6.6-.6.9-.6h.6c.2 0 .5 0 .7.6l.7 1.7c.1.3 0 .5-.1.7l-.4.5c-.1.2-.2.3 0 .6a6.2 6.2 0 0 0 2.6 2.3c.3.1.4 0 .6-.1l.5-.6c.2-.2.4-.2.6-.1l1.6.8c.3.1.5.3.5.5 0 .4-.2 1.2-.6 1.5-.4.4-1 .6-1.6.6a8 8 0 0 1-6.7-6.6c0-.7.1-1.3.5-1.8z" />
+          </svg>
+          <span>WhatsApp&rsquo;tan yaz</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p class="footer__copy">© <span data-footer-year>2026</span> Her An Kur&rsquo;an, Her An Mutluluk</p>
+      <ul class="footer__legal">
+        <li><a href="#">Gizlilik Politikası</a></li>
+        <li><a href="#">Kullanım Koşulları</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Vendor (globals) -->
+  <script src="js/vendor/gsap.min.js"></script>
+  <script src="js/vendor/ScrollTrigger.min.js"></script>
+  <script src="js/vendor/lenis.min.js"></script>
+  <!-- App -->
+  <script type="module" src="js/main.js"></script>
+</body>
+
+</html>

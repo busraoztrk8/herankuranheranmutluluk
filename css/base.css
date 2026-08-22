@@ -1,0 +1,115 @@
+/* ============================================================
+   base.css — reset, design tokens, typography scale, utilities
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* Brand */
+  --brand-yellow: #F8B700;
+  --brand-yellow-deep: #C89300;
+  --brand-purple: #543E9A;
+  --brand-purple-soft: rgba(84, 62, 154, 0.14);
+
+  /* Neutrals */
+  --background-dark: #151313;
+  --background-dark-soft: #1D1A1A;
+  --background-light: #F7F3EA;
+  --background-ivory: #FFF9EC;
+  --text-light: #FFFDF8;
+  --text-dark: #1B1815;
+  --text-muted: #8C857B;
+  --border-soft: rgba(255, 255, 255, 0.12);
+  --border-dark-soft: rgba(27, 24, 21, 0.12);
+
+  /* Controlled brand gradient — small doses only */
+  --brand-gradient: linear-gradient(135deg, #F8B700 0%, #F3C94B 48%, #543E9A 100%);
+
+  /* Type */
+  --font-display: "Instrument Serif", "Cormorant Garamond", Georgia, serif;
+  --font-body: "Manrope", "Segoe UI", system-ui, sans-serif;
+
+  /* Scale */
+  --step--1: clamp(0.78rem, 0.74rem + 0.2vw, 0.9rem);
+  --step-0: clamp(0.95rem, 0.9rem + 0.25vw, 1.1rem);
+  --step-1: clamp(1.15rem, 1.05rem + 0.5vw, 1.5rem);
+  --step-2: clamp(1.5rem, 1.2rem + 1.4vw, 2.4rem);
+  --step-3: clamp(2.2rem, 1.6rem + 3vw, 4.2rem);
+  --step-4: clamp(3rem, 1.8rem + 6vw, 7rem);
+  --step-giant: clamp(4rem, 16vw, 15rem);
+
+  /* Rhythm */
+  --space-section: clamp(6rem, 12vw, 11rem);
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur: 0.9s;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  /* kaydırma çubuğu gizli — sayfa Lenis ile kaydırılıyor,
+     tekerlek / dokunma / klavye normal çalışmaya devam eder */
+  scrollbar-width: none;      /* Firefox */
+  -ms-overflow-style: none;   /* eski Edge */
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar { width: 0; height: 0; display: none; }
+
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  color: var(--text-dark);
+  background: var(--background-ivory);
+  overflow-x: hidden;
+  font-feature-settings: "kern";
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+em { font-style: normal; }
+
+::selection { background: var(--brand-yellow); color: var(--text-dark); }
+
+:focus-visible {
+  outline: 2px solid var(--brand-yellow);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- utilities ---------- */
+.u-yellow { color: var(--brand-yellow-deep); }
+[data-theme="dark"] .u-yellow, .u-yellow--bright { color: var(--brand-yellow); }
+.u-purple { color: var(--brand-purple); }
+
+.eyebrow {
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Split-text helpers (populated by js/animations/textReveal.js) */
+.split-char, .split-word { display: inline-block; will-change: transform; }
+.split-mask { display: inline-block; overflow: hidden; vertical-align: bottom; }
+
+/* Reduced motion: everything visible, no transforms */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

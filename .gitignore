@@ -1,0 +1,27 @@
+# ---------- işletim sistemi ----------
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+._*
+
+# ---------- editör ----------
+.vscode/
+.idea/
+*.code-workspace
+*.swp
+*.swo
+
+# ---------- yerel / geçici ----------
+*.log
+*.tmp
+*.bak
+.cache/
+node_modules/
+
+# ---------- ortam dosyaları (asla depoya girmemeli) ----------
+.env
+.env.*
+*.pem
+*.key

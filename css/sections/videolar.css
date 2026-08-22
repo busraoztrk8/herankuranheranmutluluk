@@ -1,0 +1,219 @@
+/* ============================================================
+   videolar.css — Pazar Sohbeti ile aynı perspektifli deste,
+   açık (ivory) zemine uyarlanmış hâli
+   ============================================================ */
+
+.vlist {
+  background: var(--background-light);
+  color: var(--text-dark);
+  padding: clamp(2.5rem, 6vh, 4rem) 0 clamp(3.5rem, 6vw, 6rem);
+  overflow: hidden;
+  z-index: 3;
+}
+
+.vlist__head {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 var(--gutter);
+  margin-bottom: clamp(2.5rem, 6vh, 4rem);
+}
+.vlist__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2rem, 4.6vw, 4.2rem);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  color: var(--text-dark);
+}
+/* başlığın altında kısa marka çizgisi */
+.vlist__title::after {
+  content: "";
+  display: block;
+  width: 64px; height: 3px;
+  margin: clamp(0.9rem, 2vh, 1.4rem) auto 0;
+  background: var(--brand-gradient, var(--brand-yellow));
+  border-radius: 2px;
+}
+
+/* ---------- deste ---------- */
+.vlist__deck {
+  position: relative;
+  margin-top: clamp(1.5rem, 4vh, 3rem);
+  /* öndeki kartın 16:9 yüksekliği + arkadaki kartlar için küçük pay */
+  height: calc(min(76vw, 780px) * 0.5625 + clamp(1.5rem, 4vw, 3rem));
+  perspective: 1400px;
+  touch-action: pan-y;
+}
+
+.vlist__card {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: min(76vw, 780px);
+  aspect-ratio: 16 / 9;
+  /* Ortalama BURADA yapılmaz. JS her kartı xPercent/yPercent: -50 ile
+     konumlandırıyor; burada bir translate(-50%,-50%) daha olursa GSAP
+     ikisini toplar ve kart desteden yukarı taşar. Konumun tek sahibi
+     js/sections/videolar.js. */
+  transform-style: preserve-3d;
+  will-change: transform, opacity, filter;
+  overflow: hidden;
+  border-radius: 16px;
+  background: var(--background-dark-soft);
+  /* açık zeminde siyah gölge sert kalıyor; sıcak ve yayvan bir gölge */
+  box-shadow: 0 30px 80px rgba(27, 24, 21, 0.22);
+  cursor: pointer;
+}
+.vlist__card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 1s var(--ease-out);
+}
+.vlist__card:hover img { transform: scale(1.04); }
+
+.vlist__card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 45%, rgba(21, 19, 19, 0.7) 100%);
+  pointer-events: none;
+}
+
+/* kart içinde açılan oynatıcı */
+.vlist__embed {
+  width: 100%; height: 100%;
+  border: 0;
+  display: block;
+}
+.vlist__card.is-playing::after { display: none; }
+.vlist__card.is-playing { cursor: default; }
+
+.vlist__card-meta {
+  position: absolute;
+  left: 1.4rem; right: 1.4rem; bottom: 1.2rem;
+  z-index: 2;
+}
+.vlist__card-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--step-1);
+  line-height: 1.15;
+  color: var(--text-light);
+}
+
+.vlist__card-play {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 62px; height: 62px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 253, 248, 0.55);
+  display: grid;
+  place-items: center;
+  color: var(--text-light);
+  opacity: 0;
+  transition: opacity 0.35s, background-color 0.35s, color 0.35s, border-color 0.35s;
+  pointer-events: none;
+}
+.vlist__card-play svg { width: 36%; margin-left: 8%; }
+.vlist__card.is-front:hover .vlist__card-play {
+  opacity: 1;
+  background: var(--brand-yellow);
+  border-color: var(--brand-yellow);
+  color: var(--text-dark);
+}
+
+/* ---------- ileri / geri ---------- */
+.vlist__nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  margin-top: clamp(1.2rem, 2.5vh, 2rem);
+}
+.vlist__nav[hidden] { display: none; }
+
+.vlist__arrow {
+  width: 54px; height: 54px;
+  border-radius: 50%;
+  border: 1px solid var(--border-dark-soft);
+  background: transparent;
+  color: var(--text-dark);
+  font-size: 1.1rem;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background-color 0.35s, color 0.35s, border-color 0.35s,
+              transform 0.35s var(--ease-out);
+}
+.vlist__arrow:hover {
+  background: var(--brand-yellow);
+  border-color: var(--brand-yellow);
+  color: var(--text-dark);
+  transform: translateY(-2px);
+}
+.vlist__counter {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+}
+
+/* ---------- boş durum ---------- */
+.vlist__empty {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  color: var(--text-muted);
+  padding: 2rem;
+}
+.vlist__empty span {
+  display: block;
+  margin-top: 0.7rem;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--brand-purple);
+}
+
+/* ---------- alt bağlantı ---------- */
+.vlist__foot {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(1.8rem, 4vh, 3rem);
+  padding: 0 var(--gutter);
+}
+.vlist__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-dark);
+  padding: 0.95rem 2.1rem;
+  border: 1px solid var(--brand-yellow);
+  border-radius: 999px;
+  transition: background-color 0.45s, color 0.45s, transform 0.45s var(--ease-out);
+}
+.vlist__cta:hover {
+  background: var(--brand-yellow);
+  color: var(--text-dark);
+  transform: translateY(-2px);
+}
+
+@media (pointer: coarse) {
+  .vlist__arrow { width: 58px; height: 58px; }
+  .vlist__arrow:hover { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vlist__card img, .vlist__card-play, .vlist__arrow, .vlist__cta { transition: none; }
+}

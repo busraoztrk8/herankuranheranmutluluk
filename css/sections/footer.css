@@ -1,0 +1,210 @@
+/* ============================================================
+   footer.css — derin mor kapanış sahnesi
+   ============================================================ */
+
+.footer {
+  position: relative;
+  background: #2A2050; /* markadan türetilmiş derin mor */
+  background-image: linear-gradient(180deg, #241B45 0%, #2A2050 55%, #322461 100%);
+  color: var(--text-light);
+  padding: clamp(3.5rem, 9vh, 6rem) var(--gutter) 2rem;
+  overflow: hidden;
+  z-index: 4;
+}
+
+/* alttan yükselen sıcak ışık */
+.footer__glow {
+  position: absolute;
+  left: 50%; bottom: -30%;
+  width: 90vw; height: 70vw;
+  max-width: 1400px;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse, rgba(248, 183, 0, 0.12), transparent 60%);
+  pointer-events: none;
+}
+
+/* ---------- sütunlar ---------- */
+.footer__inner {
+  position: relative;
+  max-width: 1500px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+}
+
+.footer__col-title {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--brand-yellow);
+  margin-bottom: 1.3rem;
+}
+
+/* ---------- marka sütunu ---------- */
+.footer__brand { display: inline-flex; align-items: center; }
+.footer__logo {
+  height: clamp(72px, 6.5vw, 92px);
+  width: auto;
+  display: block;
+  transition: transform 0.5s var(--ease-out);
+}
+.footer__brand:hover .footer__logo { transform: scale(1.04); }
+
+.footer__tagline {
+  margin-top: 1.3rem;
+  max-width: 34ch;
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 1.5vw, 1.35rem);
+  line-height: 1.5;
+  color: rgba(255, 253, 248, 0.82);
+}
+.footer__tagline em {
+  font-style: normal;
+  color: var(--brand-yellow);
+}
+
+.footer__social {
+  display: flex;
+  gap: 0.7rem;
+  margin-top: 1.8rem;
+}
+.footer__social a {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 253, 248, 0.2);
+  display: grid;
+  place-items: center;
+  color: rgba(255, 253, 248, 0.75);
+  transition: background-color 0.4s, color 0.4s, border-color 0.4s,
+              transform 0.4s var(--ease-out);
+}
+.footer__social svg { width: 19px; height: 19px; }
+.footer__social a:hover {
+  background: var(--brand-yellow);
+  border-color: var(--brand-yellow);
+  color: #241B45;
+  transform: translateY(-3px);
+}
+
+/* ---------- menü sütunu ---------- */
+.footer__links { display: flex; flex-direction: column; gap: 0.65rem; }
+.footer__links a {
+  position: relative;
+  font-size: 0.92rem;
+  color: rgba(255, 253, 248, 0.72);
+  transition: color 0.35s, padding-left 0.35s var(--ease-out);
+}
+.footer__links a::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 50%;
+  width: 0; height: 1px;
+  background: var(--brand-yellow);
+  transition: width 0.35s var(--ease-out);
+}
+.footer__links a:hover {
+  color: var(--text-light);
+  padding-left: 1.35rem;
+}
+.footer__links a:hover::before { width: 0.95rem; }
+
+/* ---------- iletişim sütunu ---------- */
+.footer__wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text-light);
+  padding: 0.8rem 1.4rem;
+  border: 1px solid var(--brand-yellow);
+  border-radius: 999px;
+  transition: background-color 0.4s, color 0.4s, transform 0.4s var(--ease-out);
+}
+.footer__wa svg { width: 18px; height: 18px; color: var(--brand-yellow); transition: color 0.4s; }
+.footer__wa:hover {
+  background: var(--brand-yellow);
+  color: #241B45;
+  transform: translateY(-2px);
+}
+.footer__wa:hover svg { color: #241B45; }
+
+/* ---------- alt şerit ---------- */
+.footer__bottom {
+  position: relative;
+  max-width: 1500px;
+  margin: clamp(2.5rem, 6vh, 4rem) auto 0;
+  padding-top: 1.6rem;
+  border-top: 1px solid rgba(255, 253, 248, 0.14);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+}
+.footer__copy {
+  font-size: 0.78rem;
+  color: rgba(255, 253, 248, 0.42);
+}
+.footer__legal { display: flex; gap: 1.4rem; }
+.footer__legal a {
+  font-size: 0.78rem;
+  color: rgba(255, 253, 248, 0.42);
+  transition: color 0.3s;
+}
+.footer__legal a:hover { color: var(--text-light); }
+
+@media (max-width: 900px) {
+  .footer__inner { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+  .footer__col--brand { grid-column: 1 / -1; }
+}
+
+@media (max-width: 600px) {
+  .footer {
+    padding: clamp(2.5rem, 7vh, 3.5rem) var(--gutter) 1.5rem;
+    text-align: center;
+  }
+  /* tek sütun, ortalanmış: iki dar sütun sıkışık ve dağınık duruyordu */
+  .footer__inner {
+    grid-template-columns: 1fr;
+    gap: 2.2rem;
+    justify-items: center;
+  }
+  .footer__col { width: 100%; }
+
+  .footer__logo { height: 76px; }
+  .footer__tagline {
+    margin-inline: auto;
+    margin-top: 1rem;
+    font-size: 1.02rem;
+    max-width: 30ch;
+  }
+  .footer__social { justify-content: center; margin-top: 1.4rem; }
+  /* parmakla rahat basılsın */
+  .footer__social a { width: 44px; height: 44px; }
+
+  .footer__col-title { margin-bottom: 0.9rem; }
+  .footer__links { align-items: center; gap: 0.5rem; }
+  /* ortalı dizilimde soldan kayma efekti hizayı bozuyor */
+  .footer__links a:hover { padding-left: 0; }
+  .footer__links a::before { display: none; }
+
+  .footer__bottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1.3rem;
+    gap: 0.8rem;
+  }
+  .footer__legal { justify-content: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer__logo, .footer__social a, .footer__links a, .footer__wa { transition: none; }
+}

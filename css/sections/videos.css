@@ -1,0 +1,177 @@
+/* ============================================================
+   videos.css — perspective deck: active large, others in depth
+   ============================================================ */
+
+.vids {
+  background: var(--background-dark);
+  color: var(--text-light);
+  /* bottom padding is tighter than the top: the deck + nav row already
+     carry their own breathing room, and a full section pad below left
+     half a viewport of empty black. */
+  padding: var(--space-section) 0 clamp(3.5rem, 6vw, 6rem);
+  overflow: hidden;
+  z-index: 3;
+}
+
+.vids__head {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 var(--gutter);
+  margin-bottom: clamp(2.5rem, 6vh, 4rem);
+}
+.vids__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2rem, 4.6vw, 4.2rem);
+  line-height: 1;
+}
+.vids__title em { color: var(--brand-yellow); font-style: italic; }
+
+/* deck */
+.vids__deck {
+  position: relative;
+  margin-top: clamp(1.5rem, 4vh, 3rem);
+  /* sized off the front card (16:9 of its own width) plus a small margin
+     for the fanned back cards — no dead space under the deck. */
+  height: calc(min(76vw, 780px) * 0.5625 + clamp(1.5rem, 4vw, 3rem));
+  perspective: 1400px;
+  touch-action: pan-y;
+}
+
+.vids__card {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: min(76vw, 780px);
+  aspect-ratio: 16 / 9;
+  /* Ortalama BURADA yapılmaz. JS her kartı xPercent/yPercent: -50 ile
+     konumlandırıyor; burada bir translate(-50%,-50%) daha olursa GSAP
+     ikisini toplayıp kartı desteden yukarı taşırıyor (başlığın üstüne
+     biner). Kart konumunun tek sahibi js/sections/videos.js. */
+  transform-style: preserve-3d;
+  will-change: transform, opacity, filter;
+  overflow: hidden;
+  background: var(--background-dark-soft);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+  cursor: pointer;
+}
+.vids__card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 1s var(--ease-out);
+}
+.vids__card:hover img { transform: scale(1.04); }
+
+/* kart içinde açılan oynatıcı */
+.vids__embed {
+  width: 100%; height: 100%;
+  border: 0;
+  display: block;
+}
+/* oynarken kapak süslemeleri kaybolur, kontroller açıkta kalır */
+.vids__card.is-playing::after { display: none; }
+.vids__card.is-playing { cursor: default; }
+.vids__card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(21, 19, 19, 0.75) 100%);
+}
+
+.vids__card-meta {
+  position: absolute;
+  left: 1.4rem; right: 1.4rem; bottom: 1.2rem;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.vids__card-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--step-1);
+  line-height: 1.15;
+  color: var(--text-light);
+}
+.vids__card-play {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 62px; height: 62px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 253, 248, 0.55);
+  display: grid;
+  place-items: center;
+  color: var(--text-light);
+  opacity: 0;
+  transition: opacity 0.35s, background-color 0.35s, color 0.35s;
+  pointer-events: none;
+}
+.vids__card-play svg { width: 36%; margin-left: 8%; }
+.vids__card.is-front:hover .vids__card-play { opacity: 1; background: var(--brand-yellow); border-color: var(--brand-yellow); color: var(--text-dark); }
+
+/* nav */
+.vids__nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  margin-top: clamp(1.2rem, 2.5vh, 2rem);
+}
+.vids__arrow {
+  width: 54px; height: 54px;
+  border-radius: 50%;
+  border: 1px solid var(--border-soft);
+  color: var(--text-light);
+  font-size: 1.1rem;
+  display: grid;
+  place-items: center;
+  transition: background-color 0.35s, color 0.35s, border-color 0.35s, transform 0.35s var(--ease-out);
+}
+.vids__arrow:hover {
+  background: var(--brand-yellow);
+  border-color: var(--brand-yellow);
+  color: var(--text-dark);
+  transform: translateY(-2px);
+}
+.vids__counter {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  color: rgba(255, 253, 248, 0.6);
+}
+
+/* ---------- YouTube'a giden "daha fazla" düğmesi ---------- */
+.vids__more-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(1.8rem, 4vh, 3rem);
+  padding: 0 var(--gutter);
+}
+.vids__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  padding: 0.95rem 2.1rem;
+  border: 1px solid var(--brand-yellow);
+  border-radius: 999px;
+  transition: background-color 0.45s, color 0.45s, transform 0.45s var(--ease-out);
+}
+.vids__more:hover {
+  background: var(--brand-yellow);
+  color: var(--text-dark);
+  transform: translateY(-2px);
+}
+.vids__more-icon { transition: transform 0.45s var(--ease-out); }
+.vids__more:hover .vids__more-icon { transform: translate(3px, -3px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .vids__more, .vids__more-icon { transition: none; }
+}

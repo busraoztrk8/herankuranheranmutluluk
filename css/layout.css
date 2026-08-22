@@ -1,0 +1,472 @@
+/* ============================================================
+   layout.css — navbar, footer shell, grain overlay, cursor
+   ============================================================ */
+
+/* ---------- film grain ---------- */
+.grain {
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 2000;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain-shift 1.4s steps(4) infinite;
+}
+@keyframes grain-shift {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-2%, 1.5%); }
+  50% { transform: translate(1.5%, -2%); }
+  75% { transform: translate(-1%, -1%); }
+  100% { transform: translate(0, 0); }
+}
+
+/* ---------- custom cursor ---------- */
+.cursor {
+  position: fixed;
+  top: 0; left: 0;
+  z-index: 3000;
+  pointer-events: none;
+  display: none;
+  transform: translate(-50%, -50%);
+}
+html.has-cursor .cursor { display: block; }
+html.has-cursor, html.has-cursor a, html.has-cursor button { cursor: none; }
+
+.cursor__dot {
+  display: block;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--brand-yellow);
+  transition: width 0.3s var(--ease-out), height 0.3s var(--ease-out),
+              background-color 0.3s, opacity 0.3s;
+  box-shadow: 0 0 0 0 rgba(84, 62, 154, 0);
+}
+.cursor.is-dark .cursor__dot {
+  box-shadow: 0 0 26px 10px rgba(84, 62, 154, 0.35);
+}
+.cursor.has-label .cursor__dot {
+  width: 64px; height: 64px;
+  background: rgba(248, 183, 0, 0.92);
+}
+.cursor__label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--text-dark);
+  opacity: 0;
+  white-space: nowrap;
+  transition: opacity 0.25s;
+}
+.cursor.has-label .cursor__label { opacity: 1; }
+
+/* ---------- navbar ---------- */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  transition: background-color 0.5s, backdrop-filter 0.5s, border-color 0.5s, transform 0.5s var(--ease-out);
+  border-bottom: 1px solid transparent;
+}
+.navbar.is-scrolled {
+  background: rgba(255, 255, 255, 0.65);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  border-bottom-color: var(--border-dark-soft);
+}
+.navbar.is-dark.is-scrolled {
+  background: rgba(21, 19, 19, 0.6);
+  border-bottom-color: var(--border-soft);
+}
+
+.navbar__inner {
+  /* Bar height is locked so the logo can grow without moving the menu.
+     JS reads this element's offsetHeight for the dark-mode probe + mobile overlay. */
+  --bar-h: 85px;
+  /* Tune the logo here — it is the ONLY thing that changes size.
+     Growth spills downward past the bar as a deliberate badge overhang,
+     so --bar-h (and therefore the menu) never moves. */
+  --logo-h: clamp(66px, 5.5vw, 84px);
+  --logo-top: 0px;
+  --logo-ratio: 0.9634; /* 1000 / 1038 */
+
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  max-width: 1680px;
+  margin: 0 auto;
+  height: var(--bar-h);
+  padding: 0 var(--gutter);
+}
+
+/* Fixed-size anchor: reserves only the logo's width, never its height,
+   so the oversized badge overhangs the bar instead of stretching it. */
+.navbar__brand {
+  position: relative;
+  align-self: stretch;
+  flex: 0 0 auto;
+  width: calc(var(--logo-h) * var(--logo-ratio));
+}
+.navbar__logo {
+  position: absolute;
+  top: var(--logo-top);
+  left: 0;
+  height: var(--logo-h);
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 6px 18px rgba(27, 24, 21, 0.16));
+}
+
+.navbar__nav { margin-inline: auto; }
+.navbar__list { display: flex; gap: clamp(1rem, 2vw, 2rem); }
+.navbar__link {
+  position: relative;
+  display: inline-block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--text-dark);
+  padding: 0.4rem 0;
+  transition: color 0.4s;
+  white-space: nowrap;
+  /* yazının öne dönmesi için derinlik */
+  perspective: 420px;
+}
+
+/* ---------- menü yazısı: üzerine gelince öne doğru yuvarlanır ----------
+   Yazı bir küpün ön yüzü gibi davranır; dönme ekseni yazının arkasında
+   (yüksekliğin yarısı kadar geride) durur. ::after aynı yazının ikinci
+   kopyasıdır, başta 90° dönük bekler ve tam yerine oturarak gelir. */
+.navbar__link-roll {
+  --face: 1.5em;
+  position: relative;   /* ::after buna göre hizalansın, bağlantıya göre değil */
+  display: block;
+  height: var(--face);
+  line-height: var(--face);
+  transform-style: preserve-3d;
+  transform-origin: 50% 50% calc(var(--face) / -2);
+  transition: transform 0.6s var(--ease-out);
+}
+.navbar__link-roll::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0; top: 0;
+  width: 100%;
+  height: var(--face);
+  line-height: var(--face);
+  transform: rotateX(90deg);
+  transform-origin: 50% 50% calc(var(--face) / -2);
+  /* Bekleyen yüz 90° dönük olduğu için tam kenarından görünür ve
+     yazının üstünde ince koyu bir çizgi olarak belirirdi. Duruşta
+     görünmez tutulup dönme başlayınca beliriyor. */
+  opacity: 0;
+  transition: opacity 0.2s linear;
+}
+/* öne doğru: üst kenar izleyiciye yaklaşır */
+.navbar__link:hover .navbar__link-roll { transform: rotateX(-90deg); }
+/* gelen yüz, dönüş yarılandıktan sonra görünür olsun */
+.navbar__link:hover .navbar__link-roll::after {
+  opacity: 1;
+  transition-delay: 0.2s;
+}
+
+/* dokunmatikte hover yok; dönmeyi kapat ki yazı yamuk kalmasın */
+@media (pointer: coarse) {
+  .navbar__link-roll { transition: none; }
+  .navbar__link:hover .navbar__link-roll { transform: none; }
+  .navbar__link-roll::after,
+  .navbar__link:hover .navbar__link-roll::after { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .navbar__link-roll { transition: none; }
+  .navbar__link:hover .navbar__link-roll { transform: none; }
+  .navbar__link-roll::after,
+  .navbar__link:hover .navbar__link-roll::after { display: none; }
+}
+.navbar.is-dark .navbar__link { color: var(--text-light); }
+.navbar__link::after {
+  content: "";
+  position: absolute;
+  left: 50%; bottom: -2px;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--brand-yellow);
+  transform: translateX(-50%) scale(0);
+  transition: transform 0.35s var(--ease-out);
+}
+.navbar__link:hover { color: var(--brand-yellow-deep); }
+.navbar.is-dark .navbar__link:hover { color: var(--brand-yellow); }
+.navbar__link.is-active::after { transform: translateX(-50%) scale(1); }
+
+.navbar__actions { display: flex; align-items: center; gap: 0.9rem; }
+.navbar__icon {
+  width: 20px; height: 20px;
+  color: var(--text-dark);
+  opacity: 0.75;
+  transition: color 0.3s, opacity 0.3s, transform 0.3s var(--ease-out);
+}
+.navbar__icon svg { width: 100%; height: 100%; }
+/* masaüstünde WhatsApp zaten CTA düğmesi olarak var; ikon yalnızca mobilde */
+.navbar__icon--wa { display: none; }
+.navbar.is-dark .navbar__icon { color: var(--text-light); }
+.navbar__icon:hover { opacity: 1; color: var(--brand-yellow-deep); transform: translateY(-2px); }
+.navbar.is-dark .navbar__icon:hover { color: var(--brand-yellow); }
+
+.navbar__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 0.55rem 1.15rem 0.55rem 0.95rem;
+  border: 1px solid var(--brand-yellow);
+  border-radius: 999px;
+  color: var(--text-dark);
+  transition: background-color 0.35s, color 0.35s, transform 0.35s var(--ease-out);
+  white-space: nowrap;
+}
+.navbar__cta-icon {
+  width: 17px; height: 17px;
+  flex: 0 0 auto;
+  color: var(--brand-yellow);
+  transition: color 0.35s;
+}
+.navbar__cta:hover .navbar__cta-icon { color: var(--text-dark); }
+.navbar.is-dark .navbar__cta { color: var(--text-light); }
+.navbar__cta:hover {
+  background: var(--brand-yellow);
+  color: var(--text-dark);
+  transform: translateY(-2px);
+}
+
+/* burger */
+.navbar__burger {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px;
+  margin-left: auto;
+}
+.navbar__burger span {
+  display: block;
+  width: 26px; height: 2px;
+  background: var(--text-dark);
+  transition: transform 0.4s var(--ease-out), background-color 0.4s;
+}
+.navbar.is-dark .navbar__burger span { background: var(--text-light); }
+.navbar__burger[aria-expanded="true"] span:first-child { transform: translateY(4px) rotate(45deg); }
+.navbar__burger[aria-expanded="true"] span:last-child { transform: translateY(-4px) rotate(-45deg); }
+
+.navbar__mobile {
+  display: none;
+  flex-direction: column;
+  /* menü, şeridin altındaki alanın tam ortasında durur */
+  justify-content: center;
+  align-items: center;
+  padding: 1rem var(--gutter) 2rem;
+  height: calc(100svh - var(--nav-h, 58px));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.navbar__mobile-list {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 22rem;
+  text-align: center;
+}
+.navbar__mobile-list a {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 6vw, 1.85rem);
+  line-height: 1.2;
+  padding: 0.85rem 0;
+  color: var(--text-dark);
+}
+
+/* menü açılırken satırlar sırayla, maskenin altından yükselir */
+.navbar__mobile-list li {
+  overflow: hidden;   /* maske: yazı aşağıdan süzülürken taşmasın */
+}
+.navbar__mobile-list a {
+  transform: translateY(110%);
+  opacity: 0;
+  transition:
+    transform 0.7s var(--ease-out),
+    opacity 0.5s ease;
+}
+.navbar.menu-open .navbar__mobile-list a {
+  transform: translateY(0);
+  opacity: 1;
+}
+/* her satır bir öncekinden biraz sonra gelsin */
+.navbar__mobile-list li:nth-child(1) a { transition-delay: 0.06s; }
+.navbar__mobile-list li:nth-child(2) a { transition-delay: 0.12s; }
+.navbar__mobile-list li:nth-child(3) a { transition-delay: 0.18s; }
+.navbar__mobile-list li:nth-child(4) a { transition-delay: 0.24s; }
+.navbar__mobile-list li:nth-child(5) a { transition-delay: 0.30s; }
+/* kapanırken bekleme olmasın */
+.navbar:not(.menu-open) .navbar__mobile-list a { transition-delay: 0s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar__mobile-list a { transition: none; transform: none; opacity: 1; }
+}
+.navbar.is-dark .navbar__mobile-list a { color: var(--text-light); border-bottom-color: var(--border-soft); }
+
+
+.navbar.menu-open .navbar__mobile { display: flex; }
+/* opaque, full-viewport layer — nothing bleeds through */
+.navbar.menu-open {
+  height: 100svh;
+  background: var(--background-ivory);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border-bottom-color: transparent;
+  overflow: hidden;
+}
+.navbar.is-dark.menu-open { background: var(--background-dark); }
+body.menu-locked { overflow: hidden; }
+
+@media (max-width: 960px) {
+  .navbar__nav, .navbar__cta { display: none; }
+  .navbar__burger { display: flex; margin-left: 0; padding: 4px; }
+  /* şerit alçak, logo biraz daha büyük */
+  .navbar__inner { --bar-h: 64px; --logo-h: clamp(62px, 16.5vw, 78px); --logo-top: 0px; }
+
+  /* beş ikon da hamburgerin hemen soluna dizilir */
+  .navbar__actions {
+    margin-left: auto;
+    gap: clamp(0.5rem, 2.6vw, 0.9rem);
+  }
+  .navbar__icon,
+  .navbar__icon--wa { display: block; width: clamp(15px, 4.4vw, 19px); height: clamp(15px, 4.4vw, 19px); }
+  .navbar__icon:hover { transform: none; }
+  .navbar__burger span { width: 21px; }
+}
+
+/* ---------- section shells ---------- */
+main { position: relative; }
+section { position: relative; }
+
+/* soft top divider between light sections */
+.section-divider {
+  width: 64px; height: 3px;
+  background: var(--brand-gradient);
+  border-radius: 2px;
+}
+
+/* ---------- designed image placeholder (fallback when an asset is missing) ----
+   Kullanıcı gerçek fotoğrafı bırakana kadar görsel alanları
+   "bozuk" değil, tasarlanmış bir panel olarak görünür. */
+.imgph {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.9rem, 4%, 2.2rem);
+  background:
+    radial-gradient(120% 90% at 100% 0%, rgba(248, 183, 0, 0.16), transparent 60%),
+    radial-gradient(100% 80% at 0% 100%, rgba(84, 62, 154, 0.10), transparent 62%),
+    linear-gradient(150deg, var(--background-ivory) 0%, #EEE2CB 100%);
+  color: var(--text-dark);
+  overflow: hidden;
+}
+.imgph--dark {
+  background:
+    radial-gradient(120% 90% at 100% 0%, rgba(248, 183, 0, 0.20), transparent 60%),
+    radial-gradient(100% 80% at 0% 100%, rgba(84, 62, 154, 0.22), transparent 62%),
+    linear-gradient(150deg, #201D1C 0%, #121010 100%);
+  color: var(--text-light);
+}
+.imgph::before {
+  content: "";
+  position: absolute;
+  inset: clamp(0.6rem, 6%, 1.6rem);
+  border: 1px solid currentColor;
+  opacity: 0.14;
+  pointer-events: none;
+}
+.imgph__idx {
+  position: absolute;
+  left: clamp(0.9rem, 8%, 2rem);
+  top: clamp(0.9rem, 8%, 2rem);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--brand-yellow);
+  padding-top: 0.45rem;
+  border-top: 3px solid var(--brand-yellow);
+}
+.imgph__body { text-align: center; max-width: 88%; }
+.imgph__cap {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2.4vw, 1.9rem);
+  line-height: 1.2;
+}
+.imgph__rule {
+  display: block;
+  width: 42px; height: 2px;
+  margin: 0.9rem auto 0.7rem;
+  background: var(--brand-yellow);
+}
+.imgph__note {
+  display: block;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(0.78rem, 1.3vw, 0.95rem);
+  opacity: 0.72;
+}
+
+
+/* ---------- oynayan videoyu kapatma düğmesi ----------
+   Dokunmatik cihazlarda videoyu durdurmanın tek yolu bu; masaüstünde de
+   oynatıcının üstünde durur. Oynatıcı iframe'inin üstünde kalması için
+   yüksek z-index ve kendi tıklama alanı var. */
+.video-close {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  z-index: 20;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 253, 248, 0.45);
+  background: rgba(21, 19, 19, 0.62);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: var(--text-light);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s, transform 0.3s var(--ease-out);
+}
+.video-close svg { width: 20px; height: 20px; }
+.video-close:hover {
+  background: var(--brand-yellow);
+  border-color: var(--brand-yellow);
+  color: var(--text-dark);
+  transform: scale(1.06);
+}
+
+/* dokunmatikte parmakla rahat basılsın */
+@media (pointer: coarse) {
+  .video-close {
+    width: 48px;
+    height: 48px;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+  .video-close svg { width: 23px; height: 23px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .video-close { transition: none; }
+}

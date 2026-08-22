@@ -1,0 +1,58 @@
+# ============================================================
+#  Güvenlik başlıkları — Apache (cPanel, Plesk, çoğu paylaşımlı hosting)
+#  Bu dosyayı sitenin kök dizinine yükleyin.
+#  Nginx / Netlify / Vercel kullanıyorsanız GUVENLIK.md dosyasına bakın.
+# ============================================================
+
+<IfModule mod_headers.c>
+
+  # Sayfanın başka sitelerin içine çerçevelenmesini (clickjacking) engeller
+  Header always set X-Frame-Options "SAMEORIGIN"
+
+  # Tarayıcının dosya türünü tahmin etmesini engeller
+  Header always set X-Content-Type-Options "nosniff"
+
+  # Dış sitelere giderken tam adres sızmasın
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Kullanılmayan cihaz izinlerini kapatır
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+
+  # HTTPS zorunlu (SSL sertifikası kurulduktan SONRA açın)
+  # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+  # İçerik Güvenliği Politikası
+  # Sitenin kullandığı tüm dış kaynaklar aşağıda listelidir; başka hiçbir
+  # yere istek atılamaz. Yeni bir servis eklerseniz buraya da ekleyin.
+  Header always set Content-Security-Policy "\
+default-src 'self'; \
+script-src 'self' 'unsafe-inline'; \
+style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; \
+font-src 'self' https://fonts.gstatic.com; \
+img-src 'self' data: https://i.ytimg.com https://*.cdninstagram.com https://*.fbcdn.net; \
+frame-src https://www.youtube.com https://www.youtube-nocookie.com https://www.instagram.com; \
+connect-src 'self'; \
+object-src 'none'; \
+base-uri 'self'; \
+form-action 'self'; \
+frame-ancestors 'self'"
+
+</IfModule>
+
+# ---------- gizli dosyalar dışarıdan görülmesin ----------
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
+
+# ---------- dizin listelemesini kapat ----------
+Options -Indexes
+
+# ---------- önbellek (isteğe bağlı, hız için) ----------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 7 days"
+  ExpiresByType application/javascript "access plus 7 days"
+  ExpiresByType image/jpeg "access plus 30 days"
+  ExpiresByType image/png "access plus 30 days"
+  ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
