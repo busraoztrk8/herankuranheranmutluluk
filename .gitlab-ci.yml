@@ -1,0 +1,12 @@
+# GitLab Pages — statik siteyi olduğu gibi yayınlar.
+# main dalına her push'ta site otomatik güncellenir.
+pages:
+  stage: deploy
+  script:
+    - mkdir -p public
+    - cp -r index.html favicon.ico assets css js public/
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
