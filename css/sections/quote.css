@@ -25,6 +25,9 @@
   line-height: 1.18;
   color: var(--text-dark);
   letter-spacing: -0.01em;
+  /* İnce serif kesim krem zeminde soluk kalıyor; harf gövdesini
+     hafifçe kalınlaştırarak kontrastı artırıyoruz */
+  -webkit-text-stroke: 0.4px currentColor;
 }
 .quote__line {
   display: block;
@@ -32,3 +35,8 @@
   padding-bottom: 0.08em;
 }
 .quote__line em { font-style: italic; }
+
+/* Vurgu renkleri bu boyut ve incelikte açık kaçıyor;
+   alıntıya özel daha doygun tonlar */
+.quote__text .u-yellow { color: #A87900; }
+.quote__text .u-purple { color: #45308F; }
