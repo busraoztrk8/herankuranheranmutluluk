@@ -22,50 +22,6 @@
   100% { transform: translate(0, 0); }
 }
 
-/* ---------- custom cursor ---------- */
-.cursor {
-  position: fixed;
-  top: 0; left: 0;
-  z-index: 3000;
-  pointer-events: none;
-  display: none;
-  transform: translate(-50%, -50%);
-}
-html.has-cursor .cursor { display: block; }
-html.has-cursor, html.has-cursor a, html.has-cursor button { cursor: none; }
-
-.cursor__dot {
-  display: block;
-  width: 12px; height: 12px;
-  border-radius: 50%;
-  background: var(--brand-yellow);
-  transition: width 0.3s var(--ease-out), height 0.3s var(--ease-out),
-              background-color 0.3s, opacity 0.3s;
-  box-shadow: 0 0 0 0 rgba(84, 62, 154, 0);
-}
-.cursor.is-dark .cursor__dot {
-  box-shadow: 0 0 26px 10px rgba(84, 62, 154, 0.35);
-}
-.cursor.has-label .cursor__dot {
-  width: 64px; height: 64px;
-  background: rgba(248, 183, 0, 0.92);
-}
-.cursor__label {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.66rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  color: var(--text-dark);
-  opacity: 0;
-  white-space: nowrap;
-  transition: opacity 0.25s;
-}
-.cursor.has-label .cursor__label { opacity: 1; }
-
 /* ---------- navbar ---------- */
 .navbar {
   position: fixed;
