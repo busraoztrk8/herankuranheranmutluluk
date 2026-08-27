@@ -57,9 +57,9 @@ function initLiveCovers() {
       const frame = cover.parentElement;
       const iframe = frame?.querySelector('iframe');
 
-      if (iframe && !iframe.src.includes('autoplay=1')) {
-        const separator = iframe.src.includes('?') ? '&' : '?';
-        iframe.src += `${separator}autoplay=1`;
+      if (iframe && iframe.dataset.liveSrc) {
+        const separator = iframe.dataset.liveSrc.includes('?') ? '&' : '?';
+        iframe.src = `${iframe.dataset.liveSrc}${separator}autoplay=1`;
       }
 
       cover.classList.add('is-hidden');
