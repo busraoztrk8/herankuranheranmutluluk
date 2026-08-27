@@ -10,6 +10,7 @@ export function init({ reducedMotion }) {
   const section = document.querySelector('.bcast');
   if (!section) return;
 
+  initLiveCovers();
   renderStatus(section);
 
   if (reducedMotion) return;
@@ -46,6 +47,23 @@ export function init({ reducedMotion }) {
     duration: 1,
     ease: 'power2.out',
     scrollTrigger: { trigger: section.querySelector('.bcast__caption'), start: 'top 92%', toggleActions: 'restart none restart none' },
+  });
+}
+
+/* ---------------- yayın kapakları ---------------- */
+function initLiveCovers() {
+  document.querySelectorAll('[data-live-cover]').forEach((cover) => {
+    cover.addEventListener('click', () => {
+      const frame = cover.parentElement;
+      const iframe = frame?.querySelector('iframe');
+
+      if (iframe && !iframe.src.includes('autoplay=1')) {
+        const separator = iframe.src.includes('?') ? '&' : '?';
+        iframe.src += `${separator}autoplay=1`;
+      }
+
+      cover.classList.add('is-hidden');
+    }, { once: true });
   });
 }
 
