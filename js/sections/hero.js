@@ -50,8 +50,9 @@ export function init({ reducedMotion, isTouch }) {
   gsap.set(stage, { transformOrigin: '14% 50%' });
   heroTl
     .to(stage, { scale: 1.85, yPercent: -5, ease: 'power2.in', duration: 1 }, 0)
-    // fade lands late, as the manifesto is already covering the stage
-    .to(stage, { opacity: 0, ease: 'power1.in', duration: 0.45 }, 0.55)
+    // Sonraki bölüm zaten opak ve hero'nun üzerine geliyor. Sahneyi ayrıca
+    // soldurmak, hızlı aşağı-yukarı kaydırmada opacity'nin 0'da takılmasına
+    // ve girişin boş görünmesine yol açıyordu.
     .to('.hero__scrollcue', { opacity: 0, duration: 0.16 }, 0)
     .to('.hero__bloom--purple', { opacity: 0.2, scale: 1.3, duration: 1 }, 0)
     .to('.hero__bloom--gold', { opacity: 1, scale: 1.5, xPercent: -12, yPercent: -12, duration: 1 }, 0);
