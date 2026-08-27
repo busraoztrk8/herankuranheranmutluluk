@@ -4,7 +4,6 @@
  * Vendor globals (gsap, ScrollTrigger, Lenis) load before this module.
  */
 import { initSmoothScroll } from './animations/smoothScroll.js';
-import { initCursor } from './animations/cursor.js';
 import { initMagnetic } from './animations/magnetic.js';
 
 import * as navbar from './sections/navbar.js';
@@ -36,7 +35,6 @@ if (hasGsap) {
 /* 1 — global systems */
 // exposed for debugging / programmatic scrolling
 window.lenis = initSmoothScroll(ctx);
-initCursor(ctx);
 
 /* 2 — sections (each owns its motion) */
 navbar.init(ctx);

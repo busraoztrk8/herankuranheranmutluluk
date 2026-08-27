@@ -22,9 +22,9 @@ export function init({ reducedMotion, isTouch }) {
   const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
   tl.add(revealRise(chars, { duration: 1.25, stagger: 0.05 }), 0)
     .add(revealRise(subWords, { duration: 1.0, stagger: 0.1 }), '-=0.5')
-    /* y kullanılmıyor: CSS'teki badge-float animasyonu transform'u yönetiyor */
+    /* Bilgi metni sade bir opacity geçişiyle görünür. */
     .from('.hero__badge', { opacity: 0, duration: 0.8 }, '-=0.45')
-    .from('.hero__visual img', {
+    .from('.hero__visual', {
       opacity: 0, scale: 1.08, duration: 1.6, ease: 'expo.out',
     }, 0.25)
     .from('.hero__scrollcue', { opacity: 0, y: 12, duration: 0.8 }, '-=0.6');
