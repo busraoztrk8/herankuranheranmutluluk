@@ -40,12 +40,25 @@
   height: 100%;
   object-fit: cover;
 }
+.live-cover__label {
+  position: absolute;
+  z-index: 1;
+  top: clamp(0.75rem, 2vw, 1.4rem);
+  right: clamp(0.75rem, 2vw, 1.4rem);
+  color: #fff;
+  font-size: clamp(0.7rem, 1.25vw, 1rem);
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+}
 .live-cover__play {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: clamp(3.5rem, 7vw, 5.5rem);
-  height: clamp(3.5rem, 7vw, 5.5rem);
+  width: clamp(2.3rem, 4vw, 3.4rem);
+  height: clamp(2.3rem, 4vw, 3.4rem);
   display: grid;
   place-items: center;
   border-radius: 50%;
