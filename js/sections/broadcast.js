@@ -16,7 +16,7 @@ export function init({ reducedMotion }) {
   if (reducedMotion) return;
 
   // headline reveal
-  gsap.from(section.querySelectorAll('.bcast__eyebrow, .bcast__title'), {
+  gsap.from(section.querySelectorAll('.bcast__eyebrow, .bcast__title, .bcast__time'), {
     opacity: 0,
     y: 40,
     duration: 1.1,
