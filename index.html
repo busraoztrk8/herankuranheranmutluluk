@@ -26,8 +26,8 @@
     rel="stylesheet">
 
   <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/sections/hero.css">
+  <link rel="stylesheet" href="css/layout.css?v=20260913-1">
+  <link rel="stylesheet" href="css/sections/hero.css?v=20260913-14">
   <link rel="stylesheet" href="css/sections/manifesto.css">
   <link rel="stylesheet" href="css/sections/instagram.css">
   <link rel="stylesheet" href="css/sections/broadcast.css">
@@ -131,7 +131,7 @@
           aria-label="WhatsApp ile iletişime geç">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
                stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20.5 11.7a8.4 8.4 0 0 1-12.3 7.5L3.5 20.5l1.4-4.6A8.4 8.4 0 1 1 20.5 11.7z" />
+            <path d="M12.03 3.2a8.8 8.8 0 0 0-7.4 13.5L3.13 20.8l4.3-1.4A8.8 8.8 0 1 0 12.03 3.2z" />
             <path d="M9.1 8.6c.3-.6.6-.6.9-.6h.6c.2 0 .5 0 .7.6l.7 1.7c.1.3 0 .5-.1.7l-.4.5c-.1.2-.2.3 0 .6a6.2 6.2 0 0 0 2.6 2.3c.3.1.4 0 .6-.1l.5-.6c.2-.2.4-.2.6-.1l1.6.8c.3.1.5.3.5.5 0 .4-.2 1.2-.6 1.5-.4.4-1 .6-1.6.6a8 8 0 0 1-6.7-6.6c0-.7.1-1.3.5-1.8z" />
           </svg>
         </a>
@@ -139,7 +139,7 @@
           aria-label="WhatsApp ile iletişime geç">
           <svg class="navbar__cta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M20.5 11.7a8.4 8.4 0 0 1-12.3 7.5L3.5 20.5l1.4-4.6A8.4 8.4 0 1 1 20.5 11.7z" />
+            <path d="M12.03 3.2a8.8 8.8 0 0 0-7.4 13.5L3.13 20.8l4.3-1.4A8.8 8.8 0 1 0 12.03 3.2z" />
             <path
               d="M9.1 8.6c.3-.6.6-.6.9-.6h.6c.2 0 .5 0 .7.6l.7 1.7c.1.3 0 .5-.1.7l-.4.5c-.1.2-.2.3 0 .6a6.2 6.2 0 0 0 2.6 2.3c.3.1.4 0 .6-.1l.5-.6c.2-.2.4-.2.6-.1l1.6.8c.3.1.5.3.5.5 0 .4-.2 1.2-.6 1.5-.4.4-1 .6-1.6.6a8 8 0 0 1-6.7-6.6c0-.7.1-1.3.5-1.8z" />
           </svg>
@@ -164,35 +164,49 @@
   <main id="icerik">
 
     <!-- ============ HERO ============ -->
-    <section class="hero" id="hero" data-theme="light" aria-label="Giriş">
-      <div class="hero__bloom hero__bloom--purple" aria-hidden="true"></div>
-      <div class="hero__bloom hero__bloom--gold" aria-hidden="true"></div>
-      <canvas class="hero__dust" aria-hidden="true"></canvas>
-
+    <!-- Tam ekran canlı yayın kapağı; marka imzası altta, logo yazının solunda.
+         Kapağın tamamı tıklanabilir: üstteki katmanların hepsi pointer-events:none. -->
+    <section class="hero" id="hero" data-theme="dark" aria-label="Giriş">
       <div class="hero__stage">
-        <div class="hero__copy">
-          <h1 class="hero__title">
-            <span class="hero__row"><span class="hero__word" data-split>HER AN</span></span>
-            <span class="hero__row"><span class="hero__word hero__word--accent" data-split>KUR&rsquo;AN</span></span>
-          </h1>
-          <p class="hero__sub" data-split-words>HER AN MUTLULUK</p>
-          <p class="hero__badge">Kainatın Mutluluk Merkezi</p>
-        </div>
 
         <figure class="hero__visual">
           <iframe referrerpolicy="strict-origin-when-cross-origin" class="hero__embed"
-            data-live-src="https://www.youtube-nocookie.com/embed/live_stream?channel=UCl6TeEmv5AAY00mSjHaKWVg&amp;rel=0&amp;playsinline=1"
+            data-live-src="https://www.youtube.com/embed/live_stream?channel=UCl6TeEmv5AAY00mSjHaKWVg&amp;rel=0&amp;playsinline=1"
             title="Her An Kur&rsquo;an, Her An Mutluluk — canlı yayın" frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen></iframe>
           <button class="live-cover" type="button" data-live-cover aria-label="Canlı yayını oynat">
             <img src="assets/intro.jpg" alt="" loading="eager" decoding="async">
-            <span class="live-cover__label">Tıkla ve canlı yayını izle</span>
             <span class="live-cover__play" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M9 7.2v9.6l8-4.8z" /></svg>
             </span>
           </button>
         </figure>
+
+        <canvas class="hero__dust" aria-hidden="true"></canvas>
+        <div class="hero__scrim" aria-hidden="true"></div>
+
+        <!-- CANLI rozeti yalnızca js/data/broadcasts.js 'live' derse açılır;
+             o ana kadar yerinde "Tıkla ve canlı yayını izle" ipucu durur. -->
+        <p class="hero__live" data-hero-live hidden>
+          <span class="hero__live-dot" aria-hidden="true"></span>Canlı
+        </p>
+
+        <div class="hero__copy">
+          <div class="hero__sign">
+            <img class="hero__mark" src="assets/hak_logo.png" alt="" aria-hidden="true"
+              width="1000" height="1038">
+            <div class="hero__sign-text">
+              <p class="hero__eyebrow">Kainatın Mutluluk Merkezi</p>
+              <h1 class="hero__line">
+                <span class="hero__line-in"><span class="hero__line-part"><span class="hero__w">Her An</span> <em class="hero__w">Kur&rsquo;an</em><span class="hero__comma">,</span></span> <span class="hero__line-part"><span class="hero__w">Her An</span> <em class="hero__w">Mutluluk</em></span></span>
+              </h1>
+              <span class="hero__rule" aria-hidden="true"></span>
+            </div>
+          </div>
+          <p class="hero__meta">Hafta içi her gün <strong>21.00</strong>&rsquo;de canlı yayın</p>
+        </div>
+
       </div>
 
       <div class="hero__scrollcue" aria-hidden="true">
@@ -245,7 +259,7 @@
         <div class="bcast__frame">
           <!-- Kanalın canlı yayını. Kanal kimliği değişirse channel= parametresini güncelle. -->
           <iframe referrerpolicy="strict-origin-when-cross-origin" class="bcast__embed"
-            data-live-src="https://www.youtube-nocookie.com/embed/live_stream?channel=UCl6TeEmv5AAY00mSjHaKWVg&amp;rel=0&amp;playsinline=1"
+            data-live-src="https://www.youtube.com/embed/live_stream?channel=UCl6TeEmv5AAY00mSjHaKWVg&amp;rel=0&amp;playsinline=1"
             title="Her An Kur&rsquo;an, Her An Mutluluk — canlı yayın" loading="lazy" frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen></iframe>
@@ -470,7 +484,7 @@
            data-cursor="YAZ ↗" data-magnetic>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M20.5 11.7a8.4 8.4 0 0 1-12.3 7.5L3.5 20.5l1.4-4.6A8.4 8.4 0 1 1 20.5 11.7z" />
+            <path d="M12.03 3.2a8.8 8.8 0 0 0-7.4 13.5L3.13 20.8l4.3-1.4A8.8 8.8 0 1 0 12.03 3.2z" />
             <path d="M9.1 8.6c.3-.6.6-.6.9-.6h.6c.2 0 .5 0 .7.6l.7 1.7c.1.3 0 .5-.1.7l-.4.5c-.1.2-.2.3 0 .6a6.2 6.2 0 0 0 2.6 2.3c.3.1.4 0 .6-.1l.5-.6c.2-.2.4-.2.6-.1l1.6.8c.3.1.5.3.5.5 0 .4-.2 1.2-.6 1.5-.4.4-1 .6-1.6.6a8 8 0 0 1-6.7-6.6c0-.7.1-1.3.5-1.8z" />
           </svg>
           <span>WhatsApp&rsquo;tan yaz</span>
@@ -492,7 +506,7 @@
   <script src="js/vendor/ScrollTrigger.min.js"></script>
   <script src="js/vendor/lenis.min.js"></script>
   <!-- App -->
-  <script type="module" src="js/main.js?v=20260827-2"></script>
+  <script type="module" src="js/main.js?v=20260913-4"></script>
 </body>
 
 </html>

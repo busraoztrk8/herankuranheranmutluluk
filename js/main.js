@@ -7,7 +7,7 @@ import { initSmoothScroll } from './animations/smoothScroll.js';
 import { initMagnetic } from './animations/magnetic.js';
 
 import * as navbar from './sections/navbar.js';
-import * as hero from './sections/hero.js?v=20260827-2';
+import * as hero from './sections/hero.js?v=20260913-4';
 import * as manifesto from './sections/manifesto.js';
 import * as instagram from './sections/instagram.js';
 import * as broadcast from './sections/broadcast.js';
