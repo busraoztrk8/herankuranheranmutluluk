@@ -1,37 +1,33 @@
 /* ============================================================
-   hero.css — giriş bölümü.
-   Masaüstü: tam ekran canlı yayın kapağı, altta marka imzası.
-   Telefon: üstte marka başlığı, altında 16:9 canlı yayın panosu,
-   en altta kaydırma ipucu; zemin kapağın bulanık kopyası.
+   hero.css — giriş: tam genişlik canlı yayın afişi ve hemen
+   altında ana menü şeridi. Üstteki marka şeridi layout.css'te.
    ============================================================ */
 
 .hero {
   position: relative;
-  height: 100svh;
-  min-height: 520px;
-  background: #17100E;
-  overflow: hidden;
   z-index: 2;
+  background: var(--background-ivory);
+  /* Marka şeridi sabit (fixed); afiş onun altından başlar ki
+     logo hiçbir boyutta afişin üzerine taşmasın. */
+  padding-top: var(--nav-h, 100px);
 }
 
-/* Kaydırma sırasında yavaşça yaklaşan katman — GSAP bunu ölçekler. */
-.hero__stage {
-  position: absolute;
-  inset: 0;
-  will-change: transform;
-}
-
-/* ---------- tam ekran canlı yayın ---------- */
-/* z-index veriliyor: kapak düğmesi bu katmanın İÇİNDE kalsın, üstteki
-   metin katmanları onun üstünde sıralansın. */
+/* ---------- afiş ---------- */
 .hero__visual {
-  position: absolute;
-  z-index: 0;
-  inset: 0;
+  position: relative;
   margin: 0;
+  width: 100%;
+  /* Afiş, ilk ekranda üst şerit ile menü şeridi arasındaki BÜTÜN yeri
+     kaplar; böylece menü tam ekranın alt kenarında durur. İki şeridin
+     yüksekliğini js/sections/navbar.js ölçüp yazıyor. */
+  height: calc(100svh - var(--nav-h, 104px) - var(--menu-h, 72px));
+  min-height: 320px;
   overflow: hidden;
   background: var(--background-dark-soft);
 }
+/* Afiş uzadıkça geniş görsel yanlardan kırpılıyor; kırpma noktası
+   Hocamızın yüzü kadraj dışında kalmayacak şekilde sola çekildi. */
+.hero__visual .live-cover img { object-position: 42% center; }
 .hero__embed {
   position: absolute;
   z-index: 0;
@@ -42,381 +38,136 @@
   display: block;
 }
 
-/* Kapak tam ekranı kapladığı için oynat düğmesi biraz büyür. */
-.hero__visual .live-cover__play {
-  width: clamp(3.1rem, 4.8vw, 4.4rem);
-  height: clamp(3.1rem, 4.8vw, 4.4rem);
-}
-/* Girişte "Tıkla ve canlı yayını izle" ipucu yok — kapağın tamamı zaten
-   tıklanabilir ve ortada oynat düğmesi duruyor. (Canlı Yayın bölümündeki
-   ipucu yerinde kalır.) */
-
-/* ---------- görselin üstündeki katmanlar ----------
-   Hepsi tıklamayı geçirir: kapağın tamamı oynat düğmesi gibi çalışır. */
-.hero__dust,
-.hero__scrim,
-.hero__live,
-.hero__copy {
-  pointer-events: none;
-}
-
-.hero__dust {
-  position: absolute;
-  z-index: 1;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-/* Alttan yukarı koyulaşan perde: imza yazısı her kapakta okunur kalsın. */
-.hero__scrim {
+/* ---------- "Yayını İzle" ---------- */
+.hero__watch {
   position: absolute;
   z-index: 2;
-  inset: 0;
-  background:
-    linear-gradient(0deg, rgba(16, 6, 4, 0.9) 0%, rgba(16, 6, 4, 0.45) 22%, transparent 48%),
-    linear-gradient(180deg, rgba(16, 6, 4, 0.4) 0%, transparent 24%);
-}
-
-/* ---------- CANLI rozeti ---------- */
-.hero__live {
-  position: absolute;
-  z-index: 4;
-  top: calc(var(--nav-h, 85px) + 0.9rem);
-  right: var(--gutter);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  padding: 0.34rem 0.75rem 0.34rem 0.6rem;
+  gap: clamp(0.45rem, 0.9vw, 0.75rem);
+  padding: 0.5em 1.5em 0.5em 0.5em;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  background: rgba(16, 8, 6, 0.55);
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
-  color: var(--text-light);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+  background: linear-gradient(180deg, #FFC62F 0%, var(--brand-yellow) 42%, #E79400 100%);
+  color: #2A2008;
+  font-size: clamp(0.82rem, 1.3vw, 1.1rem);
+  font-weight: 800;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow:
+    0 14px 34px rgba(60, 35, 0, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s;
 }
-/* display:inline-flex, [hidden] varsayılanını ezerdi — geri alınıyor. */
-.hero__live[hidden] { display: none; }
-.hero__live-dot {
-  width: 7px;
-  height: 7px;
+.hero__watch-icon {
+  display: grid;
+  place-items: center;
+  width: 1.95em;
+  height: 1.95em;
   border-radius: 50%;
-  background: #FF3B30;
-  box-shadow: 0 0 0 0 rgba(255, 59, 48, 0.7);
-  animation: hero-live-pulse 2s infinite;
+  background: rgba(255, 255, 255, 0.95);
 }
-@keyframes hero-live-pulse {
-  70% { box-shadow: 0 0 0 7px rgba(255, 59, 48, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(255, 59, 48, 0); }
+.hero__watch-icon svg {
+  width: 52%;
+  height: 52%;
+  fill: #E07A00;
 }
-
-/* ---------- alt şerit: marka imzası ---------- */
-.hero__copy {
-  position: absolute;
-  z-index: 5;
-  left: var(--gutter);
-  right: var(--gutter);
-  bottom: clamp(1.4rem, 4vh, 3.2rem);
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: clamp(1rem, 3vw, 2.5rem);
-  flex-wrap: wrap;
+.live-cover:hover .hero__watch {
+  transform: translate(-50%, -50%) scale(1.045);
+  box-shadow:
+    0 18px 42px rgba(60, 35, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
-/* logo + yazı: logo daima yazının solunda */
-.hero__sign {
+/* ---------- ana menü şeridi ----------
+   Afişin altında durur; sayfa kaydırılınca marka şeridinin altına
+   yapışır, böylece menü her yerde elin altında kalır. */
+.mainnav {
+  position: sticky;
+  top: var(--nav-h, 100px);
+  z-index: 900;
+  background: var(--background-ivory);
+  border-bottom: 1px solid var(--border-dark-soft);
+}
+.mainnav__list {
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: clamp(0.7rem, 1.8vw, 1.5rem);
-  min-width: 0;
+  gap: clamp(1.1rem, 3.2vw, 3.2rem);
+  max-width: 1680px;
+  margin: 0 auto;
+  padding: clamp(0.85rem, 1.5vw, 1.15rem) var(--gutter);
 }
-.hero__mark {
-  flex: 0 0 auto;
-  height: clamp(54px, 7vw, 108px);
-  width: auto;
-  filter: drop-shadow(0 10px 26px rgba(0, 0, 0, 0.45));
-}
-.hero__sign-text { min-width: 0; }
-
-.hero__eyebrow {
-  font-size: clamp(0.58rem, 0.8vw, 0.72rem);
-  font-weight: 700;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--brand-yellow);
-}
-
-/* Maske: yazı açılışta aşağıdan yükselirken taşmasın. */
-.hero__line {
-  overflow: hidden;
-  margin-top: clamp(0.35rem, 1vw, 0.8rem);
-  padding-bottom: 0.08em;
-}
-.hero__line-in {
-  display: block;
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(1.5rem, 4.4vw, 4.4rem);
-  line-height: 1.02;
-  letter-spacing: 0.004em;
-  color: var(--text-light);
-  text-shadow: 0 6px 34px rgba(0, 0, 0, 0.5);
-}
-.hero__line-in em {
-  font-style: italic;
-  color: var(--brand-yellow);
-}
-
-.hero__rule {
-  display: block;
-  width: clamp(70px, 12vw, 150px);
-  height: 2px;
-  margin-top: clamp(0.6rem, 1.4vw, 1rem);
-  background: linear-gradient(90deg, var(--brand-yellow), rgba(248, 183, 0, 0));
-}
-
-.hero__meta {
-  flex: 0 0 auto;
-  padding-bottom: 0.35rem;
-  font-size: clamp(0.68rem, 0.95vw, 0.84rem);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  color: rgba(255, 253, 248, 0.82);
-  text-align: right;
-  white-space: nowrap;
-}
-.hero__meta strong { color: var(--brand-yellow); font-weight: 700; }
-
-/* ---------- kaydırma ipucu ----------
-   Her boyutta yatayda ortalı. Masaüstünde marka başlığının ÜSTÜNDE durur;
-   en alta konsaydı başlığın üzerine binerdi. */
-.hero__scrollcue {
-  position: absolute;
-  z-index: 6;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: clamp(9rem, 17vh, 12rem);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.75rem;
-  pointer-events: none;
-  animation: cue-breathe 4.5s ease-in-out infinite;
-}
-.hero__scrollcue-text {
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
-  color: rgba(255, 253, 248, 0.72);
-  /* İki satıra bölünüp dar ekranda kötü görünüyordu — tek satırda kalır. */
-  white-space: nowrap;
-  /* Harf aralığı son harften SONRA da bir boşluk bırakıyor; kutu ortalansa
-     bile yazı göze sola kaymış görünüyordu. Bir harf aralığı kadar sağa
-     itilerek görünen yazı gerçekten ortalanıyor. */
-  text-indent: 0.26em;
-}
-.hero__scrollcue-line {
+.mainnav__link {
   position: relative;
-  width: 1px;
-  height: 48px;
-  background: rgba(255, 253, 248, 0.28);
-  overflow: hidden;
+  display: inline-block;
+  padding: 0.3rem 0;
+  font-size: clamp(0.84rem, 1.05vw, 0.98rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--text-dark);
+  white-space: nowrap;
+  transition: color 0.3s;
 }
-.hero__scrollcue-line i {
+/* Etkin bölümün altındaki sarı çizgi */
+.mainnav__link::after {
+  content: "";
   position: absolute;
-  left: 0; top: -40%;
-  width: 100%; height: 40%;
+  left: 0;
+  right: 0;
+  bottom: -0.3rem;
+  height: 3px;
+  border-radius: 2px;
   background: var(--brand-yellow);
-  animation: cue-flow 2.6s cubic-bezier(0.6, 0, 0.3, 1) infinite;
+  transform: scaleX(0);
+  transition: transform 0.35s var(--ease-out);
 }
-@keyframes cue-flow {
-  0% { top: -40%; }
-  100% { top: 110%; }
+.mainnav__link:hover { color: var(--brand-yellow-deep); }
+.mainnav__link.is-active {
+  color: var(--brand-yellow-deep);
+  font-weight: 700;
 }
-@keyframes cue-breathe {
-  0%, 100% { opacity: 0.9; }
-  50% { opacity: 0.5; }
-}
+.mainnav__link.is-active::after { transform: scaleX(1); }
 
-/* ---------- yayın başlayınca ----------
-   Oynatıcının üstünde yazı kalmaz; perde de çekilir.
-   visibility şart: .hero__copy'nin opacity'sini GSAP scrub'ı satır içi
-   stil olarak yazıyor ve buradaki opacity'yi eziyor — gizleme visibility
-   üzerinden yapılıyor ki her iki durumda da kesin çalışsın. */
-.hero.is-playing .hero__scrim,
-.hero.is-playing .hero__copy,
-.hero.is-playing .hero__scrollcue,
-.hero.is-playing .hero__live,
-.hero.is-playing .hero__dust {
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.45s ease, visibility 0.45s ease;
+/* Koyu bölümlerin üzerinden geçerken üst şeritle birlikte koyulaşır
+   (sınıfı js/sections/navbar.js veriyor). */
+.mainnav.is-dark {
+  background: var(--background-dark);
+  border-bottom-color: var(--border-soft);
 }
+.mainnav.is-dark .mainnav__link { color: var(--text-light); }
+.mainnav.is-dark .mainnav__link:hover,
+.mainnav.is-dark .mainnav__link.is-active { color: var(--brand-yellow); }
 
-/* ---------- dar ekranlar ----------
-   Telefonda giriş baştan kurgulanır: büyük marka başlığı üstte, canlı yayın
-   kapağı onun altında köşesi yuvarlatılmış bir pano olarak, en altta
-   kaydırma ipucu. Arka plan masaüstündeki gibi koyu kalır: kapağın bulanık
-   bir kopyası tüm sahnenin zeminidir. */
+/* ---------- dar ekranlar ---------- */
 @media (max-width: 900px) {
-  .hero {
-    height: 100svh;
-    min-height: 620px;
-  }
+  /* Beş başlık telefonda tek satıra sığmıyor; şerit ya kesiliyor ya iki
+     satıra çıkıyordu. Dar ekranda gezinme hamburger menüsünden yürüyor
+     (layout.css), şerit gizleniyor. */
+  .mainnav { display: none; }
 
-  /* Sahne akış düzenine geçiyor: parçalar alt alta diziliyor. */
-  .hero__stage {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: clamp(1.1rem, 3.5vh, 2.2rem);
-    padding:
-      calc(var(--nav-h, 64px) + clamp(0.75rem, 2.5vh, 1.75rem))
-      var(--gutter)
-      clamp(8rem, 21vh, 11rem);
-  }
-
-  /* --- zemin: kapağın bulanık kopyası + okunabilirlik perdesi --- */
-  .hero__scrim {
-    z-index: 0;
-    overflow: hidden;
-    background: #17100E;
-  }
-  .hero__scrim::before,
-  .hero__scrim::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-  }
-  .hero__scrim::before {
-    background: url("../../assets/intro.jpg") center / cover no-repeat;
-    filter: blur(34px) brightness(0.52) saturate(1.2);
-    transform: scale(1.25);
-  }
-  .hero__scrim::after {
-    background: linear-gradient(180deg,
-      rgba(16, 6, 4, 0.5) 0%, rgba(16, 6, 4, 0.2) 42%, rgba(16, 6, 4, 0.72) 100%);
-  }
-  .hero__dust { z-index: 1; }
-
-  /* --- 1) marka başlığı ---
-     Telefonda başlık üç satıra iner ve büyür:
-        HER AN
-        KUR'AN          (altın)
-        HER AN MUTLULUK
-     altında da mor, italik "Kainatın Mutluluk Merkezi".
-     Masaüstünde aynı kelimeler yan yana tek satır kalır. */
-  .hero__copy {
-    order: 1;
-    position: static;
-    z-index: 5;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: clamp(0.7rem, 2vh, 1.1rem);
-  }
-  /* Telefonda logo yalnızca menü şeridinde durur; başlığın yanında değil. */
-  .hero__mark { display: none; }
-
-  .hero__sign-text {
-    display: flex;
-    flex-direction: column;
-  }
-  .hero__line { order: 1; }
-
-  .hero__line-in {
-    font-size: clamp(1.95rem, 8.8vw, 2.9rem);
-    line-height: 0.98;
-    letter-spacing: -0.005em;
-    text-transform: uppercase;
-  }
-  /* İki yarı alt alta; ilk yarının kelimeleri de kendi satırlarına iner,
-     ikinci yarı ("HER AN MUTLULUK") tek satır kalır. */
-  .hero__line-part { display: block; }
-  .hero__line-part:first-child .hero__w {
-    display: block;
-    font-size: clamp(2.85rem, 13.4vw, 4.3rem);
-  }
-  .hero__comma { display: none; }
-  /* Telefonda vurgu italik değil; renk yalnızca KUR'AN'da. */
-  .hero__line-in em { font-style: normal; }
-  .hero__line-part:last-child em { color: inherit; }
-  /* Üçüncü satır üsttekilerden küçük olduğu için daha ince görünüyordu.
-     Instrument Serif'in kalın kesimi yok; font-weight tarayıcının sahte
-     kalınlaştırmasını tetikleyip harfleri bulandırırdı. Bunun yerine kontur
-     harfin kendi rengiyle kalınlaştırılıyor — temiz ve keskin. */
-  .hero__line-part:last-child {
-    margin-top: clamp(0.1rem, 0.8vw, 0.35rem);
-    -webkit-text-stroke: 0.02em currentColor;
-    paint-order: stroke fill;
-  }
-
-  /* "Kainatın Mutluluk Merkezi" başlığın ALTINA iner ve mora döner.
-     Marka moru koyu zeminde okunmuyor; aynı moru açılmış hâli. */
-  .hero__eyebrow {
-    order: 2;
-    margin-top: clamp(0.85rem, 3.4vw, 1.5rem);
-    font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 800;
-    font-size: clamp(1rem, 4.5vw, 1.45rem);
-    letter-spacing: 0.02em;
-    text-transform: none;
-    color: #AC9BEC;
-  }
-
-  /* Altın çizgi ve yayın saati bu düzende yok: saat bilgisi zaten
-     Hakkımızda ve Canlı Yayın bölümlerinde geçiyor. */
-  .hero__rule { display: none; }
-  .hero__meta { display: none; }
-
-  /* --- 2) canlı yayın panosu --- */
+  /* Afiş ekran boyuna uzatılmaz: 2.72:1'lik görsel dikey ekranda ince bir
+     dilime inerdi. 16:9 kadraj kalıyor, kırpma Hocamızı tam alacak
+     noktaya çekiliyor — Kur'an-ı Kerim'in bir bölümü de kadrajda kalır. */
   .hero__visual {
-    order: 2;
-    position: relative;
-    z-index: 2;
-    inset: auto;
-    width: 100%;
+    height: auto;
     aspect-ratio: 16 / 9;
-    border-radius: clamp(0.6rem, 2.5vw, 1rem);
-    box-shadow: 0 22px 50px rgba(0, 0, 0, 0.45);
+    min-height: 0;
   }
-  /* Pano zaten 16:9 — kapak kırpılmadan tam oturur. */
-  .hero__visual .live-cover img {
-    object-fit: cover;
-    object-position: center;
-  }
-  .hero__visual .live-cover__play { top: 50%; }
+  .hero__visual .live-cover img { object-position: 32% center; }
 
-  /* --- 3) kaydırma ipucu --- */
-  .hero__scrollcue { bottom: clamp(1.2rem, 4vh, 2.5rem); }
-  .hero__scrollcue-line { height: 38px; }
-
-  /* Kapak burada ekranı kaplamadığı için yayın başlayınca çevresindeki
-     yazıların çekilmesine gerek yok; yalnızca masaüstünde çekilirler. */
-  .hero.is-playing .hero__scrim,
-  .hero.is-playing .hero__copy,
-  .hero.is-playing .hero__scrollcue,
-  .hero.is-playing .hero__dust {
-    opacity: 1;
-    visibility: visible;
-  }
-}
-
-@media (max-width: 520px) {
-  .hero__live {
-    right: auto;
-    left: var(--gutter);
+  /* Düğme dar afişte ekranı boğmasın. */
+  .hero__watch {
+    font-size: 0.78rem;
+    padding: 0.45em 1.3em 0.45em 0.45em;
+    letter-spacing: 0.05em;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero__live-dot,
-  .hero__scrollcue,
-  .hero__scrollcue-line i { animation: none; }
+  .hero__watch,
+  .live-cover:hover .hero__watch { transition: none; transform: translate(-50%, -50%); }
 }

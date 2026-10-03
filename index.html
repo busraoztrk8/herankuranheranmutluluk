@@ -26,9 +26,9 @@
     rel="stylesheet">
 
   <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/layout.css?v=20260913-1">
-  <link rel="stylesheet" href="css/sections/hero.css?v=20260913-14">
-  <link rel="stylesheet" href="css/sections/manifesto.css">
+  <link rel="stylesheet" href="css/layout.css?v=20261003-3">
+  <link rel="stylesheet" href="css/sections/hero.css?v=20261003-6">
+  <link rel="stylesheet" href="css/sections/manifesto.css?v=20261003-1">
   <link rel="stylesheet" href="css/sections/instagram.css">
   <link rel="stylesheet" href="css/sections/broadcast.css">
   <link rel="stylesheet" href="css/sections/boran.css">
@@ -80,21 +80,14 @@
   <!-- Global film grain -->
   <div class="grain" aria-hidden="true"></div>
 
+  <!-- Üst şerit: logo + marka yazısı + sosyal halkalar.
+       Şerit yüksekliği logoyu TAM kapsar; logo afişin üzerine taşmaz. -->
   <header class="navbar" id="navbar" data-nav>
     <div class="navbar__inner">
-      <a class="navbar__brand" href="#hero" aria-label="Her An Kur'an — ana sayfa">
+      <a class="navbar__brand" href="#hero" aria-label="Her An Kur&rsquo;an — ana sayfa">
         <img class="navbar__logo" src="assets/hak_logo.png" alt="Her An Kur'an, Her An Mutluluk logosu">
       </a>
-
-      <nav class="navbar__nav" aria-label="Ana menü">
-        <ul class="navbar__list">
-          <li><a class="navbar__link" href="#hero" data-section="hero"><span class="navbar__link-roll" data-text="Ana Sayfa">Ana Sayfa</span></a></li>
-          <li><a class="navbar__link" href="#manifesto" data-section="manifesto"><span class="navbar__link-roll" data-text="Hakkımızda">Hakkımızda</span></a></li>
-          <li><a class="navbar__link" href="#yayin" data-section="yayin"><span class="navbar__link-roll" data-text="Canlı Yayın">Canlı Yayın</span></a></li>
-          <li><a class="navbar__link" href="#videolar" data-section="videolar"><span class="navbar__link-roll" data-text="Videolar">Videolar</span></a></li>
-          <li><a class="navbar__link" href="#pazar-sohbeti" data-section="pazar-sohbeti"><span class="navbar__link-roll" data-text="Pazar Sohbeti">Pazar Sohbeti</span></a></li>
-        </ul>
-      </nav>
+      <p class="navbar__wordmark">Her An Kur&rsquo;an Her An Mutluluk</p>
 
       <div class="navbar__actions">
         <a class="navbar__icon" href="https://www.instagram.com/herankuranheranmutluluk" target="_blank" rel="noopener noreferrer"
@@ -135,15 +128,6 @@
             <path d="M9.1 8.6c.3-.6.6-.6.9-.6h.6c.2 0 .5 0 .7.6l.7 1.7c.1.3 0 .5-.1.7l-.4.5c-.1.2-.2.3 0 .6a6.2 6.2 0 0 0 2.6 2.3c.3.1.4 0 .6-.1l.5-.6c.2-.2.4-.2.6-.1l1.6.8c.3.1.5.3.5.5 0 .4-.2 1.2-.6 1.5-.4.4-1 .6-1.6.6a8 8 0 0 1-6.7-6.6c0-.7.1-1.3.5-1.8z" />
           </svg>
         </a>
-        <a class="navbar__cta" href="https://wa.me/905434600460" target="_blank" rel="noopener noreferrer" data-cursor="YAZ ↗"
-          aria-label="WhatsApp ile iletişime geç">
-          <svg class="navbar__cta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
-            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M12.03 3.2a8.8 8.8 0 0 0-7.4 13.5L3.13 20.8l4.3-1.4A8.8 8.8 0 1 0 12.03 3.2z" />
-            <path
-              d="M9.1 8.6c.3-.6.6-.6.9-.6h.6c.2 0 .5 0 .7.6l.7 1.7c.1.3 0 .5-.1.7l-.4.5c-.1.2-.2.3 0 .6a6.2 6.2 0 0 0 2.6 2.3c.3.1.4 0 .6-.1l.5-.6c.2-.2.4-.2.6-.1l1.6.8c.3.1.5.3.5.5 0 .4-.2 1.2-.6 1.5-.4.4-1 .6-1.6.6a8 8 0 0 1-6.7-6.6c0-.7.1-1.3.5-1.8z" />
-          </svg>
-          <span>WhatsApp</span></a>
       </div>
 
       <button class="navbar__burger" aria-label="Menüyü aç" aria-expanded="false">
@@ -164,56 +148,39 @@
   <main id="icerik">
 
     <!-- ============ HERO ============ -->
-    <!-- Tam ekran canlı yayın kapağı; marka imzası altta, logo yazının solunda.
-         Kapağın tamamı tıklanabilir: üstteki katmanların hepsi pointer-events:none. -->
-    <section class="hero" id="hero" data-theme="dark" aria-label="Giriş">
-      <div class="hero__stage">
-
-        <figure class="hero__visual">
-          <iframe referrerpolicy="strict-origin-when-cross-origin" class="hero__embed"
-            data-live-src="https://www.youtube.com/embed/live_stream?channel=UCl6TeEmv5AAY00mSjHaKWVg&amp;rel=0&amp;playsinline=1"
-            title="Her An Kur&rsquo;an, Her An Mutluluk — canlı yayın" frameborder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen></iframe>
-          <button class="live-cover" type="button" data-live-cover aria-label="Canlı yayını oynat">
-            <img src="assets/intro.jpg" alt="" loading="eager" decoding="async">
-            <span class="live-cover__play" aria-hidden="true">
+    <!-- Tam genişlik afiş; ortasında "YAYINI İZLE". Tıklanınca kapak çekilir,
+         yerinde canlı yayın açılır. Ana menü afişin ALTINDA durur ve
+         kaydırıldıkça marka şeridinin altına yapışır. -->
+    <section class="hero" id="hero" data-theme="light" aria-label="Giriş">
+      <figure class="hero__visual">
+        <iframe referrerpolicy="strict-origin-when-cross-origin" class="hero__embed"
+          data-live-src="https://www.youtube.com/embed/live_stream?channel=UCl6TeEmv5AAY00mSjHaKWVg&amp;rel=0&amp;playsinline=1"
+          title="Her An Kur&rsquo;an, Her An Mutluluk — canlı yayın" frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+        <button class="live-cover" type="button" data-live-cover aria-label="Canlı yayını izle">
+          <img src="assets/intro2-hero.jpg" alt="" loading="eager" decoding="async"
+            width="1226" height="450">
+          <span class="hero__watch">
+            <span class="hero__watch-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M9 7.2v9.6l8-4.8z" /></svg>
             </span>
-          </button>
-        </figure>
+            Yayını İzle
+          </span>
+        </button>
+      </figure>
 
-        <canvas class="hero__dust" aria-hidden="true"></canvas>
-        <div class="hero__scrim" aria-hidden="true"></div>
-
-        <!-- CANLI rozeti yalnızca js/data/broadcasts.js 'live' derse açılır;
-             o ana kadar yerinde "Tıkla ve canlı yayını izle" ipucu durur. -->
-        <p class="hero__live" data-hero-live hidden>
-          <span class="hero__live-dot" aria-hidden="true"></span>Canlı
-        </p>
-
-        <div class="hero__copy">
-          <div class="hero__sign">
-            <img class="hero__mark" src="assets/hak_logo.png" alt="" aria-hidden="true"
-              width="1000" height="1038">
-            <div class="hero__sign-text">
-              <p class="hero__eyebrow">Kainatın Mutluluk Merkezi</p>
-              <h1 class="hero__line">
-                <span class="hero__line-in"><span class="hero__line-part"><span class="hero__w">Her An</span> <em class="hero__w">Kur&rsquo;an</em><span class="hero__comma">,</span></span> <span class="hero__line-part"><span class="hero__w">Her An</span> <em class="hero__w">Mutluluk</em></span></span>
-              </h1>
-              <span class="hero__rule" aria-hidden="true"></span>
-            </div>
-          </div>
-          <p class="hero__meta">Hafta içi her gün <strong>21.00</strong>&rsquo;de canlı yayın</p>
-        </div>
-
-      </div>
-
-      <div class="hero__scrollcue" aria-hidden="true">
-        <span class="hero__scrollcue-text">Keşfetmek için kaydır</span>
-        <span class="hero__scrollcue-line"><i></i></span>
-      </div>
     </section>
+
+    <nav class="mainnav" aria-label="Ana menü">
+      <ul class="mainnav__list">
+        <li><a class="mainnav__link" href="#hero" data-section="hero">Ana Sayfa</a></li>
+        <li><a class="mainnav__link" href="#manifesto" data-section="manifesto">Hakkımızda</a></li>
+        <li><a class="mainnav__link" href="#yayin" data-section="yayin">Canlı Yayın</a></li>
+        <li><a class="mainnav__link" href="#videolar" data-section="videolar">Videolar</a></li>
+        <li><a class="mainnav__link" href="#pazar-sohbeti" data-section="pazar-sohbeti">Pazar Sohbeti</a></li>
+      </ul>
+    </nav>
 
     <!-- ============ MANIFESTO ============ -->
     <section class="manifesto" id="manifesto" data-theme="light" aria-label="Manifesto">
@@ -506,7 +473,7 @@
   <script src="js/vendor/ScrollTrigger.min.js"></script>
   <script src="js/vendor/lenis.min.js"></script>
   <!-- App -->
-  <script type="module" src="js/main.js?v=20260913-4"></script>
+  <script type="module" src="js/main.js?v=20261003-2"></script>
 </body>
 
 </html>

@@ -8,11 +8,21 @@ export function init() {
   if (!nav) return;
 
   const themed = [...document.querySelectorAll('[data-theme]')];
+  const mainnav = document.querySelector('.mainnav');
 
-  /* ---------- navbar height as a CSS var (mobile overlay uses it) ---------- */
+  /* ---------- şerit yükseklikleri CSS değişkeni olarak ----------
+     --nav-h : üst marka şeridi (mobil menü katmanı ve afiş kullanır)
+     --menu-h: afişin altındaki menü şeridi.
+     Afiş yüksekliği "ekran - üst şerit - menü" diye hesaplandığı için
+     menü ilk ekranın tam alt kenarında durur. Menü telefonda gizli
+     olduğunda 0 yazılır ki afiş o payı yemesin. */
   const setNavH = () => {
     const h = nav.querySelector('.navbar__inner')?.offsetHeight || 66;
     document.documentElement.style.setProperty('--nav-h', `${Math.round(h)}px`);
+
+    const mh = (mainnav && getComputedStyle(mainnav).display !== 'none')
+      ? mainnav.offsetHeight : 0;
+    document.documentElement.style.setProperty('--menu-h', `${Math.round(mh)}px`);
   };
   setNavH();
   window.addEventListener('resize', setNavH, { passive: true });
@@ -42,7 +52,11 @@ export function init() {
     if (!current) {
       current = themed.find((s) => s.getBoundingClientRect().top > probe) || themed[themed.length - 1];
     }
-    nav.classList.toggle('is-dark', current?.dataset.theme === 'dark');
+    const koyu = current?.dataset.theme === 'dark';
+    nav.classList.toggle('is-dark', koyu);
+    // Yapışkan menü şeridi üst şeridin hemen altında duruyor;
+    // ikisi farklı tonda kalmasın diye aynı anda dönüyorlar.
+    mainnav?.classList.toggle('is-dark', koyu);
   };
 
   const onScroll = () => {
@@ -55,7 +69,9 @@ export function init() {
   syncNav();
 
   /* ---------- active link ---------- */
-  const links = [...nav.querySelectorAll('.navbar__link')];
+  // Gezinme baslıkları üst şeritte değil, afişin altındaki .mainnav
+  // şeridinde; o yüzden belge genelinden toplanıyor.
+  const links = [...document.querySelectorAll('.mainnav__link')];
   const sectionForLink = new Map();
   links.forEach((link) => {
     const target = document.querySelector(link.getAttribute('href'));

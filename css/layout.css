@@ -83,183 +83,95 @@
   pointer-events: none;
 }
 
-/* ---------- navbar ---------- */
+/* ---------- navbar ----------
+   Üst şerit yalnızca marka kimliği taşır: logo, marka yazısı, sosyal
+   halkalar. Gezinme başlıkları afişin altındaki .mainnav şeridinde
+   (css/sections/hero.css). */
 .navbar {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 1000;
-  transition: background-color 0.5s, backdrop-filter 0.5s, border-color 0.5s, transform 0.5s var(--ease-out);
-  border-bottom: 1px solid transparent;
+  background: var(--background-ivory);
+  border-bottom: 1px solid var(--border-dark-soft);
+  transition: background-color 0.5s, border-color 0.5s, transform 0.5s var(--ease-out);
 }
-.navbar.is-scrolled {
-  background: rgba(255, 255, 255, 0.65);
-  -webkit-backdrop-filter: blur(18px);
-  backdrop-filter: blur(18px);
-  border-bottom-color: var(--border-dark-soft);
-}
-.navbar.is-dark.is-scrolled {
-  background: rgba(21, 19, 19, 0.6);
+.navbar.is-dark {
+  background: var(--background-dark);
   border-bottom-color: var(--border-soft);
 }
 
 .navbar__inner {
-  /* Bar height is locked so the logo can grow without moving the menu.
-     JS reads this element's offsetHeight for the dark-mode probe + mobile overlay. */
-  --bar-h: 85px;
-  /* Tune the logo here — it is the ONLY thing that changes size.
-     Growth spills downward past the bar as a deliberate badge overhang,
-     so --bar-h (and therefore the menu) never moves. */
-  --logo-h: clamp(66px, 5.5vw, 84px);
-  --logo-top: 0px;
+  /* Şerit yüksekliği logoyu TAM kapsar — logo aşağıya taşıp afişin
+     üzerine binmez. Logoyu büyütmek istersen --bar-h de büyümeli. */
+  --bar-h: clamp(74px, 7.5vw, 104px);
+  --logo-h: calc(var(--bar-h) - clamp(10px, 1.2vw, 18px));
   --logo-ratio: 0.9634; /* 1000 / 1038 */
 
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: clamp(0.6rem, 1.6vw, 1.4rem);
   max-width: 1680px;
   margin: 0 auto;
   height: var(--bar-h);
   padding: 0 var(--gutter);
 }
 
-/* Fixed-size anchor: reserves only the logo's width, never its height,
-   so the oversized badge overhangs the bar instead of stretching it. */
 .navbar__brand {
-  position: relative;
-  align-self: stretch;
   flex: 0 0 auto;
+  display: block;
   width: calc(var(--logo-h) * var(--logo-ratio));
 }
 .navbar__logo {
-  position: absolute;
-  top: var(--logo-top);
-  left: 0;
   height: var(--logo-h);
   width: auto;
   display: block;
-  filter: drop-shadow(0 6px 18px rgba(27, 24, 21, 0.16));
+  filter: drop-shadow(0 4px 14px rgba(27, 24, 21, 0.14));
 }
 
-.navbar__nav { margin-inline: auto; }
-.navbar__list { display: flex; gap: clamp(1rem, 2vw, 2rem); }
-.navbar__link {
-  position: relative;
-  display: inline-block;
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  color: var(--text-dark);
-  padding: 0.4rem 0;
-  transition: color 0.4s;
-  white-space: nowrap;
-  /* yazının öne dönmesi için derinlik */
-  perspective: 420px;
-}
-
-/* ---------- menü yazısı: üzerine gelince öne doğru yuvarlanır ----------
-   Yazı bir küpün ön yüzü gibi davranır; dönme ekseni yazının arkasında
-   (yüksekliğin yarısı kadar geride) durur. ::after aynı yazının ikinci
-   kopyasıdır, başta 90° dönük bekler ve tam yerine oturarak gelir. */
-.navbar__link-roll {
-  --face: 1.5em;
-  position: relative;   /* ::after buna göre hizalansın, bağlantıya göre değil */
-  display: block;
-  height: var(--face);
-  line-height: var(--face);
-  transform-style: preserve-3d;
-  transform-origin: 50% 50% calc(var(--face) / -2);
-  transition: transform 0.6s var(--ease-out);
-}
-.navbar__link-roll::after {
-  content: attr(data-text);
-  position: absolute;
-  left: 0; top: 0;
-  width: 100%;
-  height: var(--face);
-  line-height: var(--face);
-  transform: rotateX(90deg);
-  transform-origin: 50% 50% calc(var(--face) / -2);
-  /* Bekleyen yüz 90° dönük olduğu için tam kenarından görünür ve
-     yazının üstünde ince koyu bir çizgi olarak belirirdi. Duruşta
-     görünmez tutulup dönme başlayınca beliriyor. */
-  opacity: 0;
-  transition: opacity 0.2s linear;
-}
-/* öne doğru: üst kenar izleyiciye yaklaşır */
-.navbar__link:hover .navbar__link-roll { transform: rotateX(-90deg); }
-/* gelen yüz, dönüş yarılandıktan sonra görünür olsun */
-.navbar__link:hover .navbar__link-roll::after {
-  opacity: 1;
-  transition-delay: 0.2s;
-}
-
-/* dokunmatikte hover yok; dönmeyi kapat ki yazı yamuk kalmasın */
-@media (pointer: coarse) {
-  .navbar__link-roll { transition: none; }
-  .navbar__link:hover .navbar__link-roll { transform: none; }
-  .navbar__link-roll::after,
-  .navbar__link:hover .navbar__link-roll::after { display: none; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .navbar__link-roll { transition: none; }
-  .navbar__link:hover .navbar__link-roll { transform: none; }
-  .navbar__link-roll::after,
-  .navbar__link:hover .navbar__link-roll::after { display: none; }
-}
-.navbar.is-dark .navbar__link { color: var(--text-light); }
-.navbar__link::after {
-  content: "";
-  position: absolute;
-  left: 50%; bottom: -2px;
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  background: var(--brand-yellow);
-  transform: translateX(-50%) scale(0);
-  transition: transform 0.35s var(--ease-out);
-}
-.navbar__link:hover { color: var(--brand-yellow-deep); }
-.navbar.is-dark .navbar__link:hover { color: var(--brand-yellow); }
-.navbar__link.is-active::after { transform: translateX(-50%) scale(1); }
-
-.navbar__actions { display: flex; align-items: center; gap: 0.9rem; }
-.navbar__icon {
-  width: 20px; height: 20px;
-  color: var(--text-dark);
-  opacity: 1;
-  transition: color 0.3s, opacity 0.3s, transform 0.3s var(--ease-out);
-}
-.navbar__icon svg { width: 100%; height: 100%; }
-/* masaüstünde WhatsApp zaten CTA düğmesi olarak var; ikon yalnızca mobilde */
-.navbar__icon--wa { display: none; }
-.navbar.is-dark .navbar__icon { color: var(--text-light); }
-.navbar__icon:hover { opacity: 1; color: var(--brand-yellow-deep); transform: translateY(-2px); }
-.navbar.is-dark .navbar__icon:hover { color: var(--brand-yellow); }
-
-.navbar__cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  padding: 0.55rem 1.15rem 0.55rem 0.95rem;
-  border: 1px solid var(--brand-yellow);
-  border-radius: 999px;
-  color: var(--text-dark);
-  transition: background-color 0.35s, color 0.35s, transform 0.35s var(--ease-out);
+/* Logonun yanındaki marka yazısı */
+.navbar__wordmark {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: clamp(0.92rem, 1.75vw, 1.6rem);
+  font-weight: 800;
+  letter-spacing: 0.012em;
+  line-height: 1.15;
+  text-transform: uppercase;
+  color: var(--brand-purple);
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
-.navbar__cta-icon {
-  width: 17px; height: 17px;
+.navbar.is-dark .navbar__wordmark { color: var(--brand-yellow); }
+
+/* ---------- sosyal halkalar ---------- */
+.navbar__actions {
   flex: 0 0 auto;
-  color: var(--brand-yellow);
-  transition: color 0.35s;
+  display: flex;
+  align-items: center;
+  gap: clamp(0.4rem, 0.9vw, 0.75rem);
 }
-.navbar__cta:hover .navbar__cta-icon { color: var(--text-dark); }
-.navbar.is-dark .navbar__cta { color: var(--text-light); }
-.navbar__cta:hover {
-  background: var(--brand-yellow);
+.navbar__icon {
+  display: grid;
+  place-items: center;
+  width: clamp(32px, 2.9vw, 42px);
+  height: clamp(32px, 2.9vw, 42px);
+  border: 1px solid var(--border-dark-soft);
+  border-radius: 50%;
   color: var(--text-dark);
+  background: #fff;
+  transition: color 0.3s, border-color 0.3s, background-color 0.3s, transform 0.3s var(--ease-out);
+}
+.navbar__icon svg { width: 52%; height: 52%; }
+.navbar.is-dark .navbar__icon {
+  color: var(--text-light);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--border-soft);
+}
+.navbar__icon:hover {
+  color: var(--text-dark);
+  background: var(--brand-yellow);
+  border-color: var(--brand-yellow);
   transform: translateY(-2px);
 }
 
@@ -269,7 +181,7 @@
   flex-direction: column;
   gap: 6px;
   padding: 8px;
-  margin-left: auto;
+  flex: 0 0 auto;
 }
 .navbar__burger span {
   display: block;
@@ -284,11 +196,10 @@
 .navbar__mobile {
   display: none;
   flex-direction: column;
-  /* menü, şeridin altındaki alanın tam ortasında durur */
   justify-content: center;
   align-items: center;
   padding: 1rem var(--gutter) 2rem;
-  height: calc(100svh - var(--nav-h, 58px));
+  height: calc(100svh - var(--nav-h, 74px));
   overflow-y: auto;
   overscroll-behavior: contain;
 }
@@ -308,9 +219,7 @@
 }
 
 /* menü açılırken satırlar sırayla, maskenin altından yükselir */
-.navbar__mobile-list li {
-  overflow: hidden;   /* maske: yazı aşağıdan süzülürken taşmasın */
-}
+.navbar__mobile-list li { overflow: hidden; }
 .navbar__mobile-list a {
   transform: translateY(110%);
   opacity: 0;
@@ -322,49 +231,45 @@
   transform: translateY(0);
   opacity: 1;
 }
-/* her satır bir öncekinden biraz sonra gelsin */
 .navbar__mobile-list li:nth-child(1) a { transition-delay: 0.06s; }
 .navbar__mobile-list li:nth-child(2) a { transition-delay: 0.12s; }
 .navbar__mobile-list li:nth-child(3) a { transition-delay: 0.18s; }
 .navbar__mobile-list li:nth-child(4) a { transition-delay: 0.24s; }
 .navbar__mobile-list li:nth-child(5) a { transition-delay: 0.30s; }
-/* kapanırken bekleme olmasın */
 .navbar:not(.menu-open) .navbar__mobile-list a { transition-delay: 0s; }
 
 @media (prefers-reduced-motion: reduce) {
   .navbar__mobile-list a { transition: none; transform: none; opacity: 1; }
 }
-.navbar.is-dark .navbar__mobile-list a { color: var(--text-light); border-bottom-color: var(--border-soft); }
-
+.navbar.is-dark .navbar__mobile-list a { color: var(--text-light); }
 
 .navbar.menu-open .navbar__mobile { display: flex; }
-/* opaque, full-viewport layer — nothing bleeds through */
+/* opak, tam ekran katman — arkasından hiçbir şey sızmaz */
 .navbar.menu-open {
   height: 100svh;
   background: var(--background-ivory);
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
   border-bottom-color: transparent;
   overflow: hidden;
 }
 .navbar.is-dark.menu-open { background: var(--background-dark); }
 body.menu-locked { overflow: hidden; }
 
-@media (max-width: 960px) {
-  .navbar__nav, .navbar__cta { display: none; }
-  .navbar__burger { display: flex; margin-left: 0; padding: 4px; }
-  /* şerit alçak, logo biraz daha büyük */
-  .navbar__inner { --bar-h: 64px; --logo-h: clamp(62px, 16.5vw, 78px); --logo-top: 0px; }
-
-  /* beş ikon da hamburgerin hemen soluna dizilir */
-  .navbar__actions {
-    margin-left: auto;
-    gap: clamp(0.5rem, 2.6vw, 0.9rem);
-  }
-  .navbar__icon,
-  .navbar__icon--wa { display: block; width: clamp(15px, 4.4vw, 19px); height: clamp(15px, 4.4vw, 19px); }
-  .navbar__icon:hover { transform: none; }
+@media (max-width: 900px) {
+  /* Dar ekranda gezinme buradan: menü şeridi gizli (hero.css), beş
+     başlık tam ekran katmanda açılıyor. */
+  .navbar__burger { display: flex; }
   .navbar__burger span { width: 21px; }
+  /* Marka yazısı logonun yanına sığmıyor; zaten logonun kendisi
+     aynı sözleri taşıyor. */
+  .navbar__wordmark { display: none; }
+  .navbar__actions { margin-left: auto; }
+  .navbar__icon:hover { transform: none; }
+}
+
+@media (max-width: 420px) {
+  /* En dar ekranlarda beş halka + hamburger sığsın diye halkalar küçülür. */
+  .navbar__actions { gap: 0.3rem; }
+  .navbar__icon { width: 30px; height: 30px; }
 }
 
 /* ---------- section shells ---------- */
