@@ -10,7 +10,11 @@ export function init({ reducedMotion }) {
 
   const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
   tl.from('.hero__visual', { opacity: 0, scale: 1.03, duration: 1.2, ease: 'expo.out' }, 0)
-    .from('.hero__watch', { opacity: 0, y: 12, duration: 0.8 }, 0.35);
+    /* Düğme SADECE opacity ile geliyor. y/scale gibi bir transform
+       tweenlenirse GSAP satır içi transform'u kendi yazıyor ve düğmeyi
+       ortalayan translate(-50%, -50%)'in dikey yarısını düşürüyor —
+       düğme yarım boy aşağı kayıyordu. Konumlama CSS'te kalsın. */
+    .from('.hero__watch', { opacity: 0, duration: 0.8 }, 0.35);
 
   // Menü şeridi afişin dışında; telefonda gizli olduğunda hedef bulunmaz,
   // o yüzden varlığı önce kontrol ediliyor.

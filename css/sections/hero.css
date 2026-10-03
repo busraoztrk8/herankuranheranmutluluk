@@ -25,9 +25,21 @@
   overflow: hidden;
   background: var(--background-dark-soft);
 }
-/* Afiş uzadıkça geniş görsel yanlardan kırpılıyor; kırpma noktası
-   Hocamızın yüzü kadraj dışında kalmayacak şekilde sola çekildi. */
-.hero__visual .live-cover img { object-position: 42% center; }
+/* Görsel kutuyu baştan sona doldurur (cover). Kapak 2560x1080 (2.37:1)
+   hazırlandı; kutunun oranı ekrana göre 1.86-2.96 arasında gezindiği için
+   kimi ekranda yanlardan, kimi ekranda üst/alttan bir miktar kırpılır.
+   Kırpma merkezden: tasarımın kompozisyonu ortaya kurulu.
+   NOT: Kutunun oranı ekran boyuna göre değiştiği için (yükseklik =
+   ekran − üst şerit − menü), kapak görselinin kenarlarında boşluk
+   payı bırakılması gerekir. Ölçüler README'de değil, afişi hazırlayan
+   için aşağıdaki yorumda: ~2:1, güvenli alan ortadaki %85. */
+.hero__visual .live-cover {
+  background: #F3E7CF;
+}
+.hero__visual .live-cover img {
+  object-fit: cover;
+  object-position: center;
+}
 .hero__embed {
   position: absolute;
   z-index: 0;
@@ -42,8 +54,10 @@
 .hero__watch {
   position: absolute;
   z-index: 2;
-  left: 50%;
-  top: 50%;
+  /* Tam ortada değil: kapaktaki motifin merkezine oturacak şekilde
+     biraz yukarıda ve çok az sağda. */
+  left: 52.5%;
+  top: 41%;
   transform: translate(-50%, -50%);
   display: inline-flex;
   align-items: center;
@@ -52,7 +66,7 @@
   border-radius: 999px;
   background: linear-gradient(180deg, #FFC62F 0%, var(--brand-yellow) 42%, #E79400 100%);
   color: #2A2008;
-  font-size: clamp(0.82rem, 1.3vw, 1.1rem);
+  font-size: clamp(0.95rem, 1.55vw, 1.3rem);
   font-weight: 800;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -150,20 +164,27 @@
   .mainnav { display: none; }
 
   /* Afiş ekran boyuna uzatılmaz: 2.72:1'lik görsel dikey ekranda ince bir
-     dilime inerdi. 16:9 kadraj kalıyor, kırpma Hocamızı tam alacak
-     noktaya çekiliyor — Kur'an-ı Kerim'in bir bölümü de kadrajda kalır. */
+     dilime inerdi. Kadraj oranı görselin kendi oranına yaklaştırıldı:
+     16:9'da genişliğin üçte biri kırpılıyor ve sahne iyice yakınlaşmış
+     duruyordu; 2.1:1'de kırpma onda bire iniyor, Hocamız da Kur'an-ı
+     Kerim de kadraja giriyor. */
   .hero__visual {
     height: auto;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 2.1 / 1;
     min-height: 0;
   }
-  .hero__visual .live-cover img { object-position: 32% center; }
+  .hero__visual .live-cover img { object-position: center; }
 
-  /* Düğme dar afişte ekranı boğmasın. */
+  /* Düğme dar afişte ekranı boğmasın: küçülüyor ve ortanın biraz
+     üstüne alınıyor — tam ortada Hocamızın yüzüne denk geliyordu,
+     yukarıda motifin üzerine oturuyor. */
   .hero__watch {
-    font-size: 0.78rem;
-    padding: 0.45em 1.3em 0.45em 0.45em;
-    letter-spacing: 0.05em;
+    left: 50%;
+    top: 42%;
+    font-size: 0.6rem;
+    padding: 0.4em 1.05em 0.4em 0.4em;
+    letter-spacing: 0.04em;
+    gap: 0.35rem;
   }
 }
 

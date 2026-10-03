@@ -27,7 +27,7 @@
 
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layout.css?v=20261003-3">
-  <link rel="stylesheet" href="css/sections/hero.css?v=20261003-6">
+  <link rel="stylesheet" href="css/sections/hero.css?v=20261003-15">
   <link rel="stylesheet" href="css/sections/manifesto.css?v=20261003-1">
   <link rel="stylesheet" href="css/sections/instagram.css">
   <link rel="stylesheet" href="css/sections/broadcast.css">
@@ -159,8 +159,15 @@
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen></iframe>
         <button class="live-cover" type="button" data-live-cover aria-label="Canlı yayını izle">
-          <img src="assets/intro2-hero.jpg" alt="" loading="eager" decoding="async"
-            width="1226" height="450">
+          <!-- Kaynak: assets/intro2.png (Canva, 2560x1080). Tarayıcı ekrana
+               göre seçsin diye üç boy: telefon 1024, masaüstü 1920, yüksek
+               çözünürlüklü ekran 2560. Afiş her boyutta ekran genişliği
+               kadar (sizes="100vw"). -->
+          <img src="assets/intro2-hero.jpg?v=3"
+            srcset="assets/intro2-hero-sm.jpg?v=3 1024w, assets/intro2-hero.jpg?v=3 1920w, assets/intro2-hero-2x.jpg?v=3 2560w"
+            sizes="100vw"
+            alt="" loading="eager" decoding="async"
+            width="2560" height="1080">
           <span class="hero__watch">
             <span class="hero__watch-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M9 7.2v9.6l8-4.8z" /></svg>
@@ -473,7 +480,7 @@
   <script src="js/vendor/ScrollTrigger.min.js"></script>
   <script src="js/vendor/lenis.min.js"></script>
   <!-- App -->
-  <script type="module" src="js/main.js?v=20261003-2"></script>
+  <script type="module" src="js/main.js?v=20261003-3"></script>
 </body>
 
 </html>
