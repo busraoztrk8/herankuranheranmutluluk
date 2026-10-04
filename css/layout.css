@@ -164,7 +164,8 @@
   background: transparent;
   transition: border-color 0.3s, background-color 0.3s, transform 0.3s var(--ease-out);
 }
-.navbar__icon svg { width: 56%; height: 56%; display: block; }
+/* Simge halkanın içinde daha çok yer kaplasın — kenarda ince bir pay kalır. */
+.navbar__icon svg { width: 70%; height: 70%; display: block; }
 /* Koyu bölümlerde çerçeve açılır; simgeler renklerini korur. Tek istisna
    TikTok: simgesi siyah olduğu için koyu zeminde kayboluyordu — markanın
    kendi kuralı da koyu zeminde beyaz kullanmak. */
