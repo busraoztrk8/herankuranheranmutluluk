@@ -151,28 +151,35 @@
   align-items: center;
   gap: clamp(0.4rem, 0.9vw, 0.75rem);
 }
+/* Simgeler SVG'nin kendi içinde marka renkleriyle DOLU çiziliyor
+   (index.html). Halkanın içi boş: şeridin zemini neyse o görünür —
+   beyaz daire değil, yalnızca ince bir çerçeve. */
 .navbar__icon {
   display: grid;
   place-items: center;
   width: clamp(32px, 2.9vw, 42px);
   height: clamp(32px, 2.9vw, 42px);
-  border: 1px solid var(--border-dark-soft);
+  border: 1px solid rgba(27, 24, 21, 0.16);
   border-radius: 50%;
-  color: var(--text-dark);
-  background: #fff;
-  transition: color 0.3s, border-color 0.3s, background-color 0.3s, transform 0.3s var(--ease-out);
+  background: transparent;
+  transition: border-color 0.3s, background-color 0.3s, transform 0.3s var(--ease-out);
 }
-.navbar__icon svg { width: 52%; height: 52%; }
-.navbar.is-dark .navbar__icon {
-  color: var(--text-light);
-  background: rgba(255, 255, 255, 0.06);
-  border-color: var(--border-soft);
-}
+.navbar__icon svg { width: 56%; height: 56%; display: block; }
+/* Koyu bölümlerde çerçeve açılır; simgeler renklerini korur. Tek istisna
+   TikTok: simgesi siyah olduğu için koyu zeminde kayboluyordu — markanın
+   kendi kuralı da koyu zeminde beyaz kullanmak. */
+.navbar.is-dark .navbar__icon { border-color: rgba(255, 255, 255, 0.28); }
+.navbar.is-dark .navbar__icon--tt path { fill: #FFFDF8; }
+
+/* Üzerine gelince simge hafifçe büyür, çerçeve belirginleşir. */
 .navbar__icon:hover {
-  color: var(--text-dark);
-  background: var(--brand-yellow);
-  border-color: var(--brand-yellow);
+  border-color: rgba(27, 24, 21, 0.4);
+  background: rgba(27, 24, 21, 0.05);
   transform: translateY(-2px);
+}
+.navbar.is-dark .navbar__icon:hover {
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 /* burger */

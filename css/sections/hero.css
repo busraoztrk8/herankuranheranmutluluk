@@ -17,11 +17,13 @@
   position: relative;
   margin: 0;
   width: 100%;
-  /* Afiş, ilk ekranda üst şerit ile menü şeridi arasındaki BÜTÜN yeri
-     kaplar; böylece menü tam ekranın alt kenarında durur. İki şeridin
-     yüksekliğini js/sections/navbar.js ölçüp yazıyor. */
-  height: calc(100svh - var(--nav-h, 104px) - var(--menu-h, 72px));
-  min-height: 320px;
+  /* Kutu, kapak tasarımının oranına KİLİTLİ (2560x1080). Daha önce
+     yükseklik "ekran - şeritler" diye hesaplanıyordu; o zaman kutunun
+     oranı ekrandan ekrana 1.86-2.96 arasında geziniyor ve tasarım
+     yanlardan kırpılıyordu — Kur'an-ı Kerim'in sağ kenarı kesiliyordu.
+     Oran sabitlenince Canva'da yapılan ne ise ekranda birebir o görünür.
+     Menü de çoğu ekranda yine alt kenara yakın düşüyor. */
+  aspect-ratio: 2560 / 1080;
   overflow: hidden;
   background: var(--background-dark-soft);
 }
@@ -168,12 +170,8 @@
      16:9'da genişliğin üçte biri kırpılıyor ve sahne iyice yakınlaşmış
      duruyordu; 2.1:1'de kırpma onda bire iniyor, Hocamız da Kur'an-ı
      Kerim de kadraja giriyor. */
-  .hero__visual {
-    height: auto;
-    aspect-ratio: 2.1 / 1;
-    min-height: 0;
-  }
-  .hero__visual .live-cover img { object-position: center; }
+  /* Telefonda da tasarımın kendi oranı — kırpma yok. */
+  .hero__visual { aspect-ratio: 2560 / 1080; }
 
   /* Düğme dar afişte ekranı boğmasın: küçülüyor ve ortanın biraz
      üstüne alınıyor — tam ortada Hocamızın yüzüne denk geliyordu,
