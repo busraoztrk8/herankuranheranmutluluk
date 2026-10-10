@@ -1,86 +1,126 @@
 /* ============================================================
-   boran.css — Dr. Abdulcabbar Boran: tek sayfalık özet kart.
-   10.10.2026 toplantısında çok bölümlü anlatım kaldırıldı; artık
-   kısa bir tanıtım ve kendi sitesine yönlendirme var.
+   boran.css — Dr. Abdulcabbar Boran: tek sayfalık tanıtım.
+   Yazı solda, portre sağda; portrenin alt kenarı bölüm zemininde
+   kesiliyor. Düzen 10.10.2026'da verilen tasarım örneğine göre.
    ============================================================ */
 
 .boran {
-  background: var(--background-light);
+  /* Soldan sağa hafifçe ısınan krem zemin — düz renk yerine, portrenin
+     kesilen alt kenarı sert bir çizgi gibi durmasın diye. */
+  background: linear-gradient(100deg, #F4F1EA 0%, #FAF6EE 55%, #F7F0E3 100%);
   color: var(--metin);
-  padding: clamp(3rem, 8vh, 6rem) var(--gutter);
+  /* Portre alttan kırpıldığı için taşan kısım burada kesiliyor. */
+  overflow: hidden;
   z-index: 3;
 }
 
 .boran__kart {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  align-items: center;
-  gap: clamp(1.5rem, 4vw, 3.5rem);
-  max-width: 1180px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: clamp(1.5rem, 5vw, 4.5rem);
+  max-width: 1280px;
   margin: 0 auto;
+  padding: clamp(2.5rem, 7vh, 5rem) var(--gutter) 0;
 }
 
-/* Portre: önce eski bölümdeki büyük görsele göre küçültülmüştü, sonra
-   "çok küçük kalmış" denince bir kademe büyütüldü. Kart tek sayfalık
-   olduğu için fotoğraf hâlâ metne eşlik eden ölçüde. */
-.boran__portre {
-  margin: 0;
-  flex: 0 0 auto;
-  width: clamp(200px, 28vw, 370px);
+/* ---------- sol sütun: yazı ---------- */
+.boran__metin {
+  padding-bottom: clamp(2.5rem, 7vh, 5rem);
 }
-.boran__portre img {
-  width: 100%;
-  height: auto;
-  display: block;
+
+/* İsim ve unvanı birlikte işaretleyen ince dikey çizgi */
+.boran__kimlik {
+  border-left: 3px solid var(--brand-yellow);
+  padding-left: clamp(0.9rem, 1.6vw, 1.4rem);
 }
 
 .boran__ad {
   font-family: var(--font-body);
   font-weight: 800;
-  font-size: clamp(1.65rem, 3.3vw, 2.8rem);
-  line-height: 1.15;
-  letter-spacing: -0.01em;
+  font-size: clamp(1.45rem, 3.4vw, 2.9rem);
+  line-height: 1.1;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
   color: var(--lacivert);
 }
 
 .boran__unvan {
-  margin-top: 0.4rem;
-  font-size: clamp(0.95rem, 1.4vw, 1.2rem);
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  margin-top: 0.45rem;
+  font-size: clamp(0.9rem, 1.35vw, 1.15rem);
+  font-weight: 500;
   color: var(--unvan);
+}
+/* Ayraç noktaları markanın altın rengiyle */
+.boran__nokta {
+  color: var(--brand-yellow);
+  margin: 0 0.15em;
 }
 
 .boran__ozet {
-  margin-top: clamp(0.9rem, 2vh, 1.4rem);
-  max-width: 62ch;
-  font-size: clamp(1.02rem, 1.3vw, 1.25rem);
-  line-height: 1.7;
+  margin-top: clamp(1.2rem, 3vh, 2rem);
+  max-width: 52ch;
+  font-size: clamp(0.98rem, 1.25vw, 1.18rem);
+  line-height: 1.65;
   color: var(--metin);
 }
 
+/* ---------- bağlantı ---------- */
 .boran__link {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  margin-top: clamp(1.1rem, 2.4vh, 1.8rem);
-  font-size: clamp(1rem, 1.25vw, 1.18rem);
-  font-weight: 600;
+  gap: clamp(0.8rem, 1.6vw, 1.5rem);
+  margin-top: clamp(1.4rem, 3.5vh, 2.4rem);
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid currentColor;
+  font-size: clamp(0.92rem, 1.15vw, 1.08rem);
+  font-weight: 500;
   color: var(--link);
-  transition: gap 0.3s var(--ease-out);
+  transition: gap 0.3s var(--ease-out), color 0.3s;
 }
-.boran__link:hover { gap: 0.8rem; text-decoration: underline; }
+.boran__ok {
+  width: clamp(26px, 2.4vw, 34px);
+  height: auto;
+  flex: 0 0 auto;
+}
+.boran__link:hover {
+  gap: clamp(1.1rem, 2.2vw, 2rem);
+  color: #0057B8;
+}
 
-@media (max-width: 720px) {
-  /* Dar ekranda portre metnin üstüne geçer ve ortalanır. */
+/* ---------- sağ sütun: portre ---------- */
+.boran__portre {
+  margin: 0;
+  justify-self: end;
+  /* Sabit yükseklik + üstten hizalı kırpma: alt kenar bölümün dibinde
+     kesiliyor, referanstaki gibi zemine karışıyor. */
+  height: clamp(250px, 36vw, 520px);
+  display: block;
+}
+.boran__portre img {
+  height: 100%;
+  width: auto;
+  max-width: none;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+/* ---------- dar ekranlar ---------- */
+@media (max-width: 820px) {
+  /* Telefonda portre yazının ALTINA iner ve ortalanır; yan yana
+     dizilim bu genişlikte metni fazlasıyla sıkıştırıyordu. */
   .boran__kart {
     grid-template-columns: 1fr;
-    justify-items: center;
-    text-align: center;
     gap: clamp(1.2rem, 3vh, 2rem);
+    padding-bottom: 0;
   }
-  .boran__portre { width: clamp(180px, 52vw, 260px); }
-  .boran__ozet { margin-inline: auto; }
+  .boran__metin { padding-bottom: 0; }
+  .boran__portre {
+    justify-self: center;
+    height: clamp(230px, 62vw, 340px);
+  }
+  .boran__ozet { max-width: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

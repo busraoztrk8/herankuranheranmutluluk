@@ -29,8 +29,8 @@
   <link rel="stylesheet" href="css/layout.css?v=20261010-3">
   <link rel="stylesheet" href="css/sections/hero.css?v=20261010-3">
   <link rel="stylesheet" href="css/sections/manifesto.css?v=20261010-3">
-  <link rel="stylesheet" href="css/sections/instagram.css?v=20261010-3">
-  <link rel="stylesheet" href="css/sections/boran.css?v=20261010-3">
+  <link rel="stylesheet" href="css/sections/instagram.css?v=20261010-4">
+  <link rel="stylesheet" href="css/sections/boran.css?v=20261010-6">
   <link rel="stylesheet" href="css/sections/videos.css?v=20261010-3">
   <link rel="stylesheet" href="css/sections/videolar.css?v=20261010-3">
   <link rel="stylesheet" href="css/sections/quote.css?v=20261010-5">
@@ -294,31 +294,41 @@
     </section>
 
     <!-- ============ ABDULCABBAR BORAN ============ -->
-    <!-- Tek sayfalık özet. Uzun bölüm anlatımı 10.10.2026 toplantısında
-         kaldırıldı; ayrıntı için kendi sitesine yönlendiriliyor. -->
+    <!-- Tek sayfalık tanıtım: yazı solda, portre sağda. Portrenin alt
+         kenarı bölüm zeminine karışacak şekilde kırpılıyor. -->
     <section class="boran" id="boran" data-theme="light" aria-label="Dr. Abdulcabbar Boran">
       <div class="boran__kart">
-        <figure class="boran__portre">
-          <img src="assets/acb_resim.png" alt="Dr. Abdulcabbar Boran"
-            loading="lazy" decoding="async" width="619" height="602">
-        </figure>
-
         <div class="boran__metin">
-          <h2 class="boran__ad">Dr. Abdulcabbar Boran</h2>
-          <p class="boran__unvan">Fizik Yüksek Mühendisi &bull; Mutasavvıf &bull; Yazar</p>
+          <div class="boran__kimlik">
+            <h2 class="boran__ad">Dr. Abdulcabbar Boran</h2>
+            <p class="boran__unvan">
+              Fizik Yüksek Mühendisi <span class="boran__nokta" aria-hidden="true">&bull;</span>
+              Mutasavvıf <span class="boran__nokta" aria-hidden="true">&bull;</span> Yazar
+            </p>
+          </div>
+
           <p class="boran__ozet">
             Hayatını Kur&rsquo;an-ı Kerim&rsquo;in sevgi, kurtuluş ve mutluluk mesajını
             insanlığa ulaştırmaya adamıştır. Kitapları, TV programları, ulusal ve
             uluslararası konferansları, 16 dilde sosyal medya yayınları ve diğer
             gönüllü çalışmalarıyla yıllardır geniş kitlelere mutluluğu taşımaktadır.
           </p>
+
           <!-- TODO: Hocamızın kendi site adresi onaylanacak. Şimdilik
                Kainatın Mutluluk Merkezi platformuna gidiyor. -->
           <a class="boran__link" href="https://ibrahimlive.com" target="_blank" rel="noopener noreferrer">
-            Eserleri ve çalışmaları hakkında daha fazla bilgi
-            <span aria-hidden="true">&rarr;</span>
+            <span>Eserleri ve çalışmaları hakkında daha fazla bilgi</span>
+            <svg class="boran__ok" viewBox="0 0 32 12" aria-hidden="true">
+              <path d="M0 6h28M23 1l5 5-5 5" fill="none" stroke="currentColor"
+                stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
           </a>
         </div>
+
+        <figure class="boran__portre">
+          <img src="assets/acb_resim.png" alt="Dr. Abdulcabbar Boran"
+            loading="lazy" decoding="async" width="619" height="602">
+        </figure>
       </div>
     </section>
 
@@ -366,7 +376,7 @@
   <script src="js/vendor/ScrollTrigger.min.js"></script>
   <script src="js/vendor/lenis.min.js"></script>
   <!-- App -->
-  <script type="module" src="js/main.js?v=20261010-3"></script>
+  <script type="module" src="js/main.js?v=20261010-6"></script>
 </body>
 
 </html>

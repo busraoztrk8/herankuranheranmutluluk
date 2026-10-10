@@ -11,7 +11,7 @@ import * as hero from './sections/hero.js?v=20261010-1';
 import * as manifesto from './sections/manifesto.js';
 import * as instagram from './sections/instagram.js';
 import * as broadcast from './sections/broadcast.js?v=20261010-1';
-import * as boran from './sections/boran.js?v=20261010-1';
+import * as boran from './sections/boran.js?v=20261010-6';
 import * as videos from './sections/videos.js?v=20261010-1';
 import * as videolar from './sections/videolar.js';
 import * as quote from './sections/quote.js';

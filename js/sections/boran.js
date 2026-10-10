@@ -13,7 +13,7 @@ export function init({ reducedMotion }) {
 
   gsap.from(portre, {
     opacity: 0,
-    x: -24,
+    x: 24, // portre artık sağda; girişi de sağdan gelsin
     duration: 1,
     ease: 'power3.out',
     scrollTrigger: { trigger: section, start: 'top 75%', toggleActions: 'restart none restart none' },
