@@ -6,6 +6,10 @@
 .hero {
   position: relative;
   z-index: 2;
+  /* Giriş animasyonu afişi bir an %3 büyütüyor; bu, sayfanın yanlara
+     29px kaymasına yol açıyordu (bodydeki overflow-x:hidden html'i
+     kapsamıyor). Taşma burada kesiliyor. */
+  overflow: hidden;
   background: var(--background-ivory);
   /* Marka şeridi sabit (fixed); afiş onun altından başlar ki
      logo hiçbir boyutta afişin üzerine taşmasın. */
@@ -24,8 +28,26 @@
      Oran sabitlenince Canva'da yapılan ne ise ekranda birebir o görünür.
      Menü de çoğu ekranda yine alt kenara yakın düşüyor. */
   aspect-ratio: 2560 / 1080;
+  /* Geniş ama BASIK ekranlarda (ultra geniş monitör, alçak dizüstü)
+     oran sabit olduğu için afiş çok yükseliyor ve menü ilk ekranın
+     altında kalıyordu. Genişliğe bir tavan konuyor: afiş, üst şerit ve
+     menüyle birlikte ekrana SIĞACAK kadar büyüyor, fazlası iki yana
+     pay olarak kalıyor. Yüksekliği kısmak yerine genişliği kısmak şart:
+     yükseklik kısılsaydı tasarım yine yanlardan kırpılırdı.
+     2.3704 = 2560/1080, yani tasarımın oranı. */
+  max-width: calc((100svh - var(--serit-h) - var(--menu-serit-h)) * 2.3704);
+  margin-inline: auto;
   overflow: hidden;
   background: var(--background-dark-soft);
+}
+
+/* aspect-ratio desteklemeyen eski tarayıcılar (2021 öncesi) için:
+   yükseklik yüzde dolgu ile kuruluyor — 1080/2560 = %42.1875. */
+@supports not (aspect-ratio: 1 / 1) {
+  .hero__visual {
+    height: 0;
+    padding-bottom: 42.1875%;
+  }
 }
 /* Görsel kutuyu baştan sona doldurur (cover). Kapak 2560x1080 (2.37:1)
    hazırlandı; kutunun oranı ekrana göre 1.86-2.96 arasında gezindiği için
@@ -124,7 +146,7 @@
   font-size: clamp(0.84rem, 1.05vw, 0.98rem);
   font-weight: 600;
   letter-spacing: 0.01em;
-  color: var(--text-dark);
+  color: var(--lacivert);
   white-space: nowrap;
   transition: color 0.3s;
 }
@@ -170,8 +192,13 @@
      16:9'da genişliğin üçte biri kırpılıyor ve sahne iyice yakınlaşmış
      duruyordu; 2.1:1'de kırpma onda bire iniyor, Hocamız da Kur'an-ı
      Kerim de kadraja giriyor. */
-  /* Telefonda da tasarımın kendi oranı — kırpma yok. */
-  .hero__visual { aspect-ratio: 2560 / 1080; }
+  /* Telefonda da tasarımın kendi oranı — kırpma yok.
+     Menü şeridi burada gizli olduğu için genişlik tavanının hesabından
+     da düşülüyor. */
+  .hero__visual {
+    aspect-ratio: 2560 / 1080;
+    --menu-serit-h: 0px;
+  }
 
   /* Düğme dar afişte ekranı boğmasın: küçülüyor ve ortanın biraz
      üstüne alınıyor — tam ortada Hocamızın yüzüne denk geliyordu,

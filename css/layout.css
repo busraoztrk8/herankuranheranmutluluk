@@ -103,7 +103,7 @@
 .navbar__inner {
   /* Şerit yüksekliği logoyu TAM kapsar — logo aşağıya taşıp afişin
      üzerine binmez. Logoyu büyütmek istersen --bar-h de büyümeli. */
-  --bar-h: clamp(74px, 7.5vw, 104px);
+  --bar-h: var(--serit-h);
   --logo-h: calc(var(--bar-h) - clamp(10px, 1.2vw, 18px));
   --logo-ratio: 0.9634; /* 1000 / 1038 */
 
@@ -137,7 +137,7 @@
   letter-spacing: 0.012em;
   line-height: 1.15;
   text-transform: uppercase;
-  color: var(--brand-purple);
+  color: var(--lacivert);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -207,6 +207,9 @@
   justify-content: center;
   align-items: center;
   padding: 1rem var(--gutter) 2rem;
+  /* Eski tarayıcılar ilk satırı kullanır; svh destekleyende ikinci satır
+     kazanır — mobilde kayan adres çubuğu da hesaba katılmış olur. */
+  height: calc(100vh - var(--nav-h, 74px));
   height: calc(100svh - var(--nav-h, 74px));
   overflow-y: auto;
   overscroll-behavior: contain;
@@ -254,6 +257,7 @@
 .navbar.menu-open .navbar__mobile { display: flex; }
 /* opak, tam ekran katman — arkasından hiçbir şey sızmaz */
 .navbar.menu-open {
+  height: 100vh;
   height: 100svh;
   background: var(--background-ivory);
   border-bottom-color: transparent;

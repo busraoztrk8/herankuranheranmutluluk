@@ -3,8 +3,8 @@
    ============================================================ */
 
 .vids {
-  background: var(--background-dark);
-  color: var(--text-light);
+  background: var(--background-light);
+  color: var(--metin);
   /* bottom padding is tighter than the top: the deck + nav row already
      carry their own breathing room, and a full section pad below left
      half a viewport of empty black. */
@@ -21,12 +21,14 @@
   margin-bottom: clamp(2.5rem, 6vh, 4rem);
 }
 .vids__title {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(2rem, 4.6vw, 4.2rem);
-  line-height: 1;
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: clamp(1.5rem, 3vw, 2.6rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--lacivert);
 }
-.vids__title em { color: var(--brand-yellow); font-style: italic; }
+.vids__title em { color: var(--turuncu); font-style: normal; }
 
 /* deck */
 .vids__deck {
@@ -88,9 +90,9 @@
   gap: 1rem;
 }
 .vids__card-title {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: var(--step-1);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--step-0);
   line-height: 1.15;
   color: var(--text-light);
 }
@@ -123,8 +125,8 @@
 .vids__arrow {
   width: 54px; height: 54px;
   border-radius: 50%;
-  border: 1px solid var(--border-soft);
-  color: var(--text-light);
+  border: 1px solid var(--border-dark-soft);
+  color: var(--lacivert);
   font-size: 1.1rem;
   display: grid;
   place-items: center;
@@ -140,7 +142,7 @@
   font-variant-numeric: tabular-nums;
   font-size: 0.85rem;
   letter-spacing: 0.2em;
-  color: rgba(255, 253, 248, 0.6);
+  color: var(--unvan);
 }
 
 /* ---------- YouTube'a giden "daha fazla" düğmesi ---------- */
@@ -158,15 +160,15 @@
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--text-light);
+  color: var(--lacivert);
   padding: 0.95rem 2.1rem;
-  border: 1px solid var(--brand-yellow);
+  border: 1px solid var(--turuncu);
   border-radius: 999px;
   transition: background-color 0.45s, color 0.45s, transform 0.45s var(--ease-out);
 }
 .vids__more:hover {
-  background: var(--brand-yellow);
-  color: var(--text-dark);
+  background: var(--turuncu);
+  color: #fff;
   transform: translateY(-2px);
 }
 .vids__more-icon { transition: transform 0.45s var(--ease-out); }
@@ -174,4 +176,15 @@
 
 @media (prefers-reduced-motion: reduce) {
   .vids__more, .vids__more-icon { transition: none; }
+}
+
+/* Kart üstündeki yayın tarihi — kapaklar birbirine benzediği için
+   ayırt edici tek bilgi. js/data/videos.js'teki `date` boşsa hiç
+   basılmaz (yanlış tarih göstermektense hiç gösterme). */
+.vids__card-date {
+  margin-top: 0.25rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--turuncu);
 }

@@ -7,10 +7,14 @@
 import { broadcast } from '../data/broadcasts.js';
 
 export function init({ reducedMotion }) {
+  // Kapakları açma işi bölümden BAĞIMSIZ: giriş afişindeki kapak da
+  // buradan kuruluyor. Canlı Yayın bölümü kaldırılınca da çalışsın
+  // diye erken çıkıştan ÖNCE çağrılıyor.
+  initLiveCovers();
+
   const section = document.querySelector('.bcast');
   if (!section) return;
 
-  initLiveCovers();
   renderStatus(section);
 
   if (reducedMotion) return;

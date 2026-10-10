@@ -75,7 +75,11 @@ export function init() {
   const sectionForLink = new Map();
   links.forEach((link) => {
     const target = document.querySelector(link.getAttribute('href'));
-    if (target) sectionForLink.set(target, link);
+    // Birden fazla başlık aynı bölüme gidebiliyor (Canlı Yayın da
+    // afişe bakıyor). Böyle durumda İLK başlık etkin sayılır; yoksa
+    // sonraki yazdığı için sayfanın en üstünde yanlış başlık
+    // vurgulanıyordu.
+    if (target && !sectionForLink.has(target)) sectionForLink.set(target, link);
   });
 
   const activeObserver = new IntersectionObserver(

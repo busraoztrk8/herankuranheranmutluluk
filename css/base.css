@@ -9,6 +9,13 @@
   --brand-yellow: #F8B700;
   --brand-yellow-deep: #C89300;
   --brand-purple: #543E9A;
+
+  /* 10.10.2026 toplantısında belirlenen palet */
+  --lacivert: #07152E;   /* site adı ve bölüm başlıkları */
+  --unvan: #6B6B6B;      /* unvan / alt başlık */
+  --metin: #20242B;      /* ana metin */
+  --turuncu: #F28C00;    /* vurgu */
+  --link: #006FE6;       /* bağlantı */
   --brand-purple-soft: rgba(84, 62, 154, 0.14);
 
   /* Neutrals */
@@ -45,6 +52,14 @@
   /* Motion */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --dur: 0.9s;
+
+  /* Şerit yükseklikleri — TEK KAYNAK.
+     Hem üst marka şeridi (layout.css) hem de afişin genişlik tavanı
+     (hero.css) buradan okur. JS'e bağlı DEĞİL: afişin boyutu betiğin
+     çalışma anına bağlı kalmasın diye saf CSS'te tutuluyor.
+     --menu-serit-h telefonda 0'a iner (menü şeridi orada gizli). */
+  --serit-h: clamp(74px, 7.5vw, 104px);
+  --menu-serit-h: 76px;
 }
 
 html {

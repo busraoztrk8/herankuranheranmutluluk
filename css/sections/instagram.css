@@ -28,13 +28,14 @@
 .ig__eyebrow::before { content: ""; width: 44px; height: 1px; background: var(--brand-yellow); }
 
 .ig__title {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: var(--step-4);
-  line-height: 0.95;
-  color: var(--text-dark);
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: clamp(1.5rem, 3vw, 2.6rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--lacivert);
 }
-.ig__title em { color: var(--brand-yellow-deep); font-style: italic; }
+.ig__title em { color: var(--turuncu); font-style: normal; }
 
 /* horizontal viewport — JS pins .ig and translates the track */
 .ig__viewport { position: relative; }

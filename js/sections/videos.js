@@ -47,7 +47,11 @@ export function init({ reducedMotion, isTouch }) {
       ` alt="" loading="lazy" decoding="async"` +
       ` onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/${id}/mqdefault.jpg'">` +
       `<div class="vids__card-meta">` +
+      `<div>` +
       `<h3 class="vids__card-title">${escapeHtml(item.title)}</h3>` +
+      // Tarih yalnizca js/data/videos.js'te doldurulmussa yazilir.
+      (item.date ? `<p class="vids__card-date">${escapeHtml(item.date)}</p>` : '') +
+      `</div>` +
       `</div>` +
       `<span class="vids__card-play" aria-hidden="true">` +
       `<svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>`
