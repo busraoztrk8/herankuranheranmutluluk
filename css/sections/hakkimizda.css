@@ -1,14 +1,15 @@
 /* ============================================================
-   hakkimizda.css — Hakkımızda sayfası.
+   hakkimizda.css — ana sayfadaki Hakkımızda bölümü.
    İçerik kaynağı: tanıtım afişi ("Bir Rehber Bir Müjde Bir Davet").
    Palet 10.10.2026 toplantısındaki gibi: lacivert başlık, turuncu
    vurgu, fildişi zemin.
    ============================================================ */
 
 .hk {
-  /* Üst marka şeridi sabit; içerik onun altından başlar */
-  padding-top: var(--nav-h, 100px);
   background: var(--background-ivory);
+  /* Menüden gelince bölüm, sabit şerit + yapışkan menünün altına
+     otursun */
+  scroll-margin-top: calc(var(--nav-h, 100px) + var(--menu-h, 60px));
 }
 
 .hk__inner {
@@ -79,36 +80,33 @@
   color: var(--lacivert);
 }
 
-/* ---------- görsel ---------- */
+/* ---------- görsel ----------
+   ss.png şeffaf zeminli kesim portre: fotoğraf çerçevesi yerine
+   ışık haleli yumuşak bir panel üzerine oturuyor. */
 .hk__gorsel {
-  position: relative;
   margin: 0;
   justify-self: center;
   width: 100%;
-  max-width: 460px;
+  max-width: 440px;
 }
-/* arkadaki kaymış lacivert çerçeve — fotoğrafa derinlik verir */
-.hk__gorsel::before {
-  content: "";
-  position: absolute;
-  inset: clamp(0.9rem, 2vw, 1.4rem) calc(clamp(0.9rem, 2vw, 1.4rem) * -1)
-         calc(clamp(0.9rem, 2vw, 1.4rem) * -1) clamp(0.9rem, 2vw, 1.4rem);
-  border: 2px solid var(--lacivert);
-  border-radius: 14px;
-  opacity: 0.55;
+.hk__sahne {
+  border-radius: 18px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 42%,
+      rgba(248, 183, 0, 0.30) 0%,
+      rgba(84, 62, 154, 0.10) 55%,
+      transparent 78%),
+    linear-gradient(180deg, #FBF4E2 0%, #F3E7CF 100%);
+  padding: clamp(1.6rem, 3.5vw, 2.6rem) clamp(1.1rem, 2.4vw, 1.8rem) 0;
+  box-shadow: 0 22px 48px rgba(7, 21, 46, 0.14);
 }
-.hk__gorsel img {
-  position: relative;
+.hk__sahne img {
+  display: block;
   width: 100%;
-  /* HTML'deki height niteliği oranı ezmesin */
   height: auto;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  border-radius: 14px;
-  box-shadow: 0 22px 48px rgba(7, 21, 46, 0.18);
 }
 .hk__gorsel figcaption {
-  position: relative;
   margin-top: 0.85rem;
   font-size: var(--step--1);
   font-weight: 600;

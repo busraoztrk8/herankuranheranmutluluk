@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="css/base.css?v=20261010-3">
   <link rel="stylesheet" href="css/layout.css?v=20261010-3">
   <link rel="stylesheet" href="css/sections/hero.css?v=20261010-3">
-  <link rel="stylesheet" href="css/sections/manifesto.css?v=20261010-3">
+  <link rel="stylesheet" href="css/sections/hakkimizda.css?v=20261015-2">
   <link rel="stylesheet" href="css/sections/instagram.css?v=20261010-4">
   <link rel="stylesheet" href="css/sections/boran.css?v=20261010-6">
   <link rel="stylesheet" href="css/sections/videos.css?v=20261010-3">
@@ -148,7 +148,7 @@
     <div class="navbar__mobile" hidden>
       <ul class="navbar__mobile-list">
         <li><a href="#hero">Ana Sayfa</a></li>
-        <li><a href="hakkimizda.html">Hakkımızda</a></li>
+        <li><a href="#manifesto">Hakkımızda</a></li>
         <li><a href="#videolar">Videolar</a></li>
         <li><a href="#pazar-sohbeti">Pazar Sohbeti</a></li>
       </ul>
@@ -187,41 +187,80 @@
     <nav class="mainnav" aria-label="Ana menü">
       <ul class="mainnav__list">
         <li><a class="mainnav__link" href="#hero" data-section="hero">Ana Sayfa</a></li>
-        <li><a class="mainnav__link" href="hakkimizda.html">Hakkımızda</a></li>
+        <li><a class="mainnav__link" href="#manifesto" data-section="manifesto">Hakkımızda</a></li>
         <li><a class="mainnav__link" href="#videolar" data-section="videolar">Videolar</a></li>
         <li><a class="mainnav__link" href="#pazar-sohbeti" data-section="pazar-sohbeti">Pazar Sohbeti</a></li>
       </ul>
     </nav>
 
-    <!-- ============ MANIFESTO ============ -->
-    <section class="manifesto" id="manifesto" data-theme="light" aria-label="Manifesto">
-      <div class="manifesto__inner">
-        <p class="manifesto__eyebrow">Hakkımızda</p>
-        <h2 class="manifesto__lines" aria-label="Bir rehber. Bir müjde. Bir davet.">
-          <span class="manifesto__line"><span>Bir <em class="u-yellow">rehber.</em></span></span>
-          <span class="manifesto__line"><span>Bir <em class="u-purple">müjde.</em></span></span>
-          <span class="manifesto__line"><span>Bir <em class="u-yellow">davet.</em></span></span>
+    <!-- ============ HAKKIMIZDA ============ -->
+    <!-- İçerik kaynağı: tanıtım afişi ("Bir Rehber Bir Müjde Bir Davet") -->
+    <section class="hk" id="manifesto" data-theme="light" aria-label="Hakkımızda">
+      <div class="hk__inner">
+
+        <p class="hk__eyebrow">Hakkımızda</p>
+        <h2 class="hk__title">
+          Bir <strong>Rehber</strong> Bir <strong>Müjde</strong> Bir <strong>Davet</strong>
         </h2>
-        <div class="manifesto__body">
-          <p>
-            Allah, insanın mutlu olmasını istiyor. Bu sebeple Kur&rsquo;an bir
-            <em class="u-yellow">mutluluk rehberidir</em>, mutluluk davetiyesidir,
-            mutluluk müjdesidir ve mutluluk garantisidir.
-          </p>
-          <p>
-            O sebeple diyoruz ki: <em class="u-purple">Her An Kur&rsquo;an, Her An Mutluluk.</em>
-            Sizi Allah&rsquo;a davet ediyoruz. Sizi mutluluğa davet ediyoruz.
-          </p>
-          <p>
-            Dr. Abdulcabbar Boran, Kur&rsquo;an-ı Kerim ayetleri ve hadisler ışığında
-            sorularınızı cevaplıyor.
-          </p>
+        <div class="hk__rule" aria-hidden="true"></div>
+
+        <div class="hk__govde">
+          <div class="hk__metin">
+            <p>
+              Hayatın her döneminde insan; huzur, anlam ve mutluluk arar.
+              Allah&ucirc; Teal&acirc; da insanın mutlu olmasını ister. İşte bu sebeple
+              <strong>Kur&rsquo;an-ı Kerim; bir mutluluk davetiyesi, bir mutluluk
+              reçetesi ve bir mutluluk garantisidir.</strong> Her An Kur&rsquo;an,
+              Her An Mutluluk, tüm yayınlarıyla bu daveti sizlere ulaştırıyor:
+            </p>
+
+            <blockquote class="hk__davet">
+              <p>Sizleri Allah&rsquo;a davet ediyoruz.<br>
+                 Sizleri mutluluğa davet ediyoruz.</p>
+            </blockquote>
+          </div>
+
+          <!-- İlk görsel: şeffaf zeminli kesim portre (ss.png); yenileri
+               geldikçe eklenecek. -->
+          <figure class="hk__gorsel">
+            <div class="hk__sahne">
+              <img src="assets/ss.png" alt="Dr. Abdulcabbar Boran"
+                loading="lazy" decoding="async" width="1039" height="1514"
+                data-caption="Dr. Abdulcabbar Boran" onerror="window.__imgFallback(this)">
+            </div>
+            <figcaption>Dr. Abdulcabbar Boran</figcaption>
+          </figure>
         </div>
 
-        <p class="manifesto__meta">
-          <span class="manifesto__meta-dot" aria-hidden="true"></span>
-          Hafta içi her gün, Türkiye saati ile <strong>21.00</strong>&rsquo;de canlı yayın
-        </p>
+        <!-- Afişin alt satırı: canlı yayın bilgisi + saat çizelgesi -->
+        <div class="hk__yayin">
+          <p class="hk__yayin-metin">
+            Canlı yayınlarımızda <strong>Dr. Abdulcabbar Boran,</strong>
+            Kur&rsquo;&acirc;n-ı Kerim ayetleri ve hadisler ışığında
+            <em>sorularınızı cevaplıyor.</em>
+          </p>
+
+          <span class="hk__yayin-ayrac" aria-hidden="true"></span>
+
+          <dl class="hk__saatler">
+            <div class="hk__saat">
+              <dt class="hk__saat-gun">Her Akşam</dt>
+              <dd class="hk__saat-vakit">21.00</dd>
+              <dd class="hk__saat-ad">Canlı Yayın</dd>
+            </div>
+            <div class="hk__saat">
+              <dt class="hk__saat-gun">Cumartesi</dt>
+              <dd class="hk__saat-vakit">21.30</dd>
+              <dd class="hk__saat-ad">Konferans</dd>
+            </div>
+            <div class="hk__saat">
+              <dt class="hk__saat-gun">Pazar</dt>
+              <dd class="hk__saat-vakit">14.30</dd>
+              <dd class="hk__saat-ad">Pazar Sohbetleri</dd>
+            </div>
+          </dl>
+        </div>
+
       </div>
     </section>
 
