@@ -17,8 +17,8 @@ export function init({ reducedMotion }) {
     ...vars,
   });
 
-  // başlık bloğu: etiket → başlık → turuncu çizgi
-  rise(['.hk__eyebrow', '.hk__title', '.hk__rule'], {
+  // başlık bloğu: etiket → üç basamak satırı → turuncu çizgi
+  rise(['.hk__eyebrow', '.hk__title-line', '.hk__rule'], {
     stagger: 0.14,
     scrollTrigger: { trigger: section, start: 'top 72%' },
   });

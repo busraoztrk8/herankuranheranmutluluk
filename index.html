@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="css/base.css?v=20261010-3">
   <link rel="stylesheet" href="css/layout.css?v=20261010-3">
   <link rel="stylesheet" href="css/sections/hero.css?v=20261010-3">
-  <link rel="stylesheet" href="css/sections/hakkimizda.css?v=20261015-2">
+  <link rel="stylesheet" href="css/sections/hakkimizda.css?v=20261015-3">
   <link rel="stylesheet" href="css/sections/instagram.css?v=20261010-4">
   <link rel="stylesheet" href="css/sections/boran.css?v=20261010-6">
   <link rel="stylesheet" href="css/sections/videos.css?v=20261010-3">
@@ -199,8 +199,11 @@
       <div class="hk__inner">
 
         <p class="hk__eyebrow">Hakkımızda</p>
-        <h2 class="hk__title">
-          Bir <strong>Rehber</strong> Bir <strong>Müjde</strong> Bir <strong>Davet</strong>
+        <!-- Üç satır, her biri bir öncekinden içeride: basamak düzeni -->
+        <h2 class="hk__title" aria-label="Bir Rehber Bir Müjde Bir Davet">
+          <span class="hk__title-line">Bir <strong>Rehber</strong></span>
+          <span class="hk__title-line">Bir <strong>Müjde</strong></span>
+          <span class="hk__title-line">Bir <strong>Davet</strong></span>
         </h2>
         <div class="hk__rule" aria-hidden="true"></div>
 
@@ -410,7 +413,7 @@
   <script src="js/vendor/ScrollTrigger.min.js"></script>
   <script src="js/vendor/lenis.min.js"></script>
   <!-- App -->
-  <script type="module" src="js/main.js?v=20261015-2"></script>
+  <script type="module" src="js/main.js?v=20261015-3"></script>
 </body>
 
 </html>
