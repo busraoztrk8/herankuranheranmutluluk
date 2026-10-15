@@ -8,7 +8,7 @@ import { initMagnetic } from './animations/magnetic.js';
 
 import * as navbar from './sections/navbar.js?v=20261010-3';
 import * as hero from './sections/hero.js?v=20261010-1';
-import * as manifesto from './sections/manifesto.js';
+import * as hakkimizda from './sections/hakkimizda.js';
 import * as instagram from './sections/instagram.js';
 import * as broadcast from './sections/broadcast.js?v=20261010-1';
 import * as boran from './sections/boran.js?v=20261010-6';
@@ -39,7 +39,7 @@ window.lenis = initSmoothScroll(ctx);
 /* 2 — sections (each owns its motion) */
 navbar.init(ctx);
 hero.init(ctx);
-manifesto.init(ctx);
+hakkimizda.init(ctx);
 instagram.init(ctx);
 broadcast.init(ctx);
 boran.init(ctx);
