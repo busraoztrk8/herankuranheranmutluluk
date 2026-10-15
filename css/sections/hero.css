@@ -28,14 +28,10 @@
      Oran sabitlenince Canva'da yapılan ne ise ekranda birebir o görünür.
      Menü de çoğu ekranda yine alt kenara yakın düşüyor. */
   aspect-ratio: 1930 / 815;
-  /* Geniş ama BASIK ekranlarda (ultra geniş monitör, alçak dizüstü)
-     oran sabit olduğu için afiş çok yükseliyor ve menü ilk ekranın
-     altında kalıyordu. Genişliğe bir tavan konuyor: afiş, üst şerit ve
-     menüyle birlikte ekrana SIĞACAK kadar büyüyor, fazlası iki yana
-     pay olarak kalıyor. Yüksekliği kısmak yerine genişliği kısmak şart:
-     yükseklik kısılsaydı tasarım yine yanlardan kırpılırdı.
-     2.3681 = 1930/815, yani tasarımın oranı. */
-  max-width: calc((100svh - var(--serit-h) - var(--menu-serit-h)) * 2.3681);
+  /* Afiş ekranı tam kaplar: iki yanda boşluk bırakılmaz. Oran sabit
+     (2.3681) olduğu için yükseklik genişliğe göre belirlenir; 16:9 ve
+     benzeri ekranlarda afiş + şeritler ilk ekrana rahat sığar. */
+  max-width: none;
   margin-inline: auto;
   overflow: hidden;
   background: var(--background-dark-soft);

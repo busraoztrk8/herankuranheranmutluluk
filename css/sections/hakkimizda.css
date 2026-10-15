@@ -20,7 +20,7 @@
 
 /* ---------- başlık ---------- */
 .hk__eyebrow {
-  font-size: clamp(0.72rem, 0.9vw, 0.82rem);
+  font-size: clamp(0.78rem, 1vw, 0.92rem);
   font-weight: 700;
   letter-spacing: 0.3em;
   text-transform: uppercase;
@@ -28,13 +28,11 @@
 }
 
 .hk__title {
-  /* Basamak genişliği: her satır bir öncekinden bu kadar içeride */
-  --kademe: clamp(1.1rem, 3.4vw, 2.5rem);
   margin-top: 0.9rem;
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: clamp(1.6rem, 3.4vw, 2.7rem);
-  line-height: 1.16;
+  font-size: clamp(1.7rem, 3.6vw, 3.1rem);
+  line-height: 1.14;
   letter-spacing: 0.01em;
   color: var(--lacivert);
   text-transform: uppercase;
@@ -43,10 +41,9 @@
   font-weight: 800;
 }
 
-/* Basamak: Bir Rehber / ..Bir Müjde / ....Bir Davet */
-.hk__title-line { display: block; }
-.hk__title-line:nth-child(2) { margin-left: var(--kademe); }
-.hk__title-line:nth-child(3) { margin-left: calc(var(--kademe) * 2); }
+/* Yan yana: üç parça tek satırda akar, araya bir boşluk konur */
+.hk__title-line { display: inline; white-space: nowrap; }
+.hk__title-line + .hk__title-line { margin-left: 0.55em; }
 
 /* Başlığın altındaki kısa turuncu çizgi */
 .hk__rule {
@@ -67,7 +64,7 @@
 }
 
 .hk__metin p {
-  font-size: clamp(1rem, 1.25vw, 1.12rem);
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
   line-height: 1.75;
   color: var(--metin);
 }
@@ -82,7 +79,7 @@
 .hk__davet p {
   font-family: var(--font-display);
   font-style: italic;
-  font-size: clamp(1.2rem, 1.85vw, 1.6rem);
+  font-size: clamp(1.3rem, 2.1vw, 1.85rem);
   line-height: 1.38;
   color: var(--lacivert);
 }
@@ -200,13 +197,15 @@
    kelime sayısı artsın diye punto ve basamak payı kısılıyor. */
 @media (max-width: 600px) {
   .hk__title {
-    --kademe: clamp(0.8rem, 3.4vw, 1.3rem);
-    font-size: clamp(1.4rem, 6.6vw, 1.95rem);
+    font-size: clamp(1.45rem, 6.6vw, 2.05rem);
   }
-  .hk__eyebrow { font-size: 0.72rem; letter-spacing: 0.24em; }
+  /* Telefonda uc parca tek satira sigmaz; her biri kendi satirinda */
+  .hk__title-line { display: block; }
+  .hk__title-line + .hk__title-line { margin-left: 0; }
+  .hk__eyebrow { font-size: 0.74rem; letter-spacing: 0.24em; }
 
   .hk__metin p {
-    font-size: 1rem;
+    font-size: 1.02rem;
     line-height: 1.7;
   }
   .hk__davet {
