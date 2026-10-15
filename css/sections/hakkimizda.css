@@ -43,7 +43,7 @@
 
 /* Yan yana: üç parça tek satırda akar, araya bir boşluk konur */
 .hk__title-line { display: inline; white-space: nowrap; }
-.hk__title-line + .hk__title-line { margin-left: 0.55em; }
+.hk__title-line + .hk__title-line { margin-left: 0.12em; }
 
 /* Başlığın altındaki kısa turuncu çizgi */
 .hk__rule {
