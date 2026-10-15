@@ -78,8 +78,8 @@
 .hero__watch {
   position: absolute;
   z-index: 2;
-  /* Tam ortada değil: kapaktaki motifin merkezine oturacak şekilde
-     biraz yukarıda ve çok az sağda. */
+  /* Tam ortada değil: kapaktaki altın motifin merkezine oturacak
+     şekilde biraz yukarıda ve çok az sağda. */
   left: 52.5%;
   top: 41%;
   transform: translate(-50%, -50%);

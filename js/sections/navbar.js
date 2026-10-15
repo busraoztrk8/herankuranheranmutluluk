@@ -74,7 +74,11 @@ export function init() {
   const links = [...document.querySelectorAll('.mainnav__link')];
   const sectionForLink = new Map();
   links.forEach((link) => {
-    const target = document.querySelector(link.getAttribute('href'));
+    // Hakkımızda gibi başka sayfaya giden bağlantılar (#'siz href)
+    // querySelector'a verilirse hata fırlatır; yalnızca sayfa içi
+    // çapalar bölüm takibine girer.
+    const href = link.getAttribute('href') || '';
+    const target = href.startsWith('#') ? document.querySelector(href) : null;
     // Birden fazla başlık aynı bölüme gidebiliyor (Canlı Yayın da
     // afişe bakıyor). Böyle durumda İLK başlık etkin sayılır; yoksa
     // sonraki yazdığı için sayfanın en üstünde yanlış başlık

@@ -1,0 +1,191 @@
+/* ============================================================
+   hakkimizda.css — Hakkımızda sayfası.
+   İçerik kaynağı: tanıtım afişi ("Bir Rehber Bir Müjde Bir Davet").
+   Palet 10.10.2026 toplantısındaki gibi: lacivert başlık, turuncu
+   vurgu, fildişi zemin.
+   ============================================================ */
+
+.hk {
+  /* Üst marka şeridi sabit; içerik onun altından başlar */
+  padding-top: var(--nav-h, 100px);
+  background: var(--background-ivory);
+}
+
+.hk__inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: clamp(2.5rem, 6vh, 4.5rem) var(--gutter) clamp(3rem, 8vh, 5.5rem);
+}
+
+/* ---------- başlık ---------- */
+.hk__eyebrow {
+  font-size: var(--step--1);
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--turuncu);
+}
+
+.hk__title {
+  margin-top: 0.9rem;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: clamp(1.9rem, 4.6vw, 3.6rem);
+  line-height: 1.12;
+  letter-spacing: 0.01em;
+  color: var(--lacivert);
+  text-transform: uppercase;
+}
+.hk__title strong {
+  font-weight: 800;
+}
+
+/* Başlığın altındaki kısa turuncu çizgi */
+.hk__rule {
+  width: 72px;
+  height: 4px;
+  margin-top: 1.4rem;
+  border-radius: 2px;
+  background: var(--turuncu);
+}
+
+/* ---------- gövde: yazı solda, görsel sağda ---------- */
+.hk__govde {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+  margin-top: clamp(2.2rem, 5vh, 3.8rem);
+}
+
+.hk__metin p {
+  font-size: var(--step-1);
+  line-height: 1.75;
+  color: var(--metin);
+}
+.hk__metin p strong { color: var(--lacivert); }
+
+/* Afişteki italik davet cümleleri: serif, turuncu şeritli alıntı */
+.hk__davet {
+  margin-top: clamp(1.6rem, 3.5vh, 2.4rem);
+  padding-left: 1.4rem;
+  border-left: 4px solid var(--turuncu);
+}
+.hk__davet p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.45rem, 2.6vw, 2.15rem);
+  line-height: 1.35;
+  color: var(--lacivert);
+}
+
+/* ---------- görsel ---------- */
+.hk__gorsel {
+  position: relative;
+  margin: 0;
+  justify-self: center;
+  width: 100%;
+  max-width: 460px;
+}
+/* arkadaki kaymış lacivert çerçeve — fotoğrafa derinlik verir */
+.hk__gorsel::before {
+  content: "";
+  position: absolute;
+  inset: clamp(0.9rem, 2vw, 1.4rem) calc(clamp(0.9rem, 2vw, 1.4rem) * -1)
+         calc(clamp(0.9rem, 2vw, 1.4rem) * -1) clamp(0.9rem, 2vw, 1.4rem);
+  border: 2px solid var(--lacivert);
+  border-radius: 14px;
+  opacity: 0.55;
+}
+.hk__gorsel img {
+  position: relative;
+  width: 100%;
+  /* HTML'deki height niteliği oranı ezmesin */
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: 0 22px 48px rgba(7, 21, 46, 0.18);
+}
+.hk__gorsel figcaption {
+  position: relative;
+  margin-top: 0.85rem;
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--unvan);
+  text-align: center;
+}
+
+/* ---------- canlı yayın bandı (afişin alt satırı) ---------- */
+.hk__yayin {
+  margin-top: clamp(3rem, 7vh, 5rem);
+  border-radius: 18px;
+  background: var(--lacivert);
+  color: var(--text-light);
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) auto minmax(0, 1fr);
+  gap: clamp(1.6rem, 4vw, 3.5rem);
+  align-items: center;
+  padding: clamp(1.8rem, 4vw, 3rem) clamp(1.6rem, 4vw, 3.2rem);
+}
+
+.hk__yayin-metin {
+  font-size: var(--step-0);
+  line-height: 1.7;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.hk__yayin-metin strong { color: var(--brand-yellow); font-weight: 800; }
+.hk__yayin-metin em {
+  font-style: italic;
+  font-weight: 800;
+}
+
+/* ortadaki ayraç çubuğu */
+.hk__yayin-ayrac {
+  width: 4px;
+  align-self: stretch;
+  border-radius: 2px;
+  background: var(--turuncu);
+}
+
+.hk__saatler {
+  display: grid;
+  row-gap: 0.7rem;
+}
+.hk__saat {
+  display: grid;
+  grid-template-columns: 7.5em 3.6em auto;
+  column-gap: 1rem;
+  align-items: baseline;
+  font-size: var(--step-0);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.hk__saat-gun { font-weight: 600; opacity: 0.9; }
+.hk__saat-vakit {
+  font-style: italic;
+  font-weight: 800;
+  color: var(--brand-yellow);
+}
+.hk__saat-ad { font-weight: 800; }
+
+/* ---------- dar ekranlar ---------- */
+@media (max-width: 900px) {
+  .hk__govde { grid-template-columns: 1fr; }
+  .hk__gorsel { max-width: 420px; }
+
+  .hk__yayin {
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+  }
+  .hk__yayin-ayrac {
+    width: auto;
+    height: 4px;
+    align-self: auto;
+  }
+  .hk__saat { grid-template-columns: 6.6em 3.4em auto; }
+}

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hakkımızda — Her An Kur'an, Her An Mutluluk</title>
+  <meta name="description"
+    content="Bir rehber, bir müjde, bir davet. Her An Kur'an, Her An Mutluluk tüm yayınlarıyla Kur'an'ın mutluluk davetini sizlere ulaştırıyor.">
+  <meta property="og:title" content="Hakkımızda — Her An Kur'an, Her An Mutluluk">
+  <meta property="og:description"
+    content="Sizleri Allah'a davet ediyoruz. Sizleri mutluluğa davet ediyoruz.">
+  <meta property="og:image" content="assets/og-image.jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="tr_TR">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/icon-512.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <link rel="shortcut icon" href="favicon.ico">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Manrope:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="css/base.css?v=20261015-1">
+  <link rel="stylesheet" href="css/layout.css?v=20261015-1">
+  <link rel="stylesheet" href="css/sections/hero.css?v=20261015-1">
+  <link rel="stylesheet" href="css/sections/hakkimizda.css?v=20261015-1">
+  <link rel="stylesheet" href="css/sections/footer.css?v=20261015-1">
+</head>
+
+<body>
+
+  <!-- Görsel yedeği — index ile aynı mekanizma -->
+  <script>
+    window.__imgFallback = function (img) {
+      if (!img || img.dataset.phDone) return;
+      img.dataset.phDone = '1';
+      var host = img.parentElement;
+      if (!host) return;
+      var dark = !!img.closest('[data-theme="dark"], .vids, .bcast, .footer');
+      var cap = img.dataset.caption || img.alt || '';
+      var idx = img.dataset.index || '';
+      var note = img.dataset.note || 'Görsel buraya gelecek';
+      if (getComputedStyle(host).position === 'static') host.style.position = 'relative';
+      var ph = document.createElement('span');
+      ph.className = 'imgph' + (dark ? ' imgph--dark' : '');
+      ph.setAttribute('aria-hidden', 'true');
+      ph.innerHTML =
+        (idx ? '<span class="imgph__idx">' + idx + '</span>' : '') +
+        '<span class="imgph__body"><span class="imgph__cap"></span>' +
+        '<span class="imgph__rule"></span>' +
+        '<span class="imgph__note"></span></span>';
+      ph.querySelector('.imgph__cap').textContent = cap;
+      ph.querySelector('.imgph__note').textContent = note;
+      img.style.display = 'none';
+      host.appendChild(ph);
+    };
+    document.addEventListener('error', function (e) {
+      var t = e.target;
+      if (t && t.tagName === 'IMG' && !t.classList.contains('navbar__logo')
+        && !t.classList.contains('footer__logo')) window.__imgFallback(t);
+    }, true);
+  </script>
+
+  <!-- Global film grain -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Üst şerit: index ile aynı -->
+  <header class="navbar" id="navbar" data-nav>
+    <div class="navbar__inner">
+      <a class="navbar__brand" href="index.html" aria-label="Her An Kur&rsquo;an — ana sayfa">
+        <img class="navbar__logo" src="assets/hak_logo.png" alt="Her An Kur'an, Her An Mutluluk logosu">
+      </a>
+      <p class="navbar__wordmark">Her An Kur&rsquo;an Her An Mutluluk</p>
+
+      <div class="navbar__actions">
+        <a class="navbar__icon navbar__icon--ig" href="https://www.instagram.com/herankuranheranmutluluk" target="_blank" rel="noopener noreferrer"
+          aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <defs>
+              <linearGradient id="ig-gradient" x1="8%" y1="92%" x2="92%" y2="8%">
+                <stop offset="0" stop-color="#FFD764" />
+                <stop offset="0.28" stop-color="#FA7E1E" />
+                <stop offset="0.56" stop-color="#D62976" />
+                <stop offset="0.8" stop-color="#962FBF" />
+                <stop offset="1" stop-color="#4F5BD5" />
+              </linearGradient>
+            </defs>
+            <path fill="url(#ig-gradient)"
+              d="M8.2 2.5h7.6a5.7 5.7 0 0 1 5.7 5.7v7.6a5.7 5.7 0 0 1-5.7 5.7H8.2a5.7 5.7 0 0 1-5.7-5.7V8.2a5.7 5.7 0 0 1 5.7-5.7zm-.18 2.2A3.32 3.32 0 0 0 4.7 8.02v7.96a3.32 3.32 0 0 0 3.32 3.32h7.96a3.32 3.32 0 0 0 3.32-3.32V8.02A3.32 3.32 0 0 0 15.98 4.7H8.02z" />
+            <path fill="url(#ig-gradient)"
+              d="M12 7.3a4.7 4.7 0 1 1 0 9.4 4.7 4.7 0 0 1 0-9.4zm0 2.2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z" />
+            <circle fill="url(#ig-gradient)" cx="17.05" cy="6.95" r="1.18" />
+          </svg>
+        </a>
+        <a class="navbar__icon navbar__icon--yt" href="https://www.youtube.com/@HeranKuranHeranMutluluk" target="_blank" rel="noopener noreferrer"
+          aria-label="YouTube">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="#FF0000"
+              d="M21.6 7.17a2.52 2.52 0 0 0-1.77-1.78C18.25 4.96 12 4.96 12 4.96s-6.25 0-7.83.43A2.52 2.52 0 0 0 2.4 7.17 26.2 26.2 0 0 0 1.97 12c0 1.64.14 3.27.43 4.83a2.52 2.52 0 0 0 1.77 1.78c1.58.43 7.83.43 7.83.43s6.25 0 7.83-.43a2.52 2.52 0 0 0 1.77-1.78c.29-1.56.43-3.19.43-4.83 0-1.64-.14-3.27-.43-4.83z" />
+            <path fill="#fff" d="M10.02 15.17V8.83L15.3 12z" />
+          </svg>
+        </a>
+        <a class="navbar__icon navbar__icon--fb" href="https://www.facebook.com/hkuranhmutluluk" target="_blank" rel="noopener noreferrer"
+          aria-label="Facebook">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="#1877F2"
+              d="M15.12 5.32H17V2.14A26.1 26.1 0 0 0 14.26 2C11.54 2 9.68 3.66 9.68 6.7v2.62H6.61v3.56h3.07V22h3.68v-9.12h3.06l.46-3.56h-3.52V7.05c0-1.03.28-1.73 1.76-1.73z" />
+          </svg>
+        </a>
+        <a class="navbar__icon navbar__icon--tt" href="https://www.tiktok.com/@herankuranheranmutluluk" target="_blank" rel="noopener noreferrer"
+          aria-label="TikTok">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="#121212"
+              d="M16.6 2h-3.1v13.08a2.37 2.37 0 1 1-1.7-2.27V9.68a5.4 5.4 0 1 0 4.8 5.37V8.52a6.6 6.6 0 0 0 3.7 1.14V6.56A3.7 3.7 0 0 1 16.6 2.9z" />
+          </svg>
+        </a>
+        <a class="navbar__icon navbar__icon--wa" href="https://wa.me/905434600460" target="_blank" rel="noopener noreferrer"
+          aria-label="WhatsApp ile iletişime geç">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="#25D366"
+              d="M12.04 2.4a9.6 9.6 0 0 0-8.1 14.72L2.5 21.6l4.6-1.4a9.6 9.6 0 1 0 4.94-17.8z" />
+            <path fill="#fff"
+              d="M9.1 7.9c.25-.56.52-.57.76-.58h.64c.2 0 .47.04.68.58l.72 1.76c.1.25.03.47-.1.66l-.4.5c-.12.16-.22.3-.03.6a6.4 6.4 0 0 0 2.7 2.36c.27.13.42.07.57-.1l.5-.6c.19-.2.37-.2.57-.1l1.62.84c.26.14.44.3.44.5 0 .4-.22 1.2-.62 1.5-.4.3-.97.5-1.56.5a8.2 8.2 0 0 1-6.83-6.8c0-.7.13-1.3.44-1.82z" />
+          </svg>
+        </a>
+      </div>
+
+      <button class="navbar__burger" aria-label="Menüyü aç" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </div>
+    <div class="navbar__mobile" hidden>
+      <ul class="navbar__mobile-list">
+        <li><a href="index.html">Ana Sayfa</a></li>
+        <li><a href="hakkimizda.html">Hakkımızda</a></li>
+        <li><a href="index.html#videolar">Videolar</a></li>
+        <li><a href="index.html#pazar-sohbeti">Pazar Sohbeti</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="icerik">
+
+    <!-- Menü şeridi: index'tekiyle aynı görünüm, bağlantılar ana sayfaya döner -->
+    <nav class="mainnav" aria-label="Ana menü">
+      <ul class="mainnav__list">
+        <li><a class="mainnav__link" href="index.html">Ana Sayfa</a></li>
+        <li><a class="mainnav__link is-active" href="hakkimizda.html" aria-current="page">Hakkımızda</a></li>
+        <li><a class="mainnav__link" href="index.html#videolar">Videolar</a></li>
+        <li><a class="mainnav__link" href="index.html#pazar-sohbeti">Pazar Sohbeti</a></li>
+      </ul>
+    </nav>
+
+    <!-- ============ HAKKIMIZDA ============ -->
+    <section class="hk" data-theme="light" aria-label="Hakkımızda">
+      <div class="hk__inner">
+
+        <p class="hk__eyebrow">Hakkımızda</p>
+        <h1 class="hk__title">
+          Bir <strong>Rehber</strong> Bir <strong>Müjde</strong> Bir <strong>Davet</strong>
+        </h1>
+        <div class="hk__rule" aria-hidden="true"></div>
+
+        <div class="hk__govde">
+          <div class="hk__metin">
+            <p>
+              Hayatın her döneminde insan; huzur, anlam ve mutluluk arar.
+              Allah&ucirc; Teal&acirc; da insanın mutlu olmasını ister. İşte bu sebeple
+              <strong>Kur&rsquo;an-ı Kerim; bir mutluluk davetiyesi, bir mutluluk
+              reçetesi ve bir mutluluk garantisidir.</strong> Her An Kur&rsquo;an,
+              Her An Mutluluk, tüm yayınlarıyla bu daveti sizlere ulaştırıyor:
+            </p>
+
+            <blockquote class="hk__davet">
+              <p>Sizleri Allah&rsquo;a davet ediyoruz.<br>
+                 Sizleri mutluluğa davet ediyoruz.</p>
+            </blockquote>
+          </div>
+
+          <!-- İlk görsel: eldeki portre kondu; yenileri geldikçe buraya
+               eklenecek / bununla değiştirilecek. -->
+          <figure class="hk__gorsel">
+            <img src="assets/boran-portrait.jpg" alt="Dr. Abdulcabbar Boran"
+              loading="lazy" decoding="async" width="1200" height="1500"
+              data-caption="Dr. Abdulcabbar Boran" onerror="window.__imgFallback(this)">
+            <figcaption>Dr. Abdulcabbar Boran</figcaption>
+          </figure>
+        </div>
+
+        <!-- Afişin alt satırı: canlı yayın bilgisi + saat çizelgesi -->
+        <div class="hk__yayin" data-theme="dark">
+          <p class="hk__yayin-metin">
+            Canlı yayınlarımızda <strong>Dr. Abdulcabbar Boran,</strong>
+            Kur&rsquo;&acirc;n-ı Kerim ayetleri ve hadisler ışığında
+            <em>sorularınızı cevaplıyor.</em>
+          </p>
+
+          <span class="hk__yayin-ayrac" aria-hidden="true"></span>
+
+          <dl class="hk__saatler">
+            <div class="hk__saat">
+              <dt class="hk__saat-gun">Her Akşam</dt>
+              <dd class="hk__saat-vakit">21.00</dd>
+              <dd class="hk__saat-ad">Canlı Yayın</dd>
+            </div>
+            <div class="hk__saat">
+              <dt class="hk__saat-gun">Cumartesi</dt>
+              <dd class="hk__saat-vakit">21.30</dd>
+              <dd class="hk__saat-ad">Konferans</dd>
+            </div>
+            <div class="hk__saat">
+              <dt class="hk__saat-gun">Pazar</dt>
+              <dd class="hk__saat-vakit">14.30</dd>
+              <dd class="hk__saat-ad">Pazar Sohbetleri</dd>
+            </div>
+          </dl>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER — index ile aynı ============ -->
+  <footer class="footer" id="iletisim" data-theme="dark">
+    <div class="footer__inner">
+      <a class="footer__ig" href="https://www.instagram.com/herankuranheranmutluluk"
+         target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor"
+            d="M8.2 2.5h7.6a5.7 5.7 0 0 1 5.7 5.7v7.6a5.7 5.7 0 0 1-5.7 5.7H8.2a5.7 5.7 0 0 1-5.7-5.7V8.2a5.7 5.7 0 0 1 5.7-5.7zm-.18 2.2A3.32 3.32 0 0 0 4.7 8.02v7.96a3.32 3.32 0 0 0 3.32 3.32h7.96a3.32 3.32 0 0 0 3.32-3.32V8.02A3.32 3.32 0 0 0 15.98 4.7H8.02z" />
+          <path fill="currentColor"
+            d="M12 7.3a4.7 4.7 0 1 1 0 9.4 4.7 4.7 0 0 1 0-9.4zm0 2.2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z" />
+          <circle fill="currentColor" cx="17.05" cy="6.95" r="1.18" />
+        </svg>
+        <span>@herankuranheranmutluluk</span>
+      </a>
+
+      <p class="footer__copy">
+        &copy; <span data-footer-year>2026</span> Her An Kur&rsquo;an, Her An Mutluluk
+        &mdash; Her hakkı saklıdır.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Vendor (globals) -->
+  <script src="js/vendor/gsap.min.js"></script>
+  <script src="js/vendor/ScrollTrigger.min.js"></script>
+  <script src="js/vendor/lenis.min.js"></script>
+  <!-- App: bölüm betikleri kendi öğesini bulamazsa sessizce atlar -->
+  <script type="module" src="js/main.js?v=20261015-1"></script>
+</body>
+
+</html>
