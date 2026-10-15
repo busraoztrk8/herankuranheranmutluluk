@@ -197,11 +197,11 @@
    kelime sayısı artsın diye punto ve basamak payı kısılıyor. */
 @media (max-width: 600px) {
   .hk__title {
-    font-size: clamp(1.45rem, 6.6vw, 2.05rem);
+    /* Telefonda da tek satirda yan yana: punto ekran genisligiyle
+       olcekleniyor, uc parca birden alt satira kaymiyor */
+    font-size: clamp(0.9rem, 4.6vw, 1.6rem);
+    white-space: nowrap;
   }
-  /* Telefonda uc parca tek satira sigmaz; her biri kendi satirinda */
-  .hk__title-line { display: block; }
-  .hk__title-line + .hk__title-line { margin-left: 0; }
   .hk__eyebrow { font-size: 0.74rem; letter-spacing: 0.24em; }
 
   .hk__metin p {
