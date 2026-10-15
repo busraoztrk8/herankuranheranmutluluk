@@ -117,11 +117,10 @@
 }
 
 /* ---------- ana menü şeridi ----------
-   Afişin altında durur; sayfa kaydırılınca marka şeridinin altına
-   yapışır, böylece menü her yerde elin altında kalır. */
+   Afişin altında STATİK durur; kaydirinca ust seride yapismaz.
+   Eski haline donuluyor: menu afisin hemen altinda tek bir yerde kalir. */
 .mainnav {
-  position: sticky;
-  top: var(--nav-h, 100px);
+  position: relative;
   z-index: 900;
   background: var(--background-ivory);
   border-bottom: 1px solid var(--border-dark-soft);
