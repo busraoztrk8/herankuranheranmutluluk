@@ -39,6 +39,8 @@
 }
 .hk__title strong {
   font-weight: 800;
+  /* Rehber/Mujde/Davet, ince 'Bir'den biraz daha iri */
+  font-size: 1.12em;
 }
 
 /* Yan yana: üç parça tek satırda akar, araya bir boşluk konur */
