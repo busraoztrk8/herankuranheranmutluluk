@@ -46,7 +46,7 @@
 .hk__title-line + .hk__title-line { margin-left: 0.12em; }
 
 /* "Bir" kelimeleri daha kucuk; Rehber/Mujde/Davet ayni boyutta kalir */
-.hk__bir { font-size: 0.62em; font-weight: 400; }
+.hk__bir { font-size: 1em; font-weight: 800; }
 
 /* Başlığın altındaki kısa turuncu çizgi */
 .hk__rule {
