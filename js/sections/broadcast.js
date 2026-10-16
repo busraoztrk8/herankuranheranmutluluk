@@ -58,6 +58,8 @@ export function init({ reducedMotion }) {
 function initLiveCovers() {
   document.querySelectorAll('[data-live-cover]').forEach((cover) => {
     cover.addEventListener('click', () => {
+      if (cover.classList.contains('is-hidden')) return;
+
       const frame = cover.parentElement;
       const iframe = frame?.querySelector('iframe');
 
@@ -67,7 +69,19 @@ function initLiveCovers() {
       }
 
       cover.classList.add('is-hidden');
-    }, { once: true });
+    });
+  });
+
+  // Canlı yayın açıkken logoya basılırsa ana sayfaya dönülür,
+  // oynatıcı durdurulur ve yayın kapağı yeniden gösterilir.
+  document.querySelector('.navbar__brand')?.addEventListener('click', resetLiveCovers);
+}
+
+function resetLiveCovers() {
+  document.querySelectorAll('[data-live-cover]').forEach((cover) => {
+    const iframe = cover.parentElement?.querySelector('iframe');
+    if (iframe) iframe.removeAttribute('src');
+    cover.classList.remove('is-hidden');
   });
 }
 
