@@ -231,23 +231,23 @@
   color: var(--text-dark);
 }
 
-/* Mobil menü, sayfanın antrasit-lacivert kimliğini taşır. */
+/* Mobil menü beyaz zeminde, ana sayfadaki antrasit-lacivert yazı tonunu taşır. */
 .navbar.menu-open,
 .navbar.menu-open .navbar__mobile,
 .navbar.menu-open::before {
-  background: #1B2A40;
+  background: var(--background-ivory);
 }
 .navbar.menu-open .navbar__mobile-list a {
-  color: #F7F3EA;
+  color: var(--text-dark);
 }
 .navbar.menu-open .navbar__burger span {
-  background: #F7F3EA;
+  background: var(--text-dark);
 }
 .navbar.menu-open .navbar__icon {
-  border-color: rgba(247, 243, 234, 0.38);
+  border-color: rgba(27, 42, 64, 0.22);
 }
 .navbar.menu-open .navbar__icon--tt path {
-  fill: #F7F3EA;
+  fill: #121212;
 }
 
 /* menü açılırken satırlar sırayla, maskenin altından yükselir */
@@ -280,11 +280,11 @@
 .navbar.menu-open {
   height: 100vh;
   height: 100svh;
-  background: #1B2A40;
+  background: var(--background-ivory);
   border-bottom-color: transparent;
   overflow: hidden;
 }
-.navbar.is-dark.menu-open { background: #1B2A40; }
+.navbar.is-dark.menu-open { background: var(--background-ivory); }
 body.menu-locked { overflow: hidden; }
 
 @media (max-width: 900px) {
@@ -297,10 +297,10 @@ body.menu-locked { overflow: hidden; }
     right: 0;
     bottom: 100%;
     height: 100vh;
-    background: #1B2A40;
+    background: var(--background-ivory);
     pointer-events: none;
   }
-  .navbar.is-dark::before { background: #1B2A40; }
+  .navbar.is-dark::before { background: var(--background-ivory); }
   .navbar__inner { position: relative; z-index: 2; }
   .navbar__mobile {
     position: fixed;
@@ -310,7 +310,7 @@ body.menu-locked { overflow: hidden; }
     height: 100svh;
     height: 100dvh;
     padding-top: calc(var(--nav-h, 74px) + 1rem);
-    background: #1B2A40;
+    background: var(--background-ivory);
   }
   .navbar__burger { display: flex; }
   .navbar__burger span { width: 21px; }
