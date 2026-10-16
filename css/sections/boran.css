@@ -38,7 +38,7 @@
 .boran__ad {
   font-family: var(--font-body);
   font-weight: 800;
-  font-size: clamp(1.45rem, 3.4vw, 2.9rem);
+  font-size: clamp(1.35rem, 2.85vw, 2.45rem);
   line-height: 1.1;
   letter-spacing: 0.005em;
   text-transform: uppercase;
@@ -94,7 +94,7 @@
   justify-self: end;
   /* Sabit yükseklik + üstten hizalı kırpma: alt kenar bölümün dibinde
      kesiliyor, referanstaki gibi zemine karışıyor. */
-  height: clamp(250px, 36vw, 520px);
+  height: clamp(235px, 31vw, 455px);
   display: block;
 }
 .boran__portre img {
@@ -118,7 +118,7 @@
   .boran__metin { padding-bottom: 0; }
   .boran__portre {
     justify-self: center;
-    height: clamp(230px, 62vw, 340px);
+    height: clamp(210px, 55vw, 300px);
   }
   .boran__ozet { max-width: none; font-size: 0.9rem; }
   .boran__link { font-size: 0.8rem; }
