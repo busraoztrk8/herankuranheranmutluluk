@@ -132,45 +132,51 @@
 
 .hk__yayin {
   display: grid;
-  grid-template-columns: minmax(340px, 0.88fr) minmax(560px, 1.12fr);
+  grid-template-columns: 42% 58%;
   margin-top: clamp(2.4rem, 5vw, 4.8rem);
   border: 1px solid rgba(7, 61, 134, 0.1);
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.48);
-  box-shadow: 0 18px 50px rgba(79, 49, 16, 0.035);
+  border-radius: 8px;
+  background: rgba(255, 253, 248, 0.7);
+  box-shadow: 0 12px 35px rgba(79, 49, 16, 0.03);
+  overflow: hidden;
 }
 
 .hk__canli {
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: clamp(1.2rem, 2vw, 2rem);
+  grid-template-columns: auto 1px 1fr;
+  gap: clamp(1rem, 1.7vw, 1.6rem);
   align-items: center;
-  margin: clamp(1.2rem, 2vw, 2rem) 0;
-  padding: 0 clamp(1.5rem, 2.6vw, 2.8rem);
+  margin: clamp(1rem, 1.7vw, 1.6rem) 0;
+  padding: 0 clamp(1rem, 2vw, 2rem);
   border-right: 1px solid var(--hk-line);
 }
 
 .hk__canli-icon {
   display: grid;
   place-items: center;
-  width: clamp(70px, 6.5vw, 96px);
+  width: clamp(64px, 5.5vw, 84px);
   aspect-ratio: 1;
   border-radius: 50%;
   background: rgba(239, 138, 24, 0.1);
   color: var(--hk-orange);
-  animation: hk-icon-float 3.8s ease-in-out infinite;
 }
 
 .hk__canli-icon svg { width: 54%; fill: none; stroke: currentColor; stroke-width: 2.5; }
 
+.hk__canli-ayrac {
+  width: 1px;
+  height: 84%;
+  background: var(--hk-line);
+}
+
 .hk__canli p {
   color: #656b73;
-  font-size: clamp(0.84rem, 1.05vw, 1.02rem);
-  line-height: 1.46;
+  font-size: clamp(0.78rem, 0.9vw, 0.94rem);
+  line-height: 1.42;
 }
 
 .hk__canli strong { color: #424750; font-weight: 800; }
-.hk__takvim { padding: clamp(1.2rem, 2vw, 2rem) clamp(1.5rem, 2.5vw, 2.6rem); }
+.hk__takvim { padding: clamp(1rem, 1.7vw, 1.6rem) clamp(1.2rem, 2vw, 2rem); }
 
 .hk__takvim-baslik {
   display: flex;
@@ -197,16 +203,16 @@
 .hk__saatler {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin-top: 1rem;
+  margin-top: 0.8rem;
 }
 
 .hk__saat {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: clamp(0.65rem, 1.2vw, 1rem);
+  gap: clamp(0.5rem, 0.9vw, 0.8rem);
   align-items: center;
   min-width: 0;
-  padding: 0 clamp(0.8rem, 1.5vw, 1.4rem);
+  padding: 0 clamp(0.6rem, 1.1vw, 1rem);
 }
 
 .hk__saat:first-child { padding-left: 0; }
@@ -215,7 +221,7 @@
 .hk__saat-icon {
   display: grid;
   place-items: center;
-  width: clamp(48px, 4.5vw, 66px);
+  width: clamp(44px, 3.8vw, 58px);
   aspect-ratio: 1;
   border-radius: 50%;
   transition: transform 0.35s var(--ease-out), background-color 0.35s ease;
@@ -246,12 +252,7 @@
   line-height: 1.05;
 }
 
-@keyframes hk-icon-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
-
-@media (max-width: 1100px) {
+@media (max-width: 900px) {
   .hk__ust { grid-template-columns: minmax(240px, 0.7fr) minmax(430px, 1.3fr); gap: 3rem; }
   .hk__yayin { grid-template-columns: 1fr; }
   .hk__canli { border-right: 0; border-bottom: 1px solid var(--hk-line); padding-bottom: 1.4rem; }
@@ -262,8 +263,8 @@
   .hk__ust { grid-template-columns: 1fr; gap: 2.5rem; }
   .hk__baslik { padding: 0 0 2.5rem; border-right: 0; border-bottom: 1px solid var(--hk-line); }
   .hk__title { width: min(100%, 420px); }
-  .hk__title em { font-size: clamp(2.2rem, 10.8vw, 3.8rem); }
-  .hk__title strong { font-size: clamp(2.05rem, 10.2vw, 3.55rem); }
+  .hk__title em { font-size: clamp(1.9rem, 8.8vw, 3.15rem); }
+  .hk__title strong { font-size: clamp(1.78rem, 8.35vw, 2.95rem); }
   .hk__metin p { font-size: 0.92rem; }
   .hk__davet { grid-template-columns: auto 1fr; gap: 0.75rem; }
   .hk__davet p { font-size: clamp(1.4rem, 6.2vw, 2.05rem); }
@@ -276,14 +277,13 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hk__canli-icon { animation: none; }
   .hk__saat-icon { transition: none; }
 }
 
 @media (max-width: 420px) {
   .hk__inner { width: min(100% - 2rem, 620px); }
   .hk__title em { min-width: 1.25em; }
-  .hk__canli { grid-template-columns: 1fr; }
+  .hk__canli { grid-template-columns: auto 1px 1fr; }
   .hk__canli-icon { width: 68px; }
   .hk__takvim { padding-inline: 1.1rem; }
 }
