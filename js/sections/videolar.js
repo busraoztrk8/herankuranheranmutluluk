@@ -96,7 +96,7 @@ export function init({ reducedMotion }) {
     return (
       `<img class="vids__thumb" src="${THUMB(item.youtubeId)}" alt=""` +
       ` loading="lazy" decoding="async"` +
-      ` onerror="this.onerror=null;this.src='${THUMB_FALLBACK(item.youtubeId)}'">` +
+      ` data-fallback="${THUMB_FALLBACK(item.youtubeId)}">` +
       (title
         ? `<div class="vlist__card-meta"><h3 class="vlist__card-title">${escapeHtml(title)}</h3></div>`
         : '') +

@@ -12,8 +12,8 @@ import * as hakkimizda from './sections/hakkimizda.js?v=20261016-2';
 import * as instagram from './sections/instagram.js';
 import * as broadcast from './sections/broadcast.js?v=20261016-2';
 import * as boran from './sections/boran.js?v=20261010-6';
-import * as videos from './sections/videos.js?v=20261010-1';
-import * as videolar from './sections/videolar.js';
+import * as videos from './sections/videos.js?v=20261018-1';
+import * as videolar from './sections/videolar.js?v=20261018-1';
 import * as footer from './sections/footer.js?v=20261010-1';
 
 const ctx = {

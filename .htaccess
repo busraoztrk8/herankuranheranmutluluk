@@ -26,8 +26,8 @@
   # yere istek atılamaz. Yeni bir servis eklerseniz buraya da ekleyin.
   Header always set Content-Security-Policy "\
 default-src 'self'; \
-script-src 'self' 'unsafe-inline'; \
-style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; \
+script-src 'self'; \
+style-src 'self' https://fonts.googleapis.com; \
 font-src 'self' https://fonts.gstatic.com; \
 img-src 'self' data: https://i.ytimg.com https://*.cdninstagram.com https://*.fbcdn.net; \
 frame-src https://www.youtube.com https://www.youtube-nocookie.com https://www.instagram.com; \
@@ -50,9 +50,11 @@ Options -Indexes
 # ---------- önbellek (isteğe bağlı, hız için) ----------
 <IfModule mod_expires.c>
   ExpiresActive On
-  ExpiresByType text/css "access plus 7 days"
-  ExpiresByType application/javascript "access plus 7 days"
-  ExpiresByType image/jpeg "access plus 30 days"
-  ExpiresByType image/png "access plus 30 days"
+  # CSS/JS her açılışta sunucuya sorulur: yalnızca main.js sürüm etiketli, uzun
+  # önbellek eski ve yeni modüllerin karışmasına yol açar.
+  ExpiresByType text/css "access plus 0 seconds"
+  ExpiresByType application/javascript "access plus 0 seconds"
+  ExpiresByType image/jpeg "access plus 1 day"
+  ExpiresByType image/png "access plus 1 day"
   ExpiresByType text/html "access plus 0 seconds"
 </IfModule>
