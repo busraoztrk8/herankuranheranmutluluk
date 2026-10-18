@@ -45,7 +45,7 @@ export function init({ reducedMotion, isTouch }) {
     return (
       `<img class="vids__thumb" src="https://i.ytimg.com/vi/${id}/hqdefault.jpg"` +
       ` alt="" loading="lazy" decoding="async"` +
-      ` onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/${id}/mqdefault.jpg'">` +
+      ` data-fallback="https://i.ytimg.com/vi/${id}/mqdefault.jpg">` +
       `<div class="vids__card-meta">` +
       `<div>` +
       `<h3 class="vids__card-title">${escapeHtml(item.title)}</h3>` +

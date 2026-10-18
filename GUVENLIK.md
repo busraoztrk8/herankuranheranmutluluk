@@ -32,7 +32,7 @@ Başka bir sunucu kullanıyorsanız aşağıdaki karşılıklarını kullanın.
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://i.ytimg.com https://*.cdninstagram.com https://*.fbcdn.net; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://www.instagram.com; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://i.ytimg.com https://*.cdninstagram.com https://*.fbcdn.net; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://www.instagram.com; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'
 ```
 
 ### Vercel — `vercel.json` (kök dizine)
@@ -58,6 +58,7 @@ add_header X-Content-Type-Options "nosniff" always;
 add_header Referrer-Policy "strict-origin-when-cross-origin" always;
 add_header Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()" always;
 add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+add_header Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://i.ytimg.com https://*.cdninstagram.com https://*.fbcdn.net; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://www.instagram.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'" always;
 autoindex off;
 location ~ /\. { deny all; }
 ```
@@ -104,3 +105,15 @@ değiştirilebilen bir video üzerinden sayfaya kod enjekte edilebilirdi
 **Kural:** Dışarıdan gelen hiçbir metin (API, kullanıcı, URL parametresi)
 `innerHTML` ile doğrudan sayfaya yazılmamalı; ya `textContent` kullanın ya da
 `escapeHtml()` yardımcısından geçirin.
+
+### Satır içi script kaldırıldı (katı CSP)
+
+`index.html`'deki satır içi `<script>` (görsel yer tutucusu) `js/imageFallback.js`
+dosyasına taşındı; video kapaklarındaki `onerror="…"` yerine `data-fallback="…"`
+kullanılıyor ve yedeğe geçiş de bu dosyada. Böylece CSP'de `script-src` ve
+`style-src` için `'unsafe-inline'` gerekmiyor — sayfaya bir şekilde kod enjekte
+edilse bile tarayıcı onu çalıştırmaz.
+
+**Kural:** Yeni satır içi `<script>`, `on…="…"` öznitelikleri, `style="…"` veya
+`<style>` blokları eklemeyin; kodu `js/`, stili `css/` dosyalarına koyun. Eklenirse
+tarayıcı CSP gereği engeller ve özellik sessizce çalışmaz.
