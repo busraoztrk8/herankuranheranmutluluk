@@ -3,8 +3,8 @@
    ============================================================ */
 
 .hk {
-  --hk-blue: #073d86;
-  --hk-orange: #ef8a18;
+  --hk-blue: #174b91;
+  --hk-orange: #ee8b12;
   --hk-line: rgba(224, 155, 75, 0.42);
   background:
     radial-gradient(circle at 85% 10%, rgba(255, 255, 255, 0.9), transparent 30%),

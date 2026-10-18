@@ -33,9 +33,9 @@
   font-size: clamp(1.5rem, 3vw, 2.6rem);
   line-height: 1.15;
   letter-spacing: -0.01em;
-  color: var(--lacivert);
+  color: #14213d;
 }
-.ig__title em { color: var(--turuncu); font-style: normal; }
+.ig__title em { color: #ee8b12; font-style: normal; }
 
 /* horizontal viewport — JS pins .ig and translates the track */
 .ig__viewport { position: relative; }
