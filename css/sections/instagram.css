@@ -29,16 +29,16 @@
 
 .ig__title {
   font-family: var(--font-body);
-  font-weight: 400;
+  font-weight: 300;
   font-size: clamp(1.5rem, 3vw, 2.6rem);
   line-height: 1.15;
   letter-spacing: -0.01em;
   color: #174b91;
 }
-.ig__title em {
+.ig__title span { font-weight: 300; }
+.ig__title strong {
   color: #174b91;
-  font-style: normal;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 /* horizontal viewport — JS pins .ig and translates the track */
