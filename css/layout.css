@@ -238,13 +238,13 @@
   background: var(--background-ivory);
 }
 .navbar.menu-open .navbar__mobile-list a {
-  color: var(--text-dark);
+  color: #174b91;
 }
 .navbar.menu-open .navbar__burger span {
-  background: var(--text-dark);
+  background: #174b91;
 }
 .navbar.menu-open .navbar__icon {
-  border-color: rgba(27, 42, 64, 0.22);
+  border-color: rgba(23, 75, 145, 0.28);
 }
 .navbar.menu-open .navbar__icon--tt path {
   fill: #121212;
