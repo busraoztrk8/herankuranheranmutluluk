@@ -244,6 +244,10 @@
 .navbar.menu-open .navbar__mobile-list a {
   color: var(--brand-navy);
 }
+.navbar.menu-open .navbar__mobile-list a:hover,
+.navbar.menu-open .navbar__mobile-list a:focus-visible {
+  color: var(--brand-yellow-deep);
+}
 .navbar.menu-open .navbar__burger span {
   background: var(--brand-navy);
 }
