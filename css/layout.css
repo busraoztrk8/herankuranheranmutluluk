@@ -137,12 +137,16 @@
   letter-spacing: 0.012em;
   line-height: 1.15;
   text-transform: uppercase;
-  color: var(--lacivert);
+  color: var(--brand-navy);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.navbar.is-dark .navbar__wordmark { color: var(--brand-yellow); }
+.navbar.is-dark {
+  background: var(--background-ivory);
+  border-bottom-color: var(--border-dark-soft);
+}
+.navbar.is-dark .navbar__wordmark { color: var(--brand-navy); }
 
 /* ---------- sosyal halkalar ---------- */
 .navbar__actions {
@@ -169,8 +173,8 @@
 /* Koyu bölümlerde çerçeve açılır; simgeler renklerini korur. Tek istisna
    TikTok: simgesi siyah olduğu için koyu zeminde kayboluyordu — markanın
    kendi kuralı da koyu zeminde beyaz kullanmak. */
-.navbar.is-dark .navbar__icon { border-color: rgba(255, 255, 255, 0.28); }
-.navbar.is-dark .navbar__icon--tt path { fill: #FFFDF8; }
+.navbar.is-dark .navbar__icon { border-color: rgba(23, 75, 145, 0.22); }
+.navbar.is-dark .navbar__icon--tt path { fill: #121212; }
 
 /* Üzerine gelince simge hafifçe büyür, çerçeve belirginleşir. */
 .navbar__icon:hover {
@@ -197,7 +201,7 @@
   background: var(--text-dark);
   transition: transform 0.4s var(--ease-out), background-color 0.4s;
 }
-.navbar.is-dark .navbar__burger span { background: var(--text-light); }
+.navbar.is-dark .navbar__burger span { background: var(--brand-navy); }
 .navbar__burger[aria-expanded="true"] span:first-child { transform: translateY(4px) rotate(45deg); }
 .navbar__burger[aria-expanded="true"] span:last-child { transform: translateY(-4px) rotate(-45deg); }
 
@@ -238,10 +242,10 @@
   background: var(--background-ivory);
 }
 .navbar.menu-open .navbar__mobile-list a {
-  color: #174b91;
+  color: var(--brand-navy);
 }
 .navbar.menu-open .navbar__burger span {
-  background: #174b91;
+  background: var(--brand-navy);
 }
 .navbar.menu-open .navbar__icon {
   border-color: rgba(23, 75, 145, 0.28);

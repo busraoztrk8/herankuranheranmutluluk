@@ -128,7 +128,7 @@
   font-size: clamp(0.84rem, 1.05vw, 0.98rem);
   font-weight: 600;
   letter-spacing: 0.01em;
-  color: var(--lacivert);
+  color: var(--brand-navy);
   white-space: nowrap;
   transition: color 0.3s;
 }
@@ -145,9 +145,9 @@
   transform: scaleX(0);
   transition: transform 0.35s var(--ease-out);
 }
-.mainnav__link:hover { color: var(--brand-yellow-deep); }
+.mainnav__link:hover { color: var(--brand-navy); }
 .mainnav__link.is-active {
-  color: var(--brand-yellow-deep);
+  color: var(--brand-navy);
   font-weight: 700;
 }
 .mainnav__link.is-active::after { transform: scaleX(1); }
@@ -155,12 +155,12 @@
 /* Koyu bölümlerin üzerinden geçerken üst şeritle birlikte koyulaşır
    (sınıfı js/sections/navbar.js veriyor). */
 .mainnav.is-dark {
-  background: var(--background-dark);
-  border-bottom-color: var(--border-soft);
+  background: var(--background-ivory);
+  border-bottom-color: var(--border-dark-soft);
 }
-.mainnav.is-dark .mainnav__link { color: var(--text-light); }
+.mainnav.is-dark .mainnav__link { color: var(--brand-navy); }
 .mainnav.is-dark .mainnav__link:hover,
-.mainnav.is-dark .mainnav__link.is-active { color: var(--brand-yellow); }
+.mainnav.is-dark .mainnav__link.is-active { color: var(--brand-navy); }
 
 /* ---------- dar ekranlar ---------- */
 @media (max-width: 900px) {
