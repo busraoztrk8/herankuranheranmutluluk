@@ -29,13 +29,17 @@
 
 .ig__title {
   font-family: var(--font-body);
-  font-weight: 800;
+  font-weight: 400;
   font-size: clamp(1.5rem, 3vw, 2.6rem);
   line-height: 1.15;
   letter-spacing: -0.01em;
-  color: #14213d;
+  color: #174b91;
 }
-.ig__title em { color: #ee8b12; font-style: normal; }
+.ig__title em {
+  color: #174b91;
+  font-style: normal;
+  font-weight: 800;
+}
 
 /* horizontal viewport — JS pins .ig and translates the track */
 .ig__viewport { position: relative; }

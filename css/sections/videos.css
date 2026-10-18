@@ -22,13 +22,17 @@
 }
 .vids__title {
   font-family: var(--font-body);
-  font-weight: 800;
+  font-weight: 400;
   font-size: clamp(1.5rem, 3vw, 2.6rem);
   line-height: 1.15;
   letter-spacing: -0.01em;
-  color: var(--lacivert);
+  color: #174b91;
 }
-.vids__title em { color: var(--turuncu); font-style: normal; }
+.vids__title em {
+  color: #174b91;
+  font-style: normal;
+  font-weight: 800;
+}
 
 /* deck */
 .vids__deck {

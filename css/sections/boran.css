@@ -41,8 +41,7 @@
   font-size: clamp(1.35rem, 2.85vw, 2.45rem);
   line-height: 1.1;
   letter-spacing: 0.005em;
-  text-transform: uppercase;
-  color: var(--lacivert);
+  color: #174b91;
 }
 
 .boran__unvan {

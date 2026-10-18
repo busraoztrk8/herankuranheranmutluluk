@@ -24,7 +24,7 @@
   font-size: clamp(1.5rem, 3vw, 2.6rem);
   line-height: 1.15;
   letter-spacing: -0.01em;
-  color: var(--lacivert);
+  color: #174b91;
 }
 /* başlığın altında kısa marka çizgisi */
 .vlist__title::after {
