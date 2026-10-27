@@ -113,10 +113,10 @@
     </div>
     <div class="navbar__mobile" hidden>
       <ul class="navbar__mobile-list">
-        <li><a href="#hero">Ana Sayfa</a></li>
-        <li><a href="#manifesto">Hakkımızda</a></li>
-        <li><a href="#videolar">Videolar</a></li>
-        <li><a href="#pazar-sohbeti">Pazar Sohbeti</a></li>
+        <li><a href="#hero" data-page="anasayfa">Ana Sayfa</a></li>
+        <li><a href="#manifesto" data-page="hakkimizda">Hakkımızda</a></li>
+        <li><a href="#videolar" data-page="videolar">Videolar</a></li>
+        <li><a href="#pazar-sohbeti" data-page="pazar-sohbeti">Pazar Sohbeti</a></li>
       </ul>
     </div>
   </header>
@@ -152,17 +152,17 @@
 
     <nav class="mainnav" aria-label="Ana menü">
       <ul class="mainnav__list">
-        <li><a class="mainnav__link" href="#hero" data-section="hero">Ana Sayfa</a></li>
-        <li><a class="mainnav__link" href="#manifesto" data-section="manifesto">Hakkımızda</a></li>
-        <li><a class="mainnav__link" href="#videolar" data-section="videolar">Videolar</a></li>
-        <li><a class="mainnav__link" href="#pazar-sohbeti" data-section="pazar-sohbeti">Pazar Sohbeti</a></li>
+        <li><a class="mainnav__link" href="#hero" data-page="anasayfa">Ana Sayfa</a></li>
+        <li><a class="mainnav__link" href="#manifesto" data-page="hakkimizda">Hakkımızda</a></li>
+        <li><a class="mainnav__link" href="#videolar" data-page="videolar">Videolar</a></li>
+        <li><a class="mainnav__link" href="#pazar-sohbeti" data-page="pazar-sohbeti">Pazar Sohbeti</a></li>
       </ul>
     </nav>
 
     <!-- ============ HAKKIMIZDA ============ -->
     <!-- Referans afiş düzeni: solda başlık, sağda metin ve davet,
          altta canlı yayın bilgisi ile yayın takvimi. -->
-    <section class="hk" id="manifesto" data-theme="light" aria-label="Hakkımızda">
+    <section class="hk" id="manifesto" data-theme="light" data-page="hakkimizda" aria-label="Hakkımızda" hidden>
       <div class="hk__inner">
         <div class="hk__ust">
           <header class="hk__baslik">
@@ -238,7 +238,7 @@
     </section>
 
     <!-- ============ INSTAGRAM ============ -->
-    <section class="ig" id="instagram" data-theme="light" aria-label="Instagram paylaşımları">
+    <section class="ig" id="instagram" data-theme="light" data-page="anasayfa" aria-label="Instagram paylaşımları">
       <div class="ig__head">
         <p class="ig__eyebrow">Instagram</p>
         <h2 class="ig__title"><span>HER GÜN</span> <strong>BİR İZ</strong></h2>
@@ -255,7 +255,7 @@
     </section>
 
     <!-- ============ VİDEOLAR ============ -->
-    <section class="vlist" id="videolar" data-theme="light" aria-label="Videolar">
+    <section class="vlist" id="videolar" data-theme="light" data-page="videolar" aria-label="Videolar" hidden>
       <div class="vlist__head">
         <h2 class="vlist__title">VİDEOLAR</h2>
       </div>
@@ -278,7 +278,7 @@
     </section>
 
     <!-- ============ VIDEOS ============ -->
-    <section class="vids" id="pazar-sohbeti" data-theme="light" aria-label="Pazar Sohbetleri">
+    <section class="vids" id="pazar-sohbeti" data-theme="light" data-page="pazar-sohbeti" aria-label="Pazar Sohbetleri" hidden>
       <div class="vids__head">
         <h2 class="vids__title"><span>HER PAZAR</span> <strong>BİR SOHBET</strong></h2>
       </div>
@@ -303,7 +303,7 @@
     <!-- ============ ABDULCABBAR BORAN ============ -->
     <!-- Tek sayfalık tanıtım: yazı solda, portre sağda. Portrenin alt
          kenarı bölüm zeminine karışacak şekilde kırpılıyor. -->
-    <section class="boran" id="boran" data-theme="light" aria-label="Dr. Abdulcabbar Boran">
+    <section class="boran" id="boran" data-theme="light" data-page="anasayfa" aria-label="Dr. Abdulcabbar Boran">
       <div class="boran__kart">
         <div class="boran__metin">
           <div class="boran__kimlik">
@@ -374,7 +374,7 @@
   <script src="js/vendor/ScrollTrigger.min.js"></script>
   <script src="js/vendor/lenis.min.js"></script>
   <!-- App -->
-  <script type="module" src="js/main.js?v=20261018-1"></script>
+  <script type="module" src="js/main.js?v=20261027-2"></script>
 </body>
 
 </html>

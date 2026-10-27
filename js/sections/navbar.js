@@ -68,38 +68,8 @@ export function init() {
   window.addEventListener('resize', onScroll, { passive: true });
   syncNav();
 
-  /* ---------- active link ---------- */
-  // Gezinme baslıkları üst şeritte değil, afişin altındaki .mainnav
-  // şeridinde; o yüzden belge genelinden toplanıyor.
-  const links = [...document.querySelectorAll('.mainnav__link')];
-  const sectionForLink = new Map();
-  links.forEach((link) => {
-    // Hakkımızda gibi başka sayfaya giden bağlantılar (#'siz href)
-    // querySelector'a verilirse hata fırlatır; yalnızca sayfa içi
-    // çapalar bölüm takibine girer.
-    const href = link.getAttribute('href') || '';
-    const target = href.startsWith('#') ? document.querySelector(href) : null;
-    // Birden fazla başlık aynı bölüme gidebiliyor (Canlı Yayın da
-    // afişe bakıyor). Böyle durumda İLK başlık etkin sayılır; yoksa
-    // sonraki yazdığı için sayfanın en üstünde yanlış başlık
-    // vurgulanıyordu.
-    if (target && !sectionForLink.has(target)) sectionForLink.set(target, link);
-  });
+  /* Aktif link artik router.js tarafindan yonetiliyor (SPA sekme). */
 
-  const activeObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const link = sectionForLink.get(entry.target);
-        if (!link) return;
-        if (entry.isIntersecting) {
-          links.forEach((l) => l.classList.remove('is-active'));
-          link.classList.add('is-active');
-        }
-      });
-    },
-    { rootMargin: '-35% 0px -55% 0px', threshold: 0 }
-  );
-  sectionForLink.forEach((_, section) => activeObserver.observe(section));
 
   /* ---------- mobile menu ---------- */
   const burger = nav.querySelector('.navbar__burger');

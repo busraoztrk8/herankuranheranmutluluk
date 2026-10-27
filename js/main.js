@@ -5,8 +5,9 @@
  */
 import { initSmoothScroll } from './animations/smoothScroll.js';
 import { initMagnetic } from './animations/magnetic.js';
+import * as router from './router.js?v=20261027-2';
 
-import * as navbar from './sections/navbar.js?v=20261010-3';
+import * as navbar from './sections/navbar.js?v=20261027-1';
 import * as hero from './sections/hero.js?v=20261010-1';
 import * as hakkimizda from './sections/hakkimizda.js?v=20261016-2';
 import * as instagram from './sections/instagram.js';
@@ -48,6 +49,9 @@ footer.init(ctx);
 
 /* 3 — magnetic hover last, after DOM built by sections */
 initMagnetic(ctx);
+
+/* 4 — menüyü sekme (SPA) moduna al: tıklanınca kaymadan sayfa değişir */
+router.init(ctx);
 
 /* Recalculate pinned distances once everything (fonts, images) settles */
 if (hasGsap) {
