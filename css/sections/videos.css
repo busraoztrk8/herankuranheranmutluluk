@@ -40,7 +40,7 @@
   margin-top: clamp(1.5rem, 4vh, 3rem);
   /* sized off the front card (16:9 of its own width) plus a small margin
      for the fanned back cards — no dead space under the deck. */
-  height: calc(min(76vw, 780px) * 0.5625 + clamp(1.5rem, 4vw, 3rem));
+  height: calc(min(62vw, 620px) * 0.5625 + clamp(1.5rem, 4vw, 3rem));
   perspective: 1400px;
   touch-action: pan-y;
 }
@@ -48,7 +48,7 @@
 .vids__card {
   position: absolute;
   left: 50%; top: 50%;
-  width: min(76vw, 780px);
+  width: min(62vw, 620px);
   aspect-ratio: 16 / 9;
   /* Ortalama BURADA yapılmaz. JS her kartı xPercent/yPercent: -50 ile
      konumlandırıyor; burada bir translate(-50%,-50%) daha olursa GSAP
