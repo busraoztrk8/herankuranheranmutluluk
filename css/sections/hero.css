@@ -104,10 +104,13 @@
 }
 
 /* ---------- ana menü şeridi ----------
-   Afişin altında STATİK durur; kaydirinca ust seride yapismaz.
-   Eski haline donuluyor: menu afisin hemen altinda tek bir yerde kalir. */
+   Afisin altinda durur; kaydirinca ust marka seridinin altina yapisir.
+   Boylece menu her yerde elin altinda, ust tarafta sabit kalir. */
 .mainnav {
-  position: relative;
+  /* Sayfa kaydirilinca ust marka seridinin hemen altina YAPISIR;
+     menu her yerde ust tarafta sabit kalir. */
+  position: sticky;
+  top: var(--nav-h, 100px);
   z-index: 900;
   background: var(--background-ivory);
   border-bottom: 1px solid var(--border-dark-soft);
