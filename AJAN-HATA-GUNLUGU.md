@@ -32,6 +32,15 @@ olmaması için ne değişti.
 
 ---
 
+## 2026-10-27 · Sekme router'ı menü linklerini de "sayfa" sanıp gizledi
+
+**Ne yapıldı:** router.js sayfaları `querySelectorAll('[data-page]').filter(el => el.closest('main'))` ile topladı; menü linklerine de `data-page` verilmişti.
+**Neden yanlış:** Menü (`.mainnav`) `<main>` içinde duruyor; filtre linkleri dışlamadı. Router aktif olmayan "sayfaları" `hidden` yapınca 4 menü linkinden 3'ü gizlendi — yalnız "Ana Sayfa" kaldı, diğer sayfalara ulaşılamadı. Testte yalnız aktif sekmenin bölümünü ölçtüm, menünün bütün linklerinin görünür kaldığını hiç kontrol etmedim; ilk ekran görüntüsünde de tek link görünüyordu ama fark etmedim.
+**Nasıl anlaşıldı:** Kullanıcı "menüler ve sayfalar nereye kayboldu" dedi. Canlıda link `display:none` çıktı; eşleşen kural `[hidden]` idi.
+**Önlem:** Seçim `section[data-page]` ile sınırlandı. Aynı attribute'u hem içerik hem gezinme öğesine veren bir düzende seçici öğe türüyle daraltılır. Sekme/görünürlük değiştiren her değişiklikten sonra BÜTÜN gezinme öğelerinin görünürlüğü her sekmede ölçülür (yalnız açılan bölüm değil).
+
+---
+
 ## 2026-10-27 · Sticky menü, overflow-x:hidden yüzünden titriyordu
 
 **Ne yapıldı:** Menü (.mainnav) `position: sticky; top: var(--nav-h)` yapıldı; ama `body { overflow-x: hidden }` duruyordu.

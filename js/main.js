@@ -5,7 +5,7 @@
  */
 import { initSmoothScroll } from './animations/smoothScroll.js';
 import { initMagnetic } from './animations/magnetic.js';
-import * as router from './router.js?v=20261027-2';
+import * as router from './router.js?v=20261027-3';
 
 import * as navbar from './sections/navbar.js?v=20261027-1';
 import * as hero from './sections/hero.js?v=20261010-1';

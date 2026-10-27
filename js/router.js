@@ -10,8 +10,10 @@
  */
 
 export function init() {
-  const pages = [...document.querySelectorAll('[data-page]')]
-    .filter((el) => el.closest('main')); // yalnızca içerik bölümleri (menü linkleri değil)
+  // Yalnızca içerik BÖLÜMLERİ sayfadır. Menü (.mainnav) de <main>
+  // içinde durduğu için "[data-page]" menü linklerini de yakalardı;
+  // bu yüzden seçim section ile sınırlı tutulur.
+  const pages = [...document.querySelectorAll('section[data-page]')];
   if (!pages.length) return;
 
   const links = [...document.querySelectorAll('.mainnav__link[data-page], .navbar__mobile-list a[data-page]')];
