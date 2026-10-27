@@ -13,6 +13,10 @@ export function init() {
 
   const hedefOf = (link) => document.querySelector(link.getAttribute('href'));
 
+  // Adres çubuğunda #bölüm adı görünmesin: eski bir #bağlantıyla
+  // gelinirse de ek açılışta temizlenir (sayfa konumu korunur).
+  if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+
   // Sabit üst şerit + yapışkan menü yüksekliği: bölüm bunların altına otursun.
   const ustPay = () => {
     const nav = document.querySelector('.navbar__inner');
@@ -41,7 +45,6 @@ export function init() {
       e.stopPropagation();
       git(hedef);
       isaretle();
-      history.replaceState(null, '', link.getAttribute('href'));
     });
   });
 
