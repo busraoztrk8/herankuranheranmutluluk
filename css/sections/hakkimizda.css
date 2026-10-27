@@ -289,3 +289,42 @@
   .hk__canli-icon { width: 68px; }
   .hk__takvim { padding-inline: 1.1rem; }
 }
+
+/* ---------- telefon: canlı yayın bandı derli toplu ----------
+   Takvim alt alta üç satıra dizilince bant ~490px boy alıyordu; burada
+   üç gün yan yana küçük sütunlar olur (ikon üstte, yazılar altında).
+   Bu blok en sonda durur ki 760/420px kurallarını ezsin. */
+@media (max-width: 760px) {
+  .hk__canli {
+    gap: 0.8rem;
+    margin: 0.9rem 0;
+    padding: 0 1rem 0.9rem;
+  }
+  .hk__canli-icon { width: 44px; }
+  .hk__canli p { font-size: 0.76rem; line-height: 1.4; }
+
+  .hk__takvim { padding: 0.9rem 1rem 1rem; }
+  .hk__takvim-baslik { font-size: 0.62rem; letter-spacing: 0.22em; gap: 0.5rem; }
+  .hk__takvim-baslik svg { width: 18px; }
+
+  .hk__saatler {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    margin-top: 0.7rem;
+  }
+  .hk__saat,
+  .hk__saat + .hk__saat {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 0.35rem;
+    padding: 0 0.3rem;
+    text-align: center;
+    border-top: 0;
+  }
+  .hk__saat + .hk__saat { border-left: 1px solid var(--hk-line); }
+  .hk__saat-icon { width: 34px; }
+  .hk__saat .hk__vakit { font-size: 1.05rem; }
+  .hk__saat dt,
+  .hk__saat dd:last-child { font-size: 0.64rem; line-height: 1.3; }
+  .hk__saat dd { white-space: normal; }
+}
