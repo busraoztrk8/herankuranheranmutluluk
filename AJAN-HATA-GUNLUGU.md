@@ -32,6 +32,15 @@ olmaması için ne değişti.
 
 ---
 
+## 2026-10-27 · "Kaymadan sayfasını göstersin" sekme sistemi sanıldı; içerikler kayboldu
+
+**Ne yapıldı:** "Diğer menülerde kaymadan gerekli sayfasını gösterecek" isteği, menüleri sekme (SPA) yapmak diye yorumlandı; her menü yalnız kendi bölümünü gösterdi, geri kalan içerik gizlendi. Kullanıcıya sorulan soru da bu yorumu baştan varsaydı ("menüler sekme gibi çalışınca afiş nasıl olsun?").
+**Neden yanlış:** Kullanıcı tek sayfayı korumak, menünün yalnızca ilgili bölüme atlamasını istiyordu. Soru, asıl belirsizliği (içerik tek sayfada mı kalacak, ayrı mı olacak) sormadan yalnızca ikincil bir ayrıntıyı (afiş) sordu; seçenekler yanlış varsayımı onaylatır biçimde kurulmuştu.
+**Nasıl anlaşıldı:** Kullanıcı "içerikler yok… hepsi bir sayfada olacak eskisi gibi, her menüye tıklayınca ayrı ayrı olmayacak" dedi.
+**Önlem:** Mimariyi değiştiren bir yorumda (tek sayfa → sekmeler gibi) soru önce o temel ayrımı sorar; seçeneklerden biri "mevcut yapı korunsun" olur. Ayrıca bu sırada iki ek kusur bulundu: `smoothScroll.js` belge düzeyinde #bağlantıları ikinci kez yakalıyordu ve `html { scroll-behavior: smooth }` `window.scrollTo`'yu yumuşatıp Lenis'le çakıştırıyordu — atlama `behavior: 'instant'` ve `stopPropagation` ile kesinleştirildi.
+
+---
+
 ## 2026-10-27 · Sekme router'ı menü linklerini de "sayfa" sanıp gizledi
 
 **Ne yapıldı:** router.js sayfaları `querySelectorAll('[data-page]').filter(el => el.closest('main'))` ile topladı; menü linklerine de `data-page` verilmişti.

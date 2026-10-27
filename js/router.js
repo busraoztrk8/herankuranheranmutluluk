@@ -1,85 +1,68 @@
 /**
- * router.js — menüyü sekme (SPA) gibi çalıştırır.
+ * router.js — tek sayfa gezinmesi.
  *
- * Üst şerit + afiş + menü her zaman sabit kalır; afişin altındaki
- * içerik (data-page'li bölümler) tıklanan menüye göre değişir.
- * Sayfa "kaymadan" değişir: scroll anında en üste (afişe) alınır.
- *
- * Sayfalar data-page attribute'undan otomatik toplanır:
- *   anasayfa · hakkimizda · videolar · pazar-sohbeti
+ * Bütün bölümler tek sayfada alt alta durur. Menüye tıklanınca sayfa
+ * kaymadan ilgili bölüme atlar; bölümün başı, sabit üst şerit + yapışkan menünün
+ * hemen altına oturur. Kaydırırken o an bakılan bölümün menüsü işaretlenir.
  */
 
 export function init() {
-  // Yalnızca içerik BÖLÜMLERİ sayfadır. Menü (.mainnav) de <main>
-  // içinde durduğu için "[data-page]" menü linklerini de yakalardı;
-  // bu yüzden seçim section ile sınırlı tutulur.
-  const pages = [...document.querySelectorAll('section[data-page]')];
-  if (!pages.length) return;
+  const links = [...document.querySelectorAll('.mainnav__link, .navbar__mobile-list a')]
+    .filter((l) => (l.getAttribute('href') || '').startsWith('#'));
+  if (!links.length) return;
 
-  const links = [...document.querySelectorAll('.mainnav__link[data-page], .navbar__mobile-list a[data-page]')];
+  const hedefOf = (link) => document.querySelector(link.getAttribute('href'));
 
-  // Hangi sayfa anahtarları var?
-  const keys = [...new Set(pages.map((p) => p.dataset.page))];
-
-  const göster = (key, { scrollReset = true } = {}) => {
-    if (!keys.includes(key)) key = keys[0];
-
-    // İçerik bölümlerini aç/kapat
-    pages.forEach((p) => { p.hidden = (p.dataset.page !== key); });
-
-    // Menü linklerini işaretle (masaüstü + mobil)
-    links.forEach((l) => {
-      const aktif = l.dataset.page === key;
-      l.classList.toggle('is-active', aktif);
-      if (aktif) l.setAttribute('aria-current', 'page');
-      else l.removeAttribute('aria-current');
-    });
-
-    // URL'yi güncelle (geri/ileri tuşu çalışsın), sayfa zıplamadan
-    if (history.replaceState) {
-      history.replaceState({ page: key }, '', `#${key}`);
-    }
-
-    // "Kaymadan": afiş görünür olacak şekilde anında en üste al
-    const enÜste = () => {
-      if (window.lenis) window.lenis.scrollTo(0, { immediate: true, force: true });
-      window.scrollTo(0, 0);
-    };
-    if (scrollReset) enÜste();
-
-    // Yeni görünen bölümler gizliyken 0 ölçülmüş olabilir: yeniden ölç.
-    // refresh/resize scroll'u itebildiği için en üste almayı SONRA tekrarla.
-    requestAnimationFrame(() => {
-      window.dispatchEvent(new Event('resize'));
-      if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
-
-      // Scroll-reveal animasyonları: gizliyken tetiklenmemiş olabilir —
-      // görünür bölümde saydam kalan öğeler garanti görünür yapılır.
-      pages.filter((p) => !p.hidden).forEach((p) => {
-        p.querySelectorAll('[style*="opacity"]').forEach((el) => {
-          if (parseFloat(el.style.opacity) < 0.01) el.style.opacity = '';
-        });
-      });
-
-      if (scrollReset) enÜste();
-    });
+  // Sabit üst şerit + yapışkan menü yüksekliği: bölüm bunların altına otursun.
+  const ustPay = () => {
+    const nav = document.querySelector('.navbar__inner');
+    const menu = document.querySelector('.mainnav');
+    const menuH = menu && getComputedStyle(menu).display !== 'none' ? menu.offsetHeight : 0;
+    return (nav ? nav.offsetHeight : 0) + menuH;
   };
 
-  // Menü tıklamaları — sayfa içi kaymak yerine sekme değiştir
+  // Kaymadan: bölüme animasyonsuz, doğrudan atlanır.
+  const git = (hedef) => {
+    const ilk = hedef.id === 'hero';
+    const y = Math.max(0, ilk ? 0 : hedef.getBoundingClientRect().top + window.scrollY - ustPay());
+    if (window.lenis) window.lenis.scrollTo(y, { immediate: true, force: true });
+    // html'de scroll-behavior: smooth tanımlı; açıkça 'instant' denmezse
+    // tarayıcı da yumuşak kaydırır ve Lenis'le çakışıp hedefe varamaz.
+    window.scrollTo({ top: y, behavior: 'instant' });
+  };
+
   links.forEach((link) => {
     link.addEventListener('click', (e) => {
+      const hedef = hedefOf(link);
+      if (!hedef) return;
       e.preventDefault();
-      göster(link.dataset.page);
+      // smoothScroll.js de belge düzeyinde #bağlantıları yakalayıp üst payı
+      // hesaba katmadan yumuşak kaydırıyor; menü tıklaması oraya ulaşmasın.
+      e.stopPropagation();
+      git(hedef);
+      isaretle();
+      history.replaceState(null, '', link.getAttribute('href'));
     });
   });
 
-  // Geri/ileri tuşu
-  window.addEventListener('popstate', () => {
-    const key = (location.hash || '').replace('#', '');
-    göster(keys.includes(key) ? key : keys[0], { scrollReset: false });
-  });
+  // Aktif menü: menü çizgisinin altında başlamış SON bölüm işaretlenir.
+  const masaustu = links.filter((l) => l.classList.contains('mainnav__link'));
+  const isaretle = () => {
+    const cizgi = ustPay() + 4;
+    let aktif = masaustu[0];
+    masaustu.forEach((l) => {
+      const h = hedefOf(l);
+      if (h && h.getBoundingClientRect().top <= cizgi) aktif = l;
+    });
+    masaustu.forEach((l) => l.classList.toggle('is-active', l === aktif));
+  };
 
-  // İlk açılış: adres çubuğundaki hash varsa onu, yoksa anasayfayı göster.
-  const ilk = (location.hash || '').replace('#', '');
-  göster(keys.includes(ilk) ? ilk : 'anasayfa', { scrollReset: false });
+  let bekliyor = false;
+  window.addEventListener('scroll', () => {
+    if (bekliyor) return;
+    bekliyor = true;
+    requestAnimationFrame(() => { bekliyor = false; isaretle(); });
+  }, { passive: true });
+  window.addEventListener('resize', isaretle, { passive: true });
+  isaretle();
 }
