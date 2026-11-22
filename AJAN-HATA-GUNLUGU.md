@@ -32,6 +32,15 @@ olmaması için ne değişti.
 
 ---
 
+## 2026-11-22 · "BORAN yazısını büyük yaz" punto büyütme sanıldı
+
+**Ne yapıldı:** "Sayfanın en altında BORAN yazısını büyük yaz" isteği, soyadını ayrı satıra alıp 96px ve kalın yapmak diye uygulandı, test edilip yayına gönderildi.
+**Neden yanlış:** Türkçede "büyük yaz" çoğu zaman "büyük harfle yaz" demektir. Kullanıcı yalnızca soyadının büyük harfle yazılmasını istiyordu; boyut ve kalınlık değişmeyecekti.
+**Nasıl anlaşıldı:** Kullanıcı "kalınlaştırıp büyütme, sadece yazı büyük harfle olacak" dedi.
+**Önlem:** "Büyük yaz / küçük yaz" geçen isteklerde harf mi punto mu kastedildiği metindeki ipucuna göre ayrılır. Belirsizse en küçük değişiklik (yalnız harf) uygulanır ve yanıtta "punto da büyüsün mü?" diye tek cümleyle sorulur.
+
+---
+
 ## 2026-10-27 · "Kaymadan sayfasını göstersin" sekme sistemi sanıldı; içerikler kayboldu
 
 **Ne yapıldı:** "Diğer menülerde kaymadan gerekli sayfasını gösterecek" isteği, menüleri sekme (SPA) yapmak diye yorumlandı; her menü yalnız kendi bölümünü gösterdi, geri kalan içerik gizlendi. Kullanıcıya sorulan soru da bu yorumu baştan varsaydı ("menüler sekme gibi çalışınca afiş nasıl olsun?").
