@@ -44,6 +44,18 @@
   color: #174b91;
 }
 
+/* Soyadı ayrı satırda ve iri: bölümün imzası gibi durur */
+.boran__ad-ilk,
+.boran__ad-soy { display: block; }
+.boran__ad-soy {
+  margin-top: 0.08em;
+  font-size: clamp(2.9rem, 7.2vw, 6rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
 .boran__unvan {
   margin-top: 0.45rem;
   font-size: clamp(0.9rem, 1.35vw, 1.15rem);
